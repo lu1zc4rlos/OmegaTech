@@ -381,13 +381,5 @@ InteropTests/NativeTests/out
 /src/System.Windows.Forms/src/comctl32.dll
 *.received.*
 
-# Normally do not want to pick up changes in the scratch project, this will ignore files that aren't already tracked.
-# 'git update-index --assume-unchanged <filename>' will allow ignoring changes for tracked files.
-# **/ScratchProject/
-# **/ScratchProjectWithInternals/
-/Projeto teste/Projeto teste/Interface.csproj
-
-#deixar de mostrar a string de conex�o
-/Projeto teste/Banco de dados/app.config
-/Projeto teste/Banco de dados/app.config
-/Projeto teste/Banco de dados/app.config
+# Ignorar arquivos de configuração com senhas e segredos
+src/main/resources/application.properties
