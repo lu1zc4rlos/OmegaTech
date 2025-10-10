@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Projeto_teste.Home;
 
 namespace client_desktop.Home
 {

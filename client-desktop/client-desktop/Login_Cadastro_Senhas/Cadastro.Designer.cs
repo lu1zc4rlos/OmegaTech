@@ -15,19 +15,11 @@
             }
             base.Dispose(disposing);
         }
-
-        private System.Windows.Forms.Label lblNome;
-        private System.Windows.Forms.TextBox txtNome;
-        private System.Windows.Forms.Label lblDataNascimento;
         private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.Label lblEmail;
-        private System.Windows.Forms.Label lblConfirmarSenha;
         private System.Windows.Forms.Button btnConfirmar;
         private System.Windows.Forms.Label lblEmailCadastrado;
-        private System.Windows.Forms.DateTimePicker atpDataNascimento;
         private System.Windows.Forms.CheckBox cbMostrarSenha;
         private System.Windows.Forms.TextBox txtSenha;
-        private System.Windows.Forms.Label lblSenha;
         private System.Windows.Forms.Label lblSenhaDiferente;
         private System.Windows.Forms.Button btnVoltarLogin;
         private System.Windows.Forms.TextBox txtConfirmarSenha;
@@ -38,6 +30,16 @@
         private System.Windows.Forms.Label lbl_omega;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private TableLayoutPanel tableLayoutPanel1;
+        private TextBox txtNome;
+        private Label lblNome;
+        private Label lblEmail;
+        private Label lblSenha;
+        private Label lblConfirmarSenha;
+        private DateTimePicker atpDataNascimento;
+        private Label lblDataNascimento;
+        private TableLayoutPanel tableLayoutPanel2;
+        private Panel panel3;
     }
 }
 
