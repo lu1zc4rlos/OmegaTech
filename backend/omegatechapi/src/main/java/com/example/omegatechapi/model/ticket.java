@@ -23,5 +23,5 @@ public class ticket {
     public String Status;
     public String Descricao;
     public LocalDate DataCriacao;
-    public int UsuarioId;
+    public Long UsuarioId;
 }

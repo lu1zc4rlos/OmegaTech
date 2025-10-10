@@ -1,6 +1,6 @@
 package com.example.omegatechapi.service;
 
-import com.example.omegatechapi.model.usuario;
+import com.example.omegatechapi.model.Usuario;
 import com.example.omegatechapi.repository.usuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,13 +13,13 @@ public class usuarioService {
     @Autowired
     private usuarioRepository usuarioRepository;
 
-    public List<usuario> buscarTodosOsUsuarios() {
+    public List<Usuario> buscarTodosOsUsuarios() {
         // Aqui que vai a lógica de negócio.
         // Por enquanto, vou buscar todos do banco.
         return usuarioRepository.findAll();
     }
 
-    public usuario salvarUsuario(usuario usuario) {
+    public Usuario salvarUsuario(Usuario usuario) {
         // Lógica para salvar um novo usuário
         // Ex: validar se o email já existe, criptografar a senha, etc.
         return usuarioRepository.save(usuario);
