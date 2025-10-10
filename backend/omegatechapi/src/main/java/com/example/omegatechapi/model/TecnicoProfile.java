@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "tecnicos_perfis") // Nome da tabela no banco de dados, substituir depois
+@Table(name = "tecnicos_perfis")
 
 public class TecnicoProfile {
 

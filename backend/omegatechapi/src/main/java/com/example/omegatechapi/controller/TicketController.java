@@ -1,5 +1,3 @@
-package com.example.omegatechapi.controller;
-
 /*
 
 A Lógica da Arquitetura REST
@@ -143,6 +141,12 @@ A resposta de sucesso volta para o usuário.
 Essa arquitetura é limpa, organizada e muito fácil de dar manutenção.
 
  */
+package com.example.omegatechapi.controller;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/tickets")
 public class TicketController {
 }

@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 @Data
 @Entity
+@Table(name = "usuarios_perfis")
 
 public class Usuario {
     @Id

@@ -1,5 +1,3 @@
-package com.example.omegatechapi.controller;
-
 /*
 Este é um novo controller, dedicado a ações que apenas administradores podem realizar. É uma ótima prática para organizar e proteger seus endpoints.
 
@@ -15,5 +13,12 @@ DELETE /api/admin/usuarios/{id}: Para deletar um usuário.
 
 PUT /api/admin/usuarios/{id}/perfil: Para alterar o perfil de um usuário (promover para técnico ou admin).
  */
+
+package com.example.omegatechapi.controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/admin")
 public class AdminController {
 }
