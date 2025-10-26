@@ -22,7 +22,9 @@ public class Ticket {
     @Column(name = "data_criacao", updatable = false)
     private LocalDate dataCriacao = LocalDate.now();
 
+    @Enumerated(EnumType.STRING)
     public Prioridade prioridade;
+    @Enumerated(EnumType.STRING)
     public Status status;
 
     public String Resposta;
