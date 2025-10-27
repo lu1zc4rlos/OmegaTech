@@ -54,6 +54,7 @@
             pn_title.Name = "pn_title";
             pn_title.Size = new Size(1000, 74);
             pn_title.TabIndex = 17;
+            pn_title.Paint += pn_title_Paint;
             // 
             // lbl_titulo
             // 
