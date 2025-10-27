@@ -55,8 +55,17 @@ namespace client_desktop {
                     this.Hide();
             
             }
+            catch (HttpRequestException ex) {             
+                MessageBox.Show("Usuário ou senha inválidos. Tente novamente.",
+                                "Erro de Login",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
             catch (Exception ex) {
-                MessageBox.Show($"Erro no login: {ex.Message}");
+                MessageBox.Show("Não foi possível conectar à API: " + ex.Message,
+                                "Erro de Conexão",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
             }
 
         }
