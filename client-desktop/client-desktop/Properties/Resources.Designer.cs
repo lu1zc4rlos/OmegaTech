@@ -59,25 +59,5 @@ namespace client_desktop.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap cae11df222ff8639d02aa7b81d1d296a {
-            get {
-                object obj = ResourceManager.GetObject("cae11df222ff8639d02aa7b81d1d296a", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap edge {
-            get {
-                object obj = ResourceManager.GetObject("edge", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

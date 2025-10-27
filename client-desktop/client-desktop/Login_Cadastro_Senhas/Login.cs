@@ -1,5 +1,5 @@
-﻿using System.Drawing.Drawing2D;
-using System.Windows.Forms;
+﻿using CredentialManagement;
+using service;
 
 namespace client_desktop {
     public partial class Login : Form {
@@ -23,53 +23,47 @@ namespace client_desktop {
         private void Login_Load(object sender, EventArgs e) {
 
         }
-        //classe para guardar os dados do usuario
-        public static class Sessao {
-            /*
-            public static Usuario UsuarioLogado { get; set; }
-            */
-        }
+        private async void btnConfirmar_Click(object sender, EventArgs e) {
+            
+            try {
 
-        private void btnConfirmar_Click(object sender, EventArgs e) {
-            /*
-            string email = txtEmail.Text.Trim();
-            string senha = txtSenha.Text.Trim();
+                var authService = new AuthService();
+                string email = txtEmail.Text.Trim();
+                string senha = txtSenha.Text.Trim();
+                var response = await authService.LoginAsync(email, senha);
 
+                string tokenRecebido = response.Token;
+                string usuario = email; 
+                string alvo = "OmegaTech-Desktop";
 
-            LoginBLL loginBLL = new LoginBLL();
-            UsuarioDAL usuarioDAL = new UsuarioDAL();
-
-            try
-            {
-                Usuario usuario = loginBLL.ObterUsuarioPorEmaileSenha(email, senha);
-
-                if (usuario != null)
-                {
-                    //teste do método para pegar o usuario
-                    Sessao.UsuarioLogado = usuarioDAL.BuscarPorEmail(email);
-                    this.Hide();
-                    using (Home.Home home = new Home.Home(usuario))
-                    {
-                        home.ShowDialog();
+                try {
+                    var credencial = new Credential {
+                        Target = alvo,
+                        Username = usuario,
+                        Password = tokenRecebido,
+                        Type = CredentialType.Generic,
+                        PersistanceType = PersistanceType.LocalComputer
+                    };
+                    credencial.Save();
+                }
+                    catch (Exception ex) {
+                        MessageBox.Show("Erro ao salvar a credencial: " + ex.Message);
                     }
+
+                    Home.Home homeForm = new Home.Home(response.Username);
+                    homeForm.Show();
                     this.Hide();
-                    LimparCampos();
-                }
-                else
-                {
-                    MessageBox.Show("E-mail ou senha inválidos!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+            
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erro: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            catch (Exception ex) {
+                MessageBox.Show($"Erro no login: {ex.Message}");
             }
-            */
+
         }
         private void cbMostarSenha_CheckedChanged(object sender, EventArgs e) {
-            /*
+            
             txtSenha.PasswordChar = cbMostarSenha.Checked ? '\0' : '*';
-            */
+            
         }
         private void btnRecuperrarSenha_Click(object sender, EventArgs e) {
             /*
@@ -97,5 +91,6 @@ namespace client_desktop {
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e) { }
         private void pictureBox1_Click(object sender, EventArgs e) { }
         private void panel2_Paint(object sender, PaintEventArgs e) { }
+        private void pn_title_Paint(object sender, PaintEventArgs e) { }
     }
 }
