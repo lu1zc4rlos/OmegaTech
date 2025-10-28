@@ -12,6 +12,7 @@ namespace client_desktop {
         }
         private void btnNaoCadastrado_Click(object sender, EventArgs e) {
 
+            this.Close();
             this.Hide();
             using (Cadastro cadastro = new Cadastro()) {
                 cadastro.ShowDialog();
@@ -50,10 +51,14 @@ namespace client_desktop {
                         MessageBox.Show("Erro ao salvar a credencial: " + ex.Message);
                     }
 
-                    Home.Home homeForm = new Home.Home(response.Username);
-                    homeForm.Show();
-                    this.Hide();
-            
+                this.Close();
+                this.Hide();
+                using (Home.Home homeForm = new Home.Home(response.Username)) {
+                    homeForm.ShowDialog();
+                }
+                this.Show();
+                LimparCampos();
+
             }
             catch (HttpRequestException ex) {             
                 MessageBox.Show("Usuário ou senha inválidos. Tente novamente.",
@@ -75,7 +80,7 @@ namespace client_desktop {
             
         }
         private void btnRecuperrarSenha_Click(object sender, EventArgs e) {
-            /*
+            
             this.Hide();
             using (RecuperarSenha recuperarSenha = new RecuperarSenha())
             {
@@ -83,14 +88,12 @@ namespace client_desktop {
             }
             this.Show();
             LimparCampos();
-            */
         }
         private void LimparCampos() {
-            /*
+            
             txtEmail.Clear();
             txtSenha.Clear();
-            cbMostarSenha.Checked = false;
-            */
+            cbMostarSenha.Checked = false;           
         }
         private void txtSenha_TextChanged(object sender, EventArgs e) { }
         private void lblEmail_Click(object sender, EventArgs e) { }

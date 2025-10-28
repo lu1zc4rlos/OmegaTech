@@ -1,4 +1,7 @@
-﻿using System.Runtime.Serialization;
+﻿using model;
+using service;
+using System.Globalization;
+using System.Runtime.Serialization;
 
 namespace client_desktop {
     public partial class Cadastro : Form {
@@ -66,6 +69,7 @@ namespace client_desktop {
             btnConfirmar.Text = "Confirmar";
             btnConfirmar.TextAlign = ContentAlignment.MiddleRight;
             btnConfirmar.UseVisualStyleBackColor = false;
+            btnConfirmar.Click += btnConfirmar_Click;
             // 
             // lblEmailCadastrado
             // 
@@ -410,59 +414,39 @@ namespace client_desktop {
             PerformLayout();
 
         }
-        /*
-        private UsuarioBLL _usuarioBLL = new UsuarioBLL();
-        private RecuperarSenhaBLL _requisitosSenhaBLL = new RecuperarSenhaBLL ();
-        LoginBLL loginBLL = new LoginBLL();
-        */
-        private void btnConfirmar_Click(object sender, EventArgs e) {
-            /*
-            DateTime Data = atpDataNascimento.Value.Date;
+        private async void btnConfirmar_Click(object sender, EventArgs e) {
 
-            Usuario novoUsuario = new Usuario() {
-                Nome = txtNome.Text,
-                Data_Nascimento = Data,
-                Email = txtEmail.Text.Trim(),
-                Senha = txtConfirmarSenha.Text,
-            };
-
-            lblEmailCadastrado.Visible = false;
-            lblSenhaDiferente.Visible = false;
-
-            if (string.IsNullOrWhiteSpace(novoUsuario.Nome) ||
-                string.IsNullOrWhiteSpace(novoUsuario.Email) ||
-                string.IsNullOrWhiteSpace(novoUsuario.Senha) ||
-                string.IsNullOrWhiteSpace(txtConfirmarSenha.Text)) {
-                MessageBox.Show("Por favor, preencha todos os campos obrigatórios.", "Aviso",
-                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (_requisitosSenhaBLL.ValidarSenha(txtConfirmarSenha.Text)) {
-                MessageBox.Show("Senha inválida! A senha deve ter:\n- Pelo menos 8 caracteres" +
-                "\n- Uma letra maiúscula\n- Um número\n- Um caractere especial.");
-                return;
-            }
-            if (txtSenha.Text != txtConfirmarSenha.Text) {
-                lblSenhaDiferente.Text = "As senhas não coincidem.";
-                lblSenhaDiferente.ForeColor = Color.Red;
-                lblSenhaDiferente.Visible = true;
-                return;
-            }
             try {
+               
+                lblSenhaDiferente.Visible = false;
 
-                if (_usuarioBLL.EmailJaCadastrado(novoUsuario)) {
-                    lblEmailCadastrado.Text = "Email já cadastrado";
-                    lblEmailCadastrado.ForeColor = Color.Red;
-                    lblEmailCadastrado.Visible = true;
+                if (txtSenha.Text != txtConfirmarSenha.Text) {
+                    lblSenhaDiferente.Text = "As senhas não coincidem.";
+                    lblSenhaDiferente.ForeColor = Color.Red;
+                    lblSenhaDiferente.Visible = true;
                     return;
                 }
+                ValidacaoService.validacaoService(
+                   txtNome.Text,
+                   txtSenha.Text,
+                   txtEmail.Text,
+                   atpDataNascimento.Value,
+                   txtConfirmarSenha.Text
+                );
+                
+                var usuario = new Usuario() {
+                    Nome = txtNome.Text.Trim(),
+                    Email = txtEmail.Text.Trim(),
+                    Senha = txtSenha.Text.Trim(),
+                    DataNascimento = atpDataNascimento.Value,
+                    Perfil = Perfil.ROLE_CLIENTE,
+                    TecnicoProfile = null
+                };
 
-                _usuarioBLL.AdicionarUsuario(novoUsuario);
+                var authService = new AuthService();
+                var response = await authService.CadastroAsync(usuario);
 
-                if (!EmailBLL.EmailValido(novoUsuario.Email)) {
-                    MessageBox.Show("E-mail inválido. Verifique e tente novamente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                /*
                 EmailBLL.EnviarEmailBLL("Olá, " + novoUsuario.Nome + "\r\n\r\n" +
                     "Seja bem-vindo ao AtendeTech, o seu novo assistente virtual de ajuda e suporte técnico.\r\n\r\n" +
                     "Estamos muito contentes em tê-lo como usuário da nossa plataforma. O AtendeTech foi desenvolvido para tornar seu atendimento mais rápido, eficiente e acessível, sempre que você precisar de suporte técnico.\r\n\r\n" +
@@ -472,49 +456,62 @@ namespace client_desktop {
                     "Sua conta foi criada com sucesso - seja bem-vindo(a)!",
                     btnConfirmar
                 );
+                */
+            
 
                 MessageBox.Show("Usuário adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                this.Hide();
-                Usuario usuario = loginBLL.ObterUsuarioPorEmail(novoUsuario.Email);
-                Projeto_teste.Home.Home home = new Projeto_teste.Home.Home(usuario);
-                home.ShowDialog();
                 this.Close();
+                this.Hide();
+                using (Home.Home homeForm = new Home.Home(response.Username)) {
+                    homeForm.ShowDialog();
+                }
+                this.Show();
+                LimparCampos();
             }
-            catch(Exception ex){
+            catch (Exception ex){
 
-                MessageBox.Show("Ocorreu um erro ao adicionar o usuário: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ocorreu um erro no cadastro: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            */
+            
         }
         private void button2_Click(object sender, EventArgs e) {
-            /*
-            this.Hide();
-            Login login = new Login();
-            login.ShowDialog();
+
             this.Close();
-            */
+            this.Hide();
+            using (Login login = new Login()) {
+                login.ShowDialog();
+            }
+            this.Show();
+            LimparCampos();
+
         }
         private void Cadastro_Load(object sender, EventArgs e) {
-            /*
+            
             CultureInfo culture = new CultureInfo("pt-BR");
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
 
             atpDataNascimento.Format = DateTimePickerFormat.Custom;
             atpDataNascimento.CustomFormat = "dd/MM/yyyy";
-            */
         }
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e) {
-            /*
+            
             atpDataNascimento.MaxDate = DateTime.Today;
-            */
+
         }
         private void checkBox1_CheckedChanged(object sender, EventArgs e) {
-            /*
+            
             txtConfirmarSenha.PasswordChar = cbMostrarSenha.Checked ? '\0' : '*';
             txtSenha.PasswordChar = cbMostrarSenha.Checked ? '\0' : '*';
-            */
+        }
+        private void LimparCampos() {
+
+            txtNome.Clear();
+            txtEmail.Clear();
+            txtSenha.Clear();
+            txtConfirmarSenha.Clear();
+            cbMostrarSenha.Checked = false;
         }
         private void txtConfirmarSenha_TextChanged(object sender, EventArgs e) { }
         private void textBox1_TextChanged(object sender, EventArgs e) { }

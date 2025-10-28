@@ -3,8 +3,8 @@
 namespace model {
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum Perfil {
-        ADMIN,
-        TECNICO,
-        CLIENTE 
+        ROLE_ADMIN,
+        ROLE_TECNICO,
+        ROLE_CLIENTE
     }
 }

@@ -4,16 +4,16 @@ namespace model {
     public class Usuario {
 
         [JsonPropertyName("id")]
-        private long Id { get; set; }
+        public long Id { get; set; }
 
         [JsonPropertyName("nome")]
-        private string Nome { get; set; }
+        public string Nome { get; set; }
 
         [JsonPropertyName("dataNascimento")]
-        private DateTime DataNascimento { get; set; }
+        public DateTime DataNascimento { get; set; }
 
         [JsonPropertyName("email")]
-        private string Email { get; set; }
+        public string Email { get; set; }
 
         [JsonPropertyName("senha")]
         public string Senha { get; set; }

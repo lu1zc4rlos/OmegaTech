@@ -27,5 +27,25 @@ namespace service {
 
             return response;
         }
+        public async Task<LoginResponse> CadastroAsync(Usuario request) {
+            var api = new ApiClient();
+
+            var response = await api.PostAsync<LoginResponse>("usuarios/cadastro", request);
+
+            if (response != null && !string.IsNullOrEmpty(response.Token)) {
+                string alvo = "OmegaTech-Desktop";
+                var credencial = new Credential {
+                    Target = alvo,
+                    Username = request.Email,
+                    Password = response.Token,
+                    Type = CredentialType.Generic,
+                    PersistanceType = PersistanceType.LocalComputer
+                };
+
+                credencial.Save();
+            }
+
+            return response;
+        }
     }
 }
