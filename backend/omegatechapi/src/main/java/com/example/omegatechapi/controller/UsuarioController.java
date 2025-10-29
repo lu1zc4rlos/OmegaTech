@@ -4,6 +4,7 @@ import com.example.omegatechapi.model.Usuario;
 import com.example.omegatechapi.response.AuthResponse;
 import com.example.omegatechapi.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,4 +27,9 @@ public class UsuarioController {
         AuthResponse response = usuarioService.loginUsuario(usuario);
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/cadastro")
+    public ResponseEntity<AuthResponse> cadastro(@RequestBody Usuario usuario){
+        AuthResponse response = usuarioService.loginUsuario(usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);    }
 }
