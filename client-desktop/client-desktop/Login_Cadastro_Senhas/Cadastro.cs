@@ -446,18 +446,9 @@ namespace client_desktop {
                 var authService = new AuthService();
                 var response = await authService.CadastroAsync(usuario);
 
-                /*
-                EmailBLL.EnviarEmailBLL("Olá, " + novoUsuario.Nome + "\r\n\r\n" +
-                    "Seja bem-vindo ao AtendeTech, o seu novo assistente virtual de ajuda e suporte técnico.\r\n\r\n" +
-                    "Estamos muito contentes em tê-lo como usuário da nossa plataforma. O AtendeTech foi desenvolvido para tornar seu atendimento mais rápido, eficiente e acessível, sempre que você precisar de suporte técnico.\r\n\r\n" +
-                    "Com o AtendeTech, você pode:\r\n\r\nObter respostas para dúvidas técnicas com agilidade\r\n\r\nReceber instruções passo a passo para resolver problemas\r\n\r\nAcessar suporte a qualquer hora, de forma simples e intuitiva\r\n\r\n" +
-                    "Contar com um serviço confiável e sempre disponível\r\n\r\nSe tiver qualquer dúvida ou sugestão, nossa equipe está à disposição para ajudá-lo.\r\n\r\nAtenciosamente,\r\nEquipe AtendeTech\r\nsuporte@atendetech.com.br",
-                    novoUsuario.Email,
-                    "Sua conta foi criada com sucesso - seja bem-vindo(a)!",
-                    btnConfirmar
-                );
-                */
-            
+                if (response == null || string.IsNullOrEmpty(response.Token)) {
+                    throw new Exception("Falha ao registrar. A API não retornou um token.");
+                }
 
                 MessageBox.Show("Usuário adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

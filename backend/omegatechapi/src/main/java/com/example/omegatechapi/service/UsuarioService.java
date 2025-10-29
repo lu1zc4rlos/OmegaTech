@@ -29,11 +29,12 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
-        if (!usuario.getSenha().equals(request.getSenha())) {
-            throw new RuntimeException("Senha incorreta");
+        if (!passwordEncoder.matches(request.getSenha(), usuario.getSenha())) {
+            throw new RuntimeException("Senha incorreta ou usuário não encontrado");
         }
 
         String token = jwtService.gerarToken(usuario);
+
         return new AuthResponse(usuario.getNome(), token);
     }
     public AuthResponse cadastrarNovoUsuario(Usuario request) {
@@ -45,6 +46,7 @@ public class UsuarioService {
         Usuario novoUsuario = new Usuario();
         novoUsuario.setNome(request.getNome());
         novoUsuario.setEmail(request.getEmail());
+        novoUsuario.setDataNascimento(request.getDataNascimento());
         novoUsuario.setSenha(passwordEncoder.encode(request.getSenha()));
         novoUsuario.setPerfil(Perfil.ROLE_CLIENTE);
 

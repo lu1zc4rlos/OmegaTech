@@ -30,6 +30,6 @@ public class UsuarioController {
 
     @PostMapping("/cadastro")
     public ResponseEntity<AuthResponse> cadastro(@RequestBody Usuario usuario){
-        AuthResponse response = usuarioService.loginUsuario(usuario);
+        AuthResponse response = usuarioService.cadastrarNovoUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);    }
 }

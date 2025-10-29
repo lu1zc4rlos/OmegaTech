@@ -12,7 +12,6 @@ namespace client_desktop {
         }
         private void btnNaoCadastrado_Click(object sender, EventArgs e) {
 
-            this.Close();
             this.Hide();
             using (Cadastro cadastro = new Cadastro()) {
                 cadastro.ShowDialog();
@@ -51,7 +50,6 @@ namespace client_desktop {
                         MessageBox.Show("Erro ao salvar a credencial: " + ex.Message);
                     }
 
-                this.Close();
                 this.Hide();
                 using (Home.Home homeForm = new Home.Home(response.Username)) {
                     homeForm.ShowDialog();
