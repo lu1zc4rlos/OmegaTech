@@ -1,5 +1,6 @@
 package com.example.omegatechapi.controller;
 
+import com.example.omegatechapi.model.AlterarSenhaRequest;
 import com.example.omegatechapi.model.Usuario;
 import com.example.omegatechapi.response.AuthResponse;
 import com.example.omegatechapi.service.UsuarioService;
@@ -31,5 +32,12 @@ public class UsuarioController {
     @PostMapping("/cadastro")
     public ResponseEntity<AuthResponse> cadastro(@RequestBody Usuario usuario){
         AuthResponse response = usuarioService.cadastrarNovoUsuario(usuario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);    }
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PutMapping("alterar_senha")
+    public ResponseEntity<Void> alterarSenha(@RequestBody AlterarSenhaRequest request) {
+        usuarioService.alterarSenha(request);
+        return ResponseEntity.ok().build();
+    }
 }

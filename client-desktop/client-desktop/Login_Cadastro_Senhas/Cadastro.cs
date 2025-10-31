@@ -387,6 +387,7 @@ namespace client_desktop {
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
             tableLayoutPanel1.Size = new Size(875, 600);
             tableLayoutPanel1.TabIndex = 0;
+            tableLayoutPanel1.Paint += tableLayoutPanel1_Paint;
             // 
             // Cadastro
             // 
@@ -417,7 +418,7 @@ namespace client_desktop {
         private async void btnConfirmar_Click(object sender, EventArgs e) {
 
             try {
-               
+
                 lblSenhaDiferente.Visible = false;
 
                 if (txtSenha.Text != txtConfirmarSenha.Text) {
@@ -433,7 +434,7 @@ namespace client_desktop {
                    atpDataNascimento.Value,
                    txtConfirmarSenha.Text
                 );
-                
+
                 var usuario = new Usuario() {
                     Nome = txtNome.Text.Trim(),
                     Email = txtEmail.Text.Trim(),
@@ -452,7 +453,6 @@ namespace client_desktop {
 
                 MessageBox.Show("Usuário adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                this.Close();
                 this.Hide();
                 using (Home.Home homeForm = new Home.Home(response.Username)) {
                     homeForm.ShowDialog();
@@ -460,15 +460,14 @@ namespace client_desktop {
                 this.Show();
                 LimparCampos();
             }
-            catch (Exception ex){
+            catch (Exception ex) {
 
                 MessageBox.Show("Ocorreu um erro no cadastro: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
         private void button2_Click(object sender, EventArgs e) {
 
-            this.Close();
             this.Hide();
             using (Login login = new Login()) {
                 login.ShowDialog();
@@ -478,7 +477,7 @@ namespace client_desktop {
 
         }
         private void Cadastro_Load(object sender, EventArgs e) {
-            
+
             CultureInfo culture = new CultureInfo("pt-BR");
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
@@ -487,12 +486,12 @@ namespace client_desktop {
             atpDataNascimento.CustomFormat = "dd/MM/yyyy";
         }
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e) {
-            
+
             atpDataNascimento.MaxDate = DateTime.Today;
 
         }
         private void checkBox1_CheckedChanged(object sender, EventArgs e) {
-            
+
             txtConfirmarSenha.PasswordChar = cbMostrarSenha.Checked ? '\0' : '*';
             txtSenha.PasswordChar = cbMostrarSenha.Checked ? '\0' : '*';
         }
@@ -512,6 +511,8 @@ namespace client_desktop {
         private void panel1_Paint(object sender, PaintEventArgs e) { }
         private void atpDataNascimento_ValueChanged(object sender, EventArgs e) { }
         private void lbl_omega_Click(object sender, EventArgs e) { }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e) { }
     }
 
     [Serializable]

@@ -47,5 +47,10 @@ namespace service {
 
             return response;
         }
+        public async Task AlterarSenhaAsync(AlterarSenhaRequest request) {
+            var api = new ApiClient();
+
+            await api.PutAsync("usuarios/alterar_senha", request);
+        }
     }
 }

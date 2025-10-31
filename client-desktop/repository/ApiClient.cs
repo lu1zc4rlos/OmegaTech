@@ -1,6 +1,8 @@
-﻿using System.Net.Http.Headers;
+﻿using model;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using model;
+using System.Text;
+using System.Text.Json;
 
 namespace repository {
     public class ApiClient {
@@ -26,6 +28,10 @@ namespace repository {
             var response = await _httpClient.PostAsJsonAsync(endpoint, body);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<T>();
+        }
+        public async Task PutAsync(string endpoint, object body) {
+            var response = await _httpClient.PutAsJsonAsync(endpoint, body);
+            response.EnsureSuccessStatusCode();
         }
     }
 }
