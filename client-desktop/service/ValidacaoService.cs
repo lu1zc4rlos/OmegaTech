@@ -59,6 +59,27 @@ namespace service {
             }
 
         }
+        public static void validacaoService(String SenhaNova, String SenhaNovamente) {
+            if (string.IsNullOrWhiteSpace(SenhaNovamente) ||
+               string.IsNullOrWhiteSpace(SenhaNova)) {
+                throw new ArgumentException("Por favor, preencha todos os campos obrigatórios.");
+            }
+            if (SenhaNova.Length < 8) {
+                throw new ArgumentException("A senha deve possuir 8 ou mais caracteres.");
+            }
+            if (!SenhaNova.Any(char.IsUpper)) {
+                throw new ArgumentException("A senha deve possuir possuir um caracter maiusculo.");
+            }
+            if (!SenhaNova.Any(char.IsDigit)) {
+                throw new ArgumentException("A senha deve possuir um número.");
+            }
+            if (!SenhaNova.Any(char.IsLower)) {
+                throw new ArgumentException("A senha deve possuir um caracter minúsculo.");
+            }
+            if (!SenhaNova.Any(ch => "!@#$%^&*()-_=+[{]}\\|;:'\",<.>/?".Contains(ch))) {
+                throw new ArgumentException("A senha deve possuir possuir um caracter especial.");
+            }
+        }
         private static bool EmailValido(string email) {
             string padrao = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
             return Regex.IsMatch(email, padrao);

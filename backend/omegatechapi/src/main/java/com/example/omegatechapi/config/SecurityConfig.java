@@ -34,6 +34,12 @@ public class SecurityConfig {
                         .requestMatchers("/usuarios/cadastro").permitAll()
                         // 🔓 Libera troca de senha
                         .requestMatchers(HttpMethod.PUT, "/usuarios/alterar_senha").permitAll()
+                        // 🔓 Libera troca de senha por código
+                        .requestMatchers(HttpMethod.POST, "/usuarios/solicitar_codigo").permitAll()
+                        // 🔓 Libera validação de código
+                        .requestMatchers(HttpMethod.POST, "/usuarios/validar_codigo").permitAll()
+                        // 🔓 Libera troca de senha
+                        .requestMatchers(HttpMethod.PUT, "/usuarios/resetar_senha").permitAll()
                         // 🔒 O resto precisa de token JWT
                         .anyRequest().authenticated()
                 )

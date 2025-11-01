@@ -1,10 +1,15 @@
 package com.example.omegatechapi.service;
 
+import com.example.omegatechapi.model.TokenRecuperacao;
+import com.example.omegatechapi.repository.TokenRecuperacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.Random;
 
 @Service
 public class EmailService {
@@ -45,6 +50,27 @@ public class EmailService {
             message.setText("Sua senha foi alterada, se você realizou essa alteração, pode desconsiderar esta mensagem.\r\r\n" +
                             "Caso não tenha solicitado essa mudança, recomendamos que entre em contato imediatamente" +
                             " com nossa equipe de suporte para garantir a segurança da sua conta.\r\n\r\n" +
+                            "Atenciosamente,\r\nEquipe OmegaTech\r\nsuporteomegatech699@gmail.com"
+            );
+
+            mailSender.send(message);
+        } catch (Exception e) {
+            System.err.println("Erro ao enviar e-mail para " + paraEmail + ": " + e.getMessage());
+        }
+    }
+    @Async
+    public void enviarEmailCodigo(String paraEmail,String codigoGerado) {
+        try {
+
+
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom("suporteomegatech699@gmail.com");
+            message.setTo(paraEmail);
+            message.setSubject("Código de recuperação");
+            message.setText("Recebemos uma solicitação para redefinir sua senha de acesso ao sistema OmegaTech.\r\n\r\n" +
+                            "Para confirmar essa solicitação, utilize o código abaixo:\r\n\r\n" +
+                            "CÓDIGO DE VERIFICAÇÃO: " + codigoGerado + "\r\n\r\n" +
+                            "Se você não solicitou essa redefinição, por favor entre em contato com nossa equipe de suporte.\r\n\r\n" +
                             "Atenciosamente,\r\nEquipe OmegaTech\r\nsuporteomegatech699@gmail.com"
             );
 

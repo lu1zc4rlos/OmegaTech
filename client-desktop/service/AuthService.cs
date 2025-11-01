@@ -52,5 +52,22 @@ namespace service {
 
             await api.PutAsync("usuarios/alterar_senha", request);
         }
+        public async Task SolicitarCodigoAsync(string email) {
+            var api = new ApiClient(); 
+            var request = new SolicitarCodigoRequest { Email = email };
+
+            await api.PostAsync("usuarios/solicitar_codigo", request);
+        }
+        public async Task ValidarCodigoAsync(string email, string codigo) {
+            var api = new ApiClient(); 
+            var request = new ValidarCodigoRequest { Email = email, Codigo = codigo };
+
+             await api.PostAsync("usuarios/validar_codigo", request);
+        }
+        public async Task ResetarSenhaAsync(ResetarSenhaComCodigo request) {
+            var api = new ApiClient();
+
+            await api.PutAsync("usuarios/resetar_senha", request);
+        }
     }
 }

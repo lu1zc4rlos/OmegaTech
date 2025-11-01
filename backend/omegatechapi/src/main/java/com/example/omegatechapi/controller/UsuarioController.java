@@ -1,15 +1,12 @@
 package com.example.omegatechapi.controller;
 
-import com.example.omegatechapi.model.AlterarSenhaRequest;
-import com.example.omegatechapi.model.Usuario;
+import com.example.omegatechapi.model.*;
 import com.example.omegatechapi.response.AuthResponse;
 import com.example.omegatechapi.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -38,6 +35,22 @@ public class UsuarioController {
     @PutMapping("alterar_senha")
     public ResponseEntity<Void> alterarSenha(@RequestBody AlterarSenhaRequest request) {
         usuarioService.alterarSenha(request);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/solicitar_codigo")
+    public ResponseEntity<Void> solicitarCodigo(@RequestBody SolicitarCodigoRequest request) {
+        usuarioService.solicitarCodigoRecuperacao(request.getEmail());
+        return ResponseEntity.ok().build();
+    }
+    @PostMapping("/validar_codigo")
+    public ResponseEntity<Void> validarCodigo(@RequestBody ValidarCodigo dto) {
+        usuarioService.validarCodigoRecuperacao(dto);
+        return ResponseEntity.ok().build();
+    }
+    @PutMapping("/resetar_senha")
+    public ResponseEntity<Void> resetarSenha(@RequestBody ResetarSenhaComCodigo dto) {
+        usuarioService.resetarSenhaComCodigo(dto);
         return ResponseEntity.ok().build();
     }
 }

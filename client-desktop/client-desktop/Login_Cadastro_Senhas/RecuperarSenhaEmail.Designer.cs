@@ -1,4 +1,4 @@
-﻿namespace client_desktop {
+﻿namespace client_desktop.Login_Cadastro_Senhas {
     partial class RecuperarSenhaEmail {
         /// <summary>
         /// Required designer variable.
@@ -22,243 +22,216 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RecuperarSenhaEmail));
-            btnEnviarCodigo = new System.Windows.Forms.Button();
-            lblCodigo = new System.Windows.Forms.Label();
-            txtEmail = new System.Windows.Forms.TextBox();
-            lblEmail = new System.Windows.Forms.Label();
-            btnConfirmar = new System.Windows.Forms.Button();
-            txtCodigo = new System.Windows.Forms.TextBox();
-            btnTrocarSenha = new System.Windows.Forms.Button();
-            btnAcessarPrograma = new System.Windows.Forms.Button();
-            pn_title = new System.Windows.Forms.Panel();
-            lbl_titulo = new System.Windows.Forms.Label();
-            pictureBox2 = new System.Windows.Forms.PictureBox();
-            nightControlBox1 = new ReaLTaiizor.Controls.NightControlBox();
-            lbl_omega = new System.Windows.Forms.Label();
-            panel1 = new System.Windows.Forms.Panel();
-            panel2 = new System.Windows.Forms.Panel();
+        private void InitializeComponent() {
+            pn_title = new Panel();
+            lbl_titulo = new Label();
+            pictureBox2 = new PictureBox();
+            nightControlBox2 = new ReaLTaiizor.Controls.NightControlBox();
+            lbl_omega = new Label();
+            txtCodigo = new TextBox();
+            btnConfirmar = new Button();
+            txtEmail = new TextBox();
+            lblEmail = new Label();
+            lblCodigo = new Label();
+            btnEnviarCodigo = new Button();
+            panel1 = new Panel();
+            btnTrocarSenha = new Button();
+            panel2 = new Panel();
             pn_title.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
-            // btnEnviarCodigo
+            // pn_title
             // 
-            btnEnviarCodigo.BackColor = System.Drawing.Color.FromArgb(40, 42, 90);
-            btnEnviarCodigo.FlatAppearance.BorderSize = 0;
-            btnEnviarCodigo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(65, 67, 115);
-            btnEnviarCodigo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnEnviarCodigo.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            btnEnviarCodigo.ForeColor = System.Drawing.Color.White;
-            btnEnviarCodigo.Location = new System.Drawing.Point(339, 261);
-            btnEnviarCodigo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            btnEnviarCodigo.Name = "btnEnviarCodigo";
-            btnEnviarCodigo.Size = new System.Drawing.Size(107, 36);
-            btnEnviarCodigo.TabIndex = 1;
-            btnEnviarCodigo.Text = "Enviar código";
-            btnEnviarCodigo.UseVisualStyleBackColor = false;
-            btnEnviarCodigo.Click += btnEnviarCodigo_Click;
+            pn_title.BackColor = Color.FromArgb(40, 42, 90);
+            pn_title.Controls.Add(lbl_titulo);
+            pn_title.Controls.Add(pictureBox2);
+            pn_title.Controls.Add(nightControlBox2);
+            pn_title.Controls.Add(lbl_omega);
+            pn_title.Dock = DockStyle.Top;
+            pn_title.Location = new Point(0, 0);
+            pn_title.Margin = new Padding(3, 4, 3, 4);
+            pn_title.Name = "pn_title";
+            pn_title.Size = new Size(800, 112);
+            pn_title.TabIndex = 20;
             // 
-            // lblCodigo
+            // lbl_titulo
             // 
-            lblCodigo.AutoSize = true;
-            lblCodigo.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            lblCodigo.ForeColor = System.Drawing.Color.White;
-            lblCodigo.Location = new System.Drawing.Point(247, 320);
-            lblCodigo.Name = "lblCodigo";
-            lblCodigo.Size = new System.Drawing.Size(69, 23);
-            lblCodigo.TabIndex = 1;
-            lblCodigo.Text = "Código:";
-            lblCodigo.Click += lblCodigo_Click;
+            lbl_titulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lbl_titulo.AutoSize = true;
+            lbl_titulo.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold);
+            lbl_titulo.ForeColor = Color.White;
+            lbl_titulo.ImeMode = ImeMode.NoControl;
+            lbl_titulo.Location = new Point(227, 23);
+            lbl_titulo.Name = "lbl_titulo";
+            lbl_titulo.Size = new Size(334, 37);
+            lbl_titulo.TabIndex = 0;
+            lbl_titulo.Text = "CÓDIGO DE VERIFICAÇÃO";
+            lbl_titulo.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.ImeMode = ImeMode.NoControl;
+            pictureBox2.Location = new Point(25, 23);
+            pictureBox2.Margin = new Padding(3, 4, 3, 4);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(74, 65);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 2;
+            pictureBox2.TabStop = false;
+            // 
+            // nightControlBox2
+            // 
+            nightControlBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            nightControlBox2.BackColor = Color.Transparent;
+            nightControlBox2.CloseHoverColor = Color.FromArgb(199, 80, 80);
+            nightControlBox2.CloseHoverForeColor = Color.White;
+            nightControlBox2.Cursor = Cursors.Hand;
+            nightControlBox2.DefaultLocation = true;
+            nightControlBox2.DisableMaximizeColor = Color.FromArgb(105, 105, 105);
+            nightControlBox2.DisableMinimizeColor = Color.FromArgb(105, 105, 105);
+            nightControlBox2.EnableCloseColor = Color.FromArgb(160, 160, 160);
+            nightControlBox2.EnableMaximizeButton = true;
+            nightControlBox2.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
+            nightControlBox2.EnableMinimizeButton = true;
+            nightControlBox2.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
+            nightControlBox2.Location = new Point(661, 0);
+            nightControlBox2.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
+            nightControlBox2.MaximizeHoverForeColor = Color.White;
+            nightControlBox2.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
+            nightControlBox2.MinimizeHoverForeColor = Color.White;
+            nightControlBox2.Name = "nightControlBox2";
+            nightControlBox2.Size = new Size(139, 31);
+            nightControlBox2.TabIndex = 1;
+            // 
+            // lbl_omega
+            // 
+            lbl_omega.AutoSize = true;
+            lbl_omega.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            lbl_omega.ForeColor = Color.White;
+            lbl_omega.ImeMode = ImeMode.NoControl;
+            lbl_omega.Location = new Point(327, 60);
+            lbl_omega.Name = "lbl_omega";
+            lbl_omega.Size = new Size(119, 28);
+            lbl_omega.TabIndex = 1;
+            lbl_omega.Text = "OmegaTech\r\n";
+            // 
+            // txtCodigo
+            // 
+            txtCodigo.BorderStyle = BorderStyle.None;
+            txtCodigo.Location = new Point(320, 325);
+            txtCodigo.Margin = new Padding(3, 4, 3, 4);
+            txtCodigo.Name = "txtCodigo";
+            txtCodigo.Size = new Size(183, 20);
+            txtCodigo.TabIndex = 25;
+            // 
+            // btnConfirmar
+            // 
+            btnConfirmar.BackColor = Color.FromArgb(40, 42, 90);
+            btnConfirmar.FlatAppearance.BorderSize = 0;
+            btnConfirmar.FlatAppearance.MouseOverBackColor = Color.FromArgb(65, 67, 115);
+            btnConfirmar.FlatStyle = FlatStyle.Flat;
+            btnConfirmar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            btnConfirmar.ForeColor = Color.White;
+            btnConfirmar.Location = new Point(359, 353);
+            btnConfirmar.Margin = new Padding(3, 4, 3, 4);
+            btnConfirmar.Name = "btnConfirmar";
+            btnConfirmar.Size = new Size(94, 36);
+            btnConfirmar.TabIndex = 26;
+            btnConfirmar.Text = "Confirmar";
+            btnConfirmar.UseVisualStyleBackColor = false;
+            btnConfirmar.Click += btnConfirmar_Click_1Async;
             // 
             // txtEmail
             // 
-            txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txtEmail.Location = new System.Drawing.Point(307, 233);
-            txtEmail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            txtEmail.BorderStyle = BorderStyle.None;
+            txtEmail.Location = new Point(320, 235);
+            txtEmail.Margin = new Padding(3, 4, 3, 4);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new System.Drawing.Size(183, 20);
-            txtEmail.TabIndex = 0;
-            txtEmail.TextChanged += txtEmail_TextChanged;
+            txtEmail.Size = new Size(183, 20);
+            txtEmail.TabIndex = 22;
             // 
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            lblEmail.ForeColor = System.Drawing.Color.White;
-            lblEmail.Location = new System.Drawing.Point(247, 231);
+            lblEmail.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblEmail.ForeColor = Color.White;
+            lblEmail.Location = new Point(260, 233);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new System.Drawing.Size(62, 23);
-            lblEmail.TabIndex = 4;
+            lblEmail.Size = new Size(62, 23);
+            lblEmail.TabIndex = 27;
             lblEmail.Text = "E-mail:";
-            lblEmail.Click += lblEmail_Click;
             // 
-            // btnConfirmar
+            // lblCodigo
             // 
-            btnConfirmar.BackColor = System.Drawing.Color.FromArgb(40, 42, 90);
-            btnConfirmar.FlatAppearance.BorderSize = 0;
-            btnConfirmar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(65, 67, 115);
-            btnConfirmar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnConfirmar.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            btnConfirmar.ForeColor = System.Drawing.Color.White;
-            btnConfirmar.Location = new System.Drawing.Point(346, 351);
-            btnConfirmar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            btnConfirmar.Name = "btnConfirmar";
-            btnConfirmar.Size = new System.Drawing.Size(94, 36);
-            btnConfirmar.TabIndex = 3;
-            btnConfirmar.Text = "Confirmar";
-            btnConfirmar.UseVisualStyleBackColor = false;
-            btnConfirmar.Click += btnConfirmar_Click_1;
+            lblCodigo.AutoSize = true;
+            lblCodigo.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblCodigo.ForeColor = Color.White;
+            lblCodigo.Location = new Point(260, 322);
+            lblCodigo.Name = "lblCodigo";
+            lblCodigo.Size = new Size(69, 23);
+            lblCodigo.TabIndex = 23;
+            lblCodigo.Text = "Código:";
             // 
-            // txtCodigo
+            // btnEnviarCodigo
             // 
-            txtCodigo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txtCodigo.Location = new System.Drawing.Point(307, 323);
-            txtCodigo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            txtCodigo.Name = "txtCodigo";
-            txtCodigo.Size = new System.Drawing.Size(183, 20);
-            txtCodigo.TabIndex = 2;
-            txtCodigo.TextChanged += txtCodigo_TextChanged;
+            btnEnviarCodigo.BackColor = Color.FromArgb(40, 42, 90);
+            btnEnviarCodigo.FlatAppearance.BorderSize = 0;
+            btnEnviarCodigo.FlatAppearance.MouseOverBackColor = Color.FromArgb(65, 67, 115);
+            btnEnviarCodigo.FlatStyle = FlatStyle.Flat;
+            btnEnviarCodigo.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            btnEnviarCodigo.ForeColor = Color.White;
+            btnEnviarCodigo.Location = new Point(352, 263);
+            btnEnviarCodigo.Margin = new Padding(3, 4, 3, 4);
+            btnEnviarCodigo.Name = "btnEnviarCodigo";
+            btnEnviarCodigo.Size = new Size(107, 36);
+            btnEnviarCodigo.TabIndex = 24;
+            btnEnviarCodigo.Text = "Enviar código";
+            btnEnviarCodigo.UseVisualStyleBackColor = false;
+            btnEnviarCodigo.Click += btnEnviarCodigo_ClickAsync;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(btnTrocarSenha);
+            panel1.Location = new Point(182, 174);
+            panel1.Margin = new Padding(3, 4, 3, 4);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(424, 348);
+            panel1.TabIndex = 28;
             // 
             // btnTrocarSenha
             // 
-            btnTrocarSenha.BackColor = System.Drawing.Color.FromArgb(40, 42, 90);
+            btnTrocarSenha.BackColor = Color.FromArgb(40, 42, 90);
             btnTrocarSenha.FlatAppearance.BorderSize = 0;
-            btnTrocarSenha.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(65, 67, 115);
-            btnTrocarSenha.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnTrocarSenha.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            btnTrocarSenha.ForeColor = System.Drawing.Color.White;
-            btnTrocarSenha.Location = new System.Drawing.Point(37, 252);
-            btnTrocarSenha.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btnTrocarSenha.FlatAppearance.MouseOverBackColor = Color.FromArgb(65, 67, 115);
+            btnTrocarSenha.FlatStyle = FlatStyle.Flat;
+            btnTrocarSenha.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            btnTrocarSenha.ForeColor = Color.White;
+            btnTrocarSenha.Location = new Point(154, 278);
+            btnTrocarSenha.Margin = new Padding(3, 4, 3, 4);
             btnTrocarSenha.Name = "btnTrocarSenha";
-            btnTrocarSenha.Size = new System.Drawing.Size(145, 41);
+            btnTrocarSenha.Size = new Size(145, 41);
             btnTrocarSenha.TabIndex = 4;
             btnTrocarSenha.Text = "Trocar Senha";
             btnTrocarSenha.UseVisualStyleBackColor = false;
             btnTrocarSenha.Click += btnTrocarSenha_Click;
             // 
-            // btnAcessarPrograma
-            // 
-            btnAcessarPrograma.BackColor = System.Drawing.Color.FromArgb(40, 42, 90);
-            btnAcessarPrograma.FlatAppearance.BorderSize = 0;
-            btnAcessarPrograma.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(65, 67, 115);
-            btnAcessarPrograma.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnAcessarPrograma.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            btnAcessarPrograma.ForeColor = System.Drawing.Color.White;
-            btnAcessarPrograma.Location = new System.Drawing.Point(237, 252);
-            btnAcessarPrograma.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            btnAcessarPrograma.Name = "btnAcessarPrograma";
-            btnAcessarPrograma.Size = new System.Drawing.Size(155, 41);
-            btnAcessarPrograma.TabIndex = 5;
-            btnAcessarPrograma.Text = "Acessar programa";
-            btnAcessarPrograma.UseVisualStyleBackColor = false;
-            btnAcessarPrograma.Click += btnAcessarPrograma_Click;
-            // 
-            // pn_title
-            // 
-            pn_title.BackColor = System.Drawing.Color.FromArgb(40, 42, 90);
-            pn_title.Controls.Add(lbl_titulo);
-            pn_title.Controls.Add(pictureBox2);
-            pn_title.Controls.Add(nightControlBox1);
-            pn_title.Controls.Add(lbl_omega);
-            pn_title.Dock = System.Windows.Forms.DockStyle.Top;
-            pn_title.Location = new System.Drawing.Point(0, 0);
-            pn_title.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            pn_title.Name = "pn_title";
-            pn_title.Size = new System.Drawing.Size(753, 112);
-            pn_title.TabIndex = 19;
-            // 
-            // lbl_titulo
-            // 
-            lbl_titulo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            lbl_titulo.AutoSize = true;
-            lbl_titulo.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            lbl_titulo.ForeColor = System.Drawing.Color.White;
-            lbl_titulo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            lbl_titulo.Location = new System.Drawing.Point(227, 23);
-            lbl_titulo.Name = "lbl_titulo";
-            lbl_titulo.Size = new System.Drawing.Size(334, 37);
-            lbl_titulo.TabIndex = 0;
-            lbl_titulo.Text = "CÓDIGO DE VERIFICAÇÃO";
-            lbl_titulo.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = (System.Drawing.Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            pictureBox2.Location = new System.Drawing.Point(25, 23);
-            pictureBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new System.Drawing.Size(74, 65);
-            pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 2;
-            pictureBox2.TabStop = false;
-            // 
-            // nightControlBox1
-            // 
-            nightControlBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            nightControlBox1.BackColor = System.Drawing.Color.Transparent;
-            nightControlBox1.CloseHoverColor = System.Drawing.Color.FromArgb(199, 80, 80);
-            nightControlBox1.CloseHoverForeColor = System.Drawing.Color.White;
-            nightControlBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            nightControlBox1.DefaultLocation = true;
-            nightControlBox1.DisableMaximizeColor = System.Drawing.Color.FromArgb(105, 105, 105);
-            nightControlBox1.DisableMinimizeColor = System.Drawing.Color.FromArgb(105, 105, 105);
-            nightControlBox1.EnableCloseColor = System.Drawing.Color.FromArgb(160, 160, 160);
-            nightControlBox1.EnableMaximizeButton = true;
-            nightControlBox1.EnableMaximizeColor = System.Drawing.Color.FromArgb(160, 160, 160);
-            nightControlBox1.EnableMinimizeButton = true;
-            nightControlBox1.EnableMinimizeColor = System.Drawing.Color.FromArgb(160, 160, 160);
-            nightControlBox1.Location = new System.Drawing.Point(594, 0);
-            nightControlBox1.MaximizeHoverColor = System.Drawing.Color.FromArgb(15, 255, 255, 255);
-            nightControlBox1.MaximizeHoverForeColor = System.Drawing.Color.White;
-            nightControlBox1.MinimizeHoverColor = System.Drawing.Color.FromArgb(15, 255, 255, 255);
-            nightControlBox1.MinimizeHoverForeColor = System.Drawing.Color.White;
-            nightControlBox1.Name = "nightControlBox1";
-            nightControlBox1.Size = new System.Drawing.Size(139, 31);
-            nightControlBox1.TabIndex = 1;
-            // 
-            // lbl_omega
-            // 
-            lbl_omega.AutoSize = true;
-            lbl_omega.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            lbl_omega.ForeColor = System.Drawing.Color.White;
-            lbl_omega.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            lbl_omega.Location = new System.Drawing.Point(327, 60);
-            lbl_omega.Name = "lbl_omega";
-            lbl_omega.Size = new System.Drawing.Size(119, 28);
-            lbl_omega.TabIndex = 1;
-            lbl_omega.Text = "OmegaTech\r\n";
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(btnAcessarPrograma);
-            panel1.Controls.Add(btnTrocarSenha);
-            panel1.Location = new System.Drawing.Point(169, 172);
-            panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(424, 348);
-            panel1.TabIndex = 20;
-            // 
             // panel2
             // 
-            panel2.BackColor = System.Drawing.Color.FromArgb(40, 42, 90);
-            panel2.Location = new System.Drawing.Point(154, 155);
-            panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            panel2.BackColor = Color.FromArgb(40, 42, 90);
+            panel2.Location = new Point(167, 157);
+            panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(455, 384);
-            panel2.TabIndex = 21;
+            panel2.Size = new Size(455, 384);
+            panel2.TabIndex = 29;
             // 
             // RecuperarSenhaEmail
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            BackColor = System.Drawing.Color.FromArgb(60, 62, 110);
-            ClientSize = new System.Drawing.Size(753, 615);
-            Controls.Add(pn_title);
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(60, 62, 110);
+            ClientSize = new Size(800, 628);
             Controls.Add(txtCodigo);
             Controls.Add(btnConfirmar);
             Controls.Add(txtEmail);
@@ -267,37 +240,36 @@
             Controls.Add(btnEnviarCodigo);
             Controls.Add(panel1);
             Controls.Add(panel2);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Controls.Add(pn_title);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "RecuperarSenhaEmail";
-            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "RecuperarSenhaEmail";
-            Load += RecuperarSenhaEmail_Load;
+            Text = "Form1";
+            Load += Form1_Load;
             pn_title.ResumeLayout(false);
             pn_title.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
-
         }
 
         #endregion
 
-        private System.Windows.Forms.Button btnEnviarCodigo;
-        private System.Windows.Forms.Label lblCodigo;
-        private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.Label lblEmail;
-        private System.Windows.Forms.Button btnConfirmar;
-        private System.Windows.Forms.TextBox txtCodigo;
-        private System.Windows.Forms.Button btnTrocarSenha;
-        private System.Windows.Forms.Button btnAcessarPrograma;
-        private System.Windows.Forms.Panel pn_title;
-        private System.Windows.Forms.Label lbl_titulo;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private ReaLTaiizor.Controls.NightControlBox nightControlBox1;
-        private System.Windows.Forms.Label lbl_omega;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
+        private Panel pn_title;
+        private Label lbl_titulo;
+        private PictureBox pictureBox2;
+        private ReaLTaiizor.Controls.NightControlBox nightControlBox2;
+        private Label lbl_omega;
+        private TextBox txtCodigo;
+        private Button btnConfirmar;
+        private TextBox txtEmail;
+        private Label lblEmail;
+        private Label lblCodigo;
+        private Button btnEnviarCodigo;
+        private Panel panel1;
+        private Button btnTrocarSenha;
+        private Panel panel2;
+        private Button button1;
+        private Button button2;
     }
 }

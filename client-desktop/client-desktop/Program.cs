@@ -1,3 +1,5 @@
+using client_desktop.Login_Cadastro_Senhas;
+
 namespace client_desktop
 {
     internal static class Program
@@ -11,7 +13,7 @@ namespace client_desktop
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Login());
+            Application.Run(new RecuperarSenhaEmail());
 
         }
     }
