@@ -11,13 +11,14 @@ namespace client_desktop {
             InitializeComponent();
         }
         private void button2_Click(object sender, EventArgs e) {
+
+
+            RecuperarSenhaEmail recuperarsenhaemail = new RecuperarSenhaEmail(); 
             
-            this.Hide();
-            using (RecuperarSenhaEmail recuperarsenhaemail = new RecuperarSenhaEmail()) 
-            {
-                recuperarsenhaemail.ShowDialog();
-            }
-            this.Show();
+            recuperarsenhaemail.MdiParent = this.MdiParent;
+            recuperarsenhaemail.Show();
+
+            this.Close();
             LimparCampos();
             
         }

@@ -50,10 +50,11 @@ namespace client_desktop.Login_Cadastro_Senhas {
 
         private void btnTrocarSenha_Click(object sender, EventArgs e) {
             this.Hide();
-            using (TrocarSenha trocarSenh = new TrocarSenha(txtEmail.Text, txtCodigo.Text)) {
-                trocarSenh.ShowDialog();
-            }
-            this.Show();
+            TrocarSenha trocarSenh = new TrocarSenha(txtEmail.Text, txtCodigo.Text);
+            trocarSenh.MdiParent = this.MdiParent;
+            trocarSenh.Show();
+
+            this.Close();
             LimparCampos();
         }
     }

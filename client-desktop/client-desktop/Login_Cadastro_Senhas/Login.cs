@@ -12,11 +12,11 @@ namespace client_desktop {
         }
         private void btnNaoCadastrado_Click(object sender, EventArgs e) {
 
-            this.Hide();
-            using (Cadastro cadastro = new Cadastro()) {
-                cadastro.ShowDialog();
-            }
-            this.Show();
+
+            Cadastro cadastro = new Cadastro();
+            cadastro.MdiParent = this.MdiParent;
+            cadastro.Show();
+            this.Close();
             LimparCampos();
 
         }
@@ -78,13 +78,12 @@ namespace client_desktop {
             
         }
         private void btnRecuperrarSenha_Click(object sender, EventArgs e) {
-            
-            this.Hide();
-            using (RecuperarSenha recuperarSenha = new RecuperarSenha())
-            {
-                recuperarSenha.ShowDialog();
-            }
-            this.Show();
+
+
+            RecuperarSenha recuperarSenha = new RecuperarSenha();
+            recuperarSenha.MdiParent = this.MdiParent;
+            recuperarSenha.Show();
+            this.Close();
             LimparCampos();
         }
         private void LimparCampos() {

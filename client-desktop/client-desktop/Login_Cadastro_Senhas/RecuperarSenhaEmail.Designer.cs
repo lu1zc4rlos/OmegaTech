@@ -22,11 +22,11 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             pn_title = new Panel();
             lbl_titulo = new Label();
             pictureBox2 = new PictureBox();
-            nightControlBox2 = new ReaLTaiizor.Controls.NightControlBox();
             lbl_omega = new Label();
             txtCodigo = new TextBox();
             btnConfirmar = new Button();
@@ -47,25 +47,22 @@
             pn_title.BackColor = Color.FromArgb(40, 42, 90);
             pn_title.Controls.Add(lbl_titulo);
             pn_title.Controls.Add(pictureBox2);
-            pn_title.Controls.Add(nightControlBox2);
             pn_title.Controls.Add(lbl_omega);
             pn_title.Dock = DockStyle.Top;
             pn_title.Location = new Point(0, 0);
-            pn_title.Margin = new Padding(3, 4, 3, 4);
             pn_title.Name = "pn_title";
-            pn_title.Size = new Size(800, 112);
+            pn_title.Size = new Size(700, 84);
             pn_title.TabIndex = 20;
             // 
             // lbl_titulo
             // 
             lbl_titulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            lbl_titulo.AutoSize = true;
             lbl_titulo.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold);
             lbl_titulo.ForeColor = Color.White;
             lbl_titulo.ImeMode = ImeMode.NoControl;
-            lbl_titulo.Location = new Point(227, 23);
+            lbl_titulo.Location = new Point(199, 17);
             lbl_titulo.Name = "lbl_titulo";
-            lbl_titulo.Size = new Size(334, 37);
+            lbl_titulo.Size = new Size(273, 30);
             lbl_titulo.TabIndex = 0;
             lbl_titulo.Text = "CÓDIGO DE VERIFICAÇÃO";
             lbl_titulo.TextAlign = ContentAlignment.TopCenter;
@@ -73,71 +70,46 @@
             // pictureBox2
             // 
             pictureBox2.ImeMode = ImeMode.NoControl;
-            pictureBox2.Location = new Point(25, 23);
-            pictureBox2.Margin = new Padding(3, 4, 3, 4);
+            pictureBox2.Location = new Point(22, 17);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(74, 65);
+            pictureBox2.Size = new Size(65, 49);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 2;
             pictureBox2.TabStop = false;
             // 
-            // nightControlBox2
-            // 
-            nightControlBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            nightControlBox2.BackColor = Color.Transparent;
-            nightControlBox2.CloseHoverColor = Color.FromArgb(199, 80, 80);
-            nightControlBox2.CloseHoverForeColor = Color.White;
-            nightControlBox2.Cursor = Cursors.Hand;
-            nightControlBox2.DefaultLocation = true;
-            nightControlBox2.DisableMaximizeColor = Color.FromArgb(105, 105, 105);
-            nightControlBox2.DisableMinimizeColor = Color.FromArgb(105, 105, 105);
-            nightControlBox2.EnableCloseColor = Color.FromArgb(160, 160, 160);
-            nightControlBox2.EnableMaximizeButton = true;
-            nightControlBox2.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
-            nightControlBox2.EnableMinimizeButton = true;
-            nightControlBox2.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
-            nightControlBox2.Location = new Point(661, 0);
-            nightControlBox2.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
-            nightControlBox2.MaximizeHoverForeColor = Color.White;
-            nightControlBox2.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
-            nightControlBox2.MinimizeHoverForeColor = Color.White;
-            nightControlBox2.Name = "nightControlBox2";
-            nightControlBox2.Size = new Size(139, 31);
-            nightControlBox2.TabIndex = 1;
-            // 
             // lbl_omega
             // 
-            lbl_omega.AutoSize = true;
+            lbl_omega.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lbl_omega.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             lbl_omega.ForeColor = Color.White;
             lbl_omega.ImeMode = ImeMode.NoControl;
-            lbl_omega.Location = new Point(327, 60);
+            lbl_omega.Location = new Point(93, 35);
             lbl_omega.Name = "lbl_omega";
-            lbl_omega.Size = new Size(119, 28);
+            lbl_omega.Size = new Size(96, 21);
             lbl_omega.TabIndex = 1;
             lbl_omega.Text = "OmegaTech\r\n";
             // 
             // txtCodigo
             // 
+            txtCodigo.Anchor = AnchorStyles.None;
             txtCodigo.BorderStyle = BorderStyle.None;
-            txtCodigo.Location = new Point(320, 325);
-            txtCodigo.Margin = new Padding(3, 4, 3, 4);
+            txtCodigo.Location = new Point(280, 244);
             txtCodigo.Name = "txtCodigo";
-            txtCodigo.Size = new Size(183, 20);
+            txtCodigo.Size = new Size(160, 16);
             txtCodigo.TabIndex = 25;
             // 
             // btnConfirmar
             // 
+            btnConfirmar.Anchor = AnchorStyles.None;
             btnConfirmar.BackColor = Color.FromArgb(40, 42, 90);
             btnConfirmar.FlatAppearance.BorderSize = 0;
             btnConfirmar.FlatAppearance.MouseOverBackColor = Color.FromArgb(65, 67, 115);
             btnConfirmar.FlatStyle = FlatStyle.Flat;
             btnConfirmar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btnConfirmar.ForeColor = Color.White;
-            btnConfirmar.Location = new Point(359, 353);
-            btnConfirmar.Margin = new Padding(3, 4, 3, 4);
+            btnConfirmar.Location = new Point(314, 265);
             btnConfirmar.Name = "btnConfirmar";
-            btnConfirmar.Size = new Size(94, 36);
+            btnConfirmar.Size = new Size(82, 27);
             btnConfirmar.TabIndex = 26;
             btnConfirmar.Text = "Confirmar";
             btnConfirmar.UseVisualStyleBackColor = false;
@@ -145,47 +117,49 @@
             // 
             // txtEmail
             // 
+            txtEmail.Anchor = AnchorStyles.None;
             txtEmail.BorderStyle = BorderStyle.None;
-            txtEmail.Location = new Point(320, 235);
-            txtEmail.Margin = new Padding(3, 4, 3, 4);
+            txtEmail.Location = new Point(280, 176);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(183, 20);
+            txtEmail.Size = new Size(160, 16);
             txtEmail.TabIndex = 22;
             // 
             // lblEmail
             // 
+            lblEmail.Anchor = AnchorStyles.None;
             lblEmail.AutoSize = true;
             lblEmail.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             lblEmail.ForeColor = Color.White;
-            lblEmail.Location = new Point(260, 233);
+            lblEmail.Location = new Point(228, 175);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(62, 23);
+            lblEmail.Size = new Size(48, 17);
             lblEmail.TabIndex = 27;
             lblEmail.Text = "E-mail:";
             // 
             // lblCodigo
             // 
+            lblCodigo.Anchor = AnchorStyles.None;
             lblCodigo.AutoSize = true;
             lblCodigo.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             lblCodigo.ForeColor = Color.White;
-            lblCodigo.Location = new Point(260, 322);
+            lblCodigo.Location = new Point(228, 242);
             lblCodigo.Name = "lblCodigo";
-            lblCodigo.Size = new Size(69, 23);
+            lblCodigo.Size = new Size(54, 17);
             lblCodigo.TabIndex = 23;
             lblCodigo.Text = "Código:";
             // 
             // btnEnviarCodigo
             // 
+            btnEnviarCodigo.Anchor = AnchorStyles.None;
             btnEnviarCodigo.BackColor = Color.FromArgb(40, 42, 90);
             btnEnviarCodigo.FlatAppearance.BorderSize = 0;
             btnEnviarCodigo.FlatAppearance.MouseOverBackColor = Color.FromArgb(65, 67, 115);
             btnEnviarCodigo.FlatStyle = FlatStyle.Flat;
             btnEnviarCodigo.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btnEnviarCodigo.ForeColor = Color.White;
-            btnEnviarCodigo.Location = new Point(352, 263);
-            btnEnviarCodigo.Margin = new Padding(3, 4, 3, 4);
+            btnEnviarCodigo.Location = new Point(308, 197);
             btnEnviarCodigo.Name = "btnEnviarCodigo";
-            btnEnviarCodigo.Size = new Size(107, 36);
+            btnEnviarCodigo.Size = new Size(94, 27);
             btnEnviarCodigo.TabIndex = 24;
             btnEnviarCodigo.Text = "Enviar código";
             btnEnviarCodigo.UseVisualStyleBackColor = false;
@@ -193,25 +167,25 @@
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel1.Controls.Add(btnTrocarSenha);
-            panel1.Location = new Point(182, 174);
-            panel1.Margin = new Padding(3, 4, 3, 4);
+            panel1.Location = new Point(159, 130);
             panel1.Name = "panel1";
-            panel1.Size = new Size(424, 348);
+            panel1.Size = new Size(371, 261);
             panel1.TabIndex = 28;
             // 
             // btnTrocarSenha
             // 
+            btnTrocarSenha.Anchor = AnchorStyles.None;
             btnTrocarSenha.BackColor = Color.FromArgb(40, 42, 90);
             btnTrocarSenha.FlatAppearance.BorderSize = 0;
             btnTrocarSenha.FlatAppearance.MouseOverBackColor = Color.FromArgb(65, 67, 115);
             btnTrocarSenha.FlatStyle = FlatStyle.Flat;
             btnTrocarSenha.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btnTrocarSenha.ForeColor = Color.White;
-            btnTrocarSenha.Location = new Point(154, 278);
-            btnTrocarSenha.Margin = new Padding(3, 4, 3, 4);
+            btnTrocarSenha.Location = new Point(135, 208);
             btnTrocarSenha.Name = "btnTrocarSenha";
-            btnTrocarSenha.Size = new Size(145, 41);
+            btnTrocarSenha.Size = new Size(127, 31);
             btnTrocarSenha.TabIndex = 4;
             btnTrocarSenha.Text = "Trocar Senha";
             btnTrocarSenha.UseVisualStyleBackColor = false;
@@ -219,19 +193,19 @@
             // 
             // panel2
             // 
+            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel2.BackColor = Color.FromArgb(40, 42, 90);
-            panel2.Location = new Point(167, 157);
-            panel2.Margin = new Padding(3, 4, 3, 4);
+            panel2.Location = new Point(146, 118);
             panel2.Name = "panel2";
-            panel2.Size = new Size(455, 384);
+            panel2.Size = new Size(398, 288);
             panel2.TabIndex = 29;
             // 
             // RecuperarSenhaEmail
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(60, 62, 110);
-            ClientSize = new Size(800, 628);
+            ClientSize = new Size(700, 471);
             Controls.Add(txtCodigo);
             Controls.Add(btnConfirmar);
             Controls.Add(txtEmail);
@@ -241,12 +215,13 @@
             Controls.Add(panel1);
             Controls.Add(panel2);
             Controls.Add(pn_title);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "RecuperarSenhaEmail";
             Text = "Form1";
+            WindowState = FormWindowState.Maximized;
             Load += Form1_Load;
             pn_title.ResumeLayout(false);
-            pn_title.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel1.ResumeLayout(false);
             ResumeLayout(false);
@@ -258,7 +233,6 @@
         private Panel pn_title;
         private Label lbl_titulo;
         private PictureBox pictureBox2;
-        private ReaLTaiizor.Controls.NightControlBox nightControlBox2;
         private Label lbl_omega;
         private TextBox txtCodigo;
         private Button btnConfirmar;

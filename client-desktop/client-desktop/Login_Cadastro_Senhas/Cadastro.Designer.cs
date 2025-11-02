@@ -26,7 +26,6 @@
         private System.Windows.Forms.Panel pn_title;
         private System.Windows.Forms.Label lbl_titulo;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private ReaLTaiizor.Controls.NightControlBox nightControlBox1;
         private System.Windows.Forms.Label lbl_omega;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
