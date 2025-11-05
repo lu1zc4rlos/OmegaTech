@@ -53,7 +53,7 @@ namespace client_desktop {
                     txtSenhaNova.Text           
                 );
 
-                var authService = new AuthService();
+                var authService = new AuthUsuarioService();
                 var request = new AlterarSenhaRequest {
                     Email = txtEmail.Text,
                     SenhaAtual = txtSenhaAtual.Text,

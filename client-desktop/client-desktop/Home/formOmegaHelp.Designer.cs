@@ -27,9 +27,10 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formOmegaHelp));
             nightControlBox1 = new ReaLTaiizor.Controls.NightControlBox();
             pn_title = new Panel();
-            pic_home = new PictureBox();
+            button4 = new Button();
             lbl_titulo = new Label();
             pictureBox2 = new PictureBox();
             nightControlBox2 = new ReaLTaiizor.Controls.NightControlBox();
@@ -38,7 +39,6 @@
             btnEnviar = new Button();
             flowLayoutPanelChat = new FlowLayoutPanel();
             pn_title.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pic_home).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
@@ -69,7 +69,7 @@
             // pn_title
             // 
             pn_title.BackColor = Color.FromArgb(40, 42, 90);
-            pn_title.Controls.Add(pic_home);
+            pn_title.Controls.Add(button4);
             pn_title.Controls.Add(lbl_titulo);
             pn_title.Controls.Add(pictureBox2);
             pn_title.Controls.Add(nightControlBox2);
@@ -82,16 +82,16 @@
             pn_title.TabIndex = 3;
             pn_title.Paint += pn_title_Paint;
             // 
-            // pic_home
+            // button4
             // 
-            pic_home.Location = new Point(11, 21);
-            pic_home.Margin = new Padding(3, 4, 3, 4);
-            pic_home.Name = "pic_home";
-            pic_home.Size = new Size(43, 49);
-            pic_home.SizeMode = PictureBoxSizeMode.StretchImage;
-            pic_home.TabIndex = 0;
-            pic_home.TabStop = false;
-            pic_home.Click += pic_home_Click;
+            button4.BackColor = Color.FromArgb(40, 42, 90);
+            button4.Image = (Image)resources.GetObject("button4.Image");
+            button4.Location = new Point(11, 18);
+            button4.Name = "button4";
+            button4.Size = new Size(56, 49);
+            button4.TabIndex = 31;
+            button4.UseVisualStyleBackColor = false;
+            button4.Click += button4_Click;
             // 
             // lbl_titulo
             // 
@@ -177,7 +177,7 @@
             btnEnviar.TabIndex = 2;
             btnEnviar.Text = "Enviar";
             btnEnviar.UseVisualStyleBackColor = false;
-         // btnEnviar.Click += btnEnviar_Click;
+            btnEnviar.Click += btnEnviar_Click;
             // 
             // flowLayoutPanelChat
             // 
@@ -209,7 +209,6 @@
             Load += formOmegaHelp_Load;
             pn_title.ResumeLayout(false);
             pn_title.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pic_home).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -219,7 +218,6 @@
         #endregion
         private ReaLTaiizor.Controls.NightControlBox nightControlBox1;
         private System.Windows.Forms.Panel pn_title;
-        private System.Windows.Forms.PictureBox pic_home;
         private System.Windows.Forms.Label lbl_titulo;
         private System.Windows.Forms.PictureBox pictureBox2;
         private ReaLTaiizor.Controls.NightControlBox nightControlBox2;
@@ -227,5 +225,6 @@
         private System.Windows.Forms.TextBox txtEnviarMensagem;
         private System.Windows.Forms.Button btnEnviar;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelChat;
+        private Button button4;
     }
 }

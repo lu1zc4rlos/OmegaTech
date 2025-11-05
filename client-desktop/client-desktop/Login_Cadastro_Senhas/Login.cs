@@ -27,7 +27,7 @@ namespace client_desktop {
             
             try {
 
-                var authService = new AuthService();
+                var authService = new AuthUsuarioService();
                 string email = txtEmail.Text.Trim();
                 string senha = txtSenha.Text.Trim();
                 var response = await authService.LoginAsync(email, senha);
@@ -51,7 +51,7 @@ namespace client_desktop {
                     }
 
                 this.Hide();
-                using (Home.Home homeForm = new Home.Home(response.Username)) {
+                using (Home.Home homeForm = new Home.Home()) {
                     homeForm.ShowDialog();
                 }
                 this.Show();

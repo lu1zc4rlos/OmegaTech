@@ -12,7 +12,7 @@ namespace client_desktop.Login_Cadastro_Senhas {
         }
         private async void btnEnviarCodigo_ClickAsync(object sender, EventArgs e) {
             try {
-                var authService = new AuthService();
+                var authService = new AuthUsuarioService();
                 await authService.SolicitarCodigoAsync(txtEmail.Text);
 
                 MessageBox.Show("Código de recuperação enviado com sucesso para o e-mail informado!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -31,7 +31,7 @@ namespace client_desktop.Login_Cadastro_Senhas {
                 return;
             }
             try {
-                var authService = new AuthService();
+                var authService = new AuthUsuarioService();
                 await authService.ValidarCodigoAsync(txtEmail.Text, txtCodigo.Text);
 
                 MessageBox.Show("Código verificado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);

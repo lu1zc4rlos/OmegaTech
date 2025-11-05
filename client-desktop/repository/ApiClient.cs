@@ -1,8 +1,9 @@
 ﻿using model;
+using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
-using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace repository {
     public class ApiClient {

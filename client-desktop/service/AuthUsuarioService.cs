@@ -3,7 +3,7 @@ using repository;
 using CredentialManagement;
 
 namespace service {
-  public class AuthService {
+  public class AuthUsuarioService {
         public async Task<LoginResponse> LoginAsync(string email, string senha) {
             var api = new ApiClient();
             var request = new LoginRequest { Email = email, Senha = senha };

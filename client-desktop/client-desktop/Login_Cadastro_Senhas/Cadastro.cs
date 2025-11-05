@@ -419,7 +419,7 @@ namespace client_desktop {
                     TecnicoProfile = null
                 };
 
-                var authService = new AuthService();
+                var authService = new AuthUsuarioService();
                 var response = await authService.CadastroAsync(usuario);
 
                 if (response == null || string.IsNullOrEmpty(response.Token)) {
@@ -429,7 +429,7 @@ namespace client_desktop {
                 MessageBox.Show("Usuário adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 this.Hide();
-                using (Home.Home homeForm = new Home.Home(response.Username)) {
+                using (Home.Home homeForm = new Home.Home()) {
                     homeForm.ShowDialog();
                 }
                 this.Show();

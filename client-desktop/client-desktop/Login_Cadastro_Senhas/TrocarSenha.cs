@@ -34,7 +34,7 @@ namespace client_desktop.Login_Cadastro_Senhas {
                         txtSenhaNova.Text
                 );
 
-                var authService = new AuthService();
+                var authService = new AuthUsuarioService();
                 var request = new ResetarSenhaComCodigo(
                     _emailParaValidar,
                     _codigoParaValidar,

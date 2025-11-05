@@ -1,25 +1,23 @@
-﻿using System;
+﻿using client_desktop.Home;
+using client_desktop.Home_Técnico;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
-using client_desktop.Home;
 
 namespace client_desktop.Home
 {
-    public partial class formChamados : Form
-    {
+    public partial class formChamados : Form {
         /*
         private Usuario _usuario;
         private TicketClienteDAL _tickeClientetDAL = new TicketClienteDAL();
         */
-        public formChamados(/*Usuario usuario*/)
-        {
+        public formChamados(/*Usuario usuario*/) {
             InitializeComponent();
             /*
             _usuario = usuario;
             */
         }
-        private void formChamados_Load(object sender, EventArgs e)
-        {
+        private void formChamados_Load(object sender, EventArgs e) {
             /*
             CarregarTicketsDoCliente();
             */
@@ -27,8 +25,7 @@ namespace client_desktop.Home
         /*
         int IdUsuarioLogado = Login.Sessao.UsuarioLogado.Id;
         */
-        private void CarregarTicketsDoCliente()
-        {
+        private void CarregarTicketsDoCliente() {
             /*
             flowLayoutPanelCards.Controls.Clear();
 
@@ -43,8 +40,7 @@ namespace client_desktop.Home
             }
             */
         }
-        private Panel CriarTicketCard(string id, string titulo, string cliente, string prioridade, string tempo, string status)
-        {
+        private Panel CriarTicketCard(string id, string titulo, string cliente, string prioridade, string tempo, string status) {
             Panel card = new Panel();
             card.Width = 850;
             card.Height = 80;
@@ -87,13 +83,11 @@ namespace client_desktop.Home
             btnAcao.AutoSize = true;
 
             // Verifica o status do chamado
-            if (status == "Concluído")
-            {
+            if (status == "Concluído") {
                 btnAcao.Text = "Ver Resposta";
                 btnAcao.BackColor = Color.Green;
                 btnAcao.ForeColor = Color.White;
-                btnAcao.Click += (s, e) =>
-                {
+                btnAcao.Click += (s, e) => {
                     int idNumerico = int.Parse(id.Replace("#HDN", ""));
 
                     this.Hide();
@@ -107,18 +101,15 @@ namespace client_desktop.Home
                     */
                 };
             }
-            else
-            {
+            else {
                 btnAcao.Text = "Excluir";
                 btnAcao.BackColor = Color.Red;
                 btnAcao.ForeColor = Color.White;
-                btnAcao.Click += (s, e) =>
-                {
+                btnAcao.Click += (s, e) => {
                     int idNumerico = int.Parse(id.Replace("#HDN", ""));
                     DialogResult confirmacao = MessageBox.Show("Deseja realmente excluir este chamado?", "Confirmar exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                    if (confirmacao == DialogResult.Yes)
-                    {
+                    if (confirmacao == DialogResult.Yes) {
                         /*
                         _tickeClientetDAL.ExcluirTicket(idNumerico);
                         MessageBox.Show("Chamado excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -135,10 +126,8 @@ namespace client_desktop.Home
             return card;
         }
 
-        private Label NovaLabel(string texto, bool negrito = false, Color? cor = null)
-        {
-            return new Label
-            {
+        private Label NovaLabel(string texto, bool negrito = false, Color? cor = null) {
+            return new Label {
                 Text = texto,
                 Font = new Font("Segoe UI", negrito ? 9F : 8.5F, negrito ? FontStyle.Bold : FontStyle.Regular),
                 ForeColor = cor ?? Color.Black,
@@ -148,8 +137,7 @@ namespace client_desktop.Home
             };
         }
 
-        private void btnCarregar_Click(object sender, EventArgs e)
-        {
+        private void btnCarregar_Click(object sender, EventArgs e) {
             /*
             flowLayoutPanelCards.Controls.Clear();
 
@@ -162,8 +150,7 @@ namespace client_desktop.Home
             }
             */
         }
-        private void button2_Click(object sender, EventArgs e)
-        {
+        private void button2_Click(object sender, EventArgs e) {
             /*
             flowLayoutPanelCards.Controls.Clear();
             var listaTickets = _tickeClientetDAL.ObterTicketsDoBancoPorUsuario(_usuario.Id, "Em andamento");
@@ -175,8 +162,7 @@ namespace client_desktop.Home
             }
             */
         }
-        private void button3_Click(object sender, EventArgs e)
-        {
+        private void button3_Click(object sender, EventArgs e) {
             /*
             flowLayoutPanelCards.Controls.Clear();
             var listaTickets = _tickeClientetDAL.ObterTicketsDoBancoPorUsuario(_usuario.Id, "Concluído");
@@ -188,8 +174,7 @@ namespace client_desktop.Home
             }
             */
         }
-        private void btnChamadosAbertos_Click(object sender, EventArgs e)
-        {
+        private void btnChamadosAbertos_Click(object sender, EventArgs e) {
             /*
             flowLayoutPanelCards.Controls.Clear();
             var listaTickets = _tickeClientetDAL.ObterTicketsDoBancoPorUsuario(_usuario.Id, "Aberto");
@@ -201,8 +186,7 @@ namespace client_desktop.Home
             }
             */
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
+        private void button1_Click(object sender, EventArgs e) {
             /*
             this.Hide();
             using (formAbrirChamado _formAbrirChamado = new formAbrirChamado(_usuario))
@@ -213,8 +197,7 @@ namespace client_desktop.Home
             */
         }
         private void dgv_chamados_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
-        private void pic_home_Click(object sender, EventArgs e) 
-        {
+        private void pic_home_Click(object sender, EventArgs e) {
             /*
             this.Hide();
             home = new Home(_usuario);
@@ -224,7 +207,15 @@ namespace client_desktop.Home
             */
         }
 
-        private void flowLayoutPanelCards_Paint(object sender, PaintEventArgs e){}
-        private void pn_title_Paint(object sender, PaintEventArgs e){}
+        private void flowLayoutPanelCards_Paint(object sender, PaintEventArgs e) { }
+        private void pn_title_Paint(object sender, PaintEventArgs e) { }
+
+        private void button4_Click(object sender, EventArgs e) {
+            this.Hide();
+            Home homeForm = new Home();
+            homeForm.ShowDialog();
+            this.Show();
+            
+        }
     }
 }

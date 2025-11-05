@@ -9,7 +9,7 @@ namespace client_desktop.Home {
         private ApiClient _apiClient;
         public static string TokenGlobal { get; private set; }
 
-        public Home(string username) {
+        public Home() {
             InitializeComponent();
         }
         private void Home_Load(object sender, EventArgs e) {
@@ -27,17 +27,37 @@ namespace client_desktop.Home {
 
                 _apiClient = new ApiClient(tokenSalvo);
 
-                
             }
             else {
                 MessageBox.Show("Sessão expirada. Por favor, faça o login novamente.");
-                Login login = new Login();
-                login.Show();
                 this.Hide();
+                using (Login login = new Login()) {
+                    login.ShowDialog();
+                }
+                this.Show();
             }
         }
 
+        private void btn_chamados_Click(object sender, EventArgs e) {
+            this.Hide();
+            using (formChamados formChamados = new formChamados()) {
+                formChamados.ShowDialog();
+            }
+            this.Show();
+        }
 
+        private void btn_chatbot_Click(object sender, EventArgs e) {
 
+            this.Hide();
+            using (formOmegaHelp formOmegaHelp = new formOmegaHelp()) {
+                formOmegaHelp.ShowDialog();
+            }
+            this.Show();
+            
+        }
+
+        private void btn_sidebar_Click(object sender, EventArgs e) {
+            SideBarTransition.Start();
+        }
     }
 }

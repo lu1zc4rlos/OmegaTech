@@ -1,19 +1,42 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using CredentialManagement;
+using repository;
+using service;
 
 namespace client_desktop.Home
 {
     public partial class formOmegaHelp : Form {
-        /*
-        private Usuario _usuario;
-        */
-        public formOmegaHelp(/*Usuario usuario*/) {
+        private ApiClient _apiClient;
+        public static string TokenGlobal { get; private set; }
+
+        public formOmegaHelp() {
             InitializeComponent();
-            /*
-            this.AcceptButton = btnEnviar;
-            _usuario = usuario;
-            */
+         
+        }
+        private void formOmegaHelp_Load(object sender, EventArgs e) {
+            this.ControlBox = false;
+            this.Dock = DockStyle.Fill;
+            string alvo = "OmegaTech-Desktop";
+            string tokenSalvo = null;
+            string usuarioSalvo = null;
+            var credencial = new Credential { Target = alvo };
+
+            if (credencial.Load()) {
+
+                tokenSalvo = credencial.Password;
+                usuarioSalvo = credencial.Username;
+                TokenGlobal = tokenSalvo;
+
+                _apiClient = new ApiClient(tokenSalvo);
+
+            }
+            else {
+                MessageBox.Show("Sessão expirada. Por favor, faça o login novamente.");
+                this.Hide();
+                using (Login login = new Login()) {
+                    login.ShowDialog();
+                }
+                this.Show();
+            }
         }
 
         private void TxtEnviarMensagem_KeyDown(object sender, KeyEventArgs e) {
@@ -21,7 +44,7 @@ namespace client_desktop.Home
         }
 
         private void AdicionarMensagem(string mensagem, bool ehUsuario) {
-            /*
+            
             Label lbl = new Label();
             lbl.Text = mensagem;
             lbl.Font = new Font("Segoe UI", 10);
@@ -51,41 +74,56 @@ namespace client_desktop.Home
             flowLayoutPanelChat.ScrollControlIntoView(linha);
         }
         private async void btnEnviar_Click(object sender, EventArgs e) {
-            string mensagem = txtEnviarMensagem.Text.Trim();
 
-            if (!string.IsNullOrEmpty(mensagem)) {
-                AdicionarMensagem(mensagem, true);
+            string mensagemUsuario = txtEnviarMensagem.Text.Trim();
+            AdicionarMensagem(mensagemUsuario, true); 
 
-                try {
-                    string resposta = await ChatBLL.ProcessarMensagemAsync(mensagem);
-                    AdicionarMensagem(resposta, false);
+            try {
+                var token = TokenGlobal;
+
+                var chatService = new ChatService();
+                var resposta = await chatService.EnviarMensagemAsync(mensagemUsuario, token);
+                
+                if (resposta.Tipo == "ERRO") {
+                    AdicionarMensagem($"⚠️ Erro: {resposta.Resposta}", false);
                 }
-                catch (Exception ex) {
-                    AdicionarMensagem("Erro ao processar resposta: " + ex.Message, false);
+                else {
+                    AdicionarMensagem($"🤖 Bot: {resposta.Resposta}", false);
                 }
 
-                txtEnviarMensagem.Clear();
+                if (resposta.Dados != null) {
+                    string dadosFormatados = FormatarDados(resposta.Dados);
+                    AdicionarMensagem($"📊 Dados: {dadosFormatados}", false);
+                }
+                
             }
-            */
+            catch (Exception ex) {
+                AdicionarMensagem($"Erro crítico ao enviar: {ex.Message}", false);
+            }
+            txtEnviarMensagem.Clear();
+
         }
-        private void formOmegaHelp_Load(object sender, EventArgs e) {
-            this.ControlBox = false;
-            this.Dock = DockStyle.Fill;
-        }
-        /*
-        Home home;
-        private Usuario usuario;
-        */
-        private void pic_home_Click(object sender, EventArgs e) {
-            /*
+        private void button4_Click(object sender, EventArgs e) {
             this.Hide();
-            home = new Home(usuario);
-            home.FormClosed += (s, args) => Application.Exit();
-            home.ShowDialog();
-            this.Close();
-            */
+            Home homeForm = new Home();
+            homeForm.ShowDialog();
+            this.Show();
+        }
+        private string FormatarDados(object dados) {
+            if (dados == null) return string.Empty;
+
+            try {
+               
+                var options = new System.Text.Json.JsonSerializerOptions {
+                    WriteIndented = true
+                };
+                return System.Text.Json.JsonSerializer.Serialize(dados, options);
+            }
+            catch {
+                return dados.ToString();
+            }
         }
         private void pn_title_Paint(object sender, PaintEventArgs e) { }
-        private void flowLayoutPanelChat_Paint(object sender, PaintEventArgs e) {}
+        private void flowLayoutPanelChat_Paint(object sender, PaintEventArgs e) { }
     }
 }
