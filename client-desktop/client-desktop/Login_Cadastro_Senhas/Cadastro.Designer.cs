@@ -39,6 +39,7 @@
         private Label lblDataNascimento;
         private TableLayoutPanel tableLayoutPanel2;
         private Panel panel3;
+        private ReaLTaiizor.Controls.NightControlBox nightControlBox1;
     }
 }
 

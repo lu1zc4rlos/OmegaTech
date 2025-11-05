@@ -117,4 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="sidebarTransition.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DQAACw0B7QfALAAAAHdJREFUWEft1jEOQEAUhGG1o1BaPZdxPRzISUh+eRsKG9p9yHzJ1CaTjbyiEPk6
+        oAUGx4SzSA1s+LLvV1amekGZNZY51gk30+VMk7wcEfkRoARmYHHMZD2sTJ/+Dp105zLWLG2bM2NcRkR+
+        Swf5lQ7yp+ggl+/bARpSeGtGCeYNAAAAAElFTkSuQmCC
+</value>
+  </data>
 </root>

@@ -17,7 +17,11 @@ namespace client_desktop.Home
             */
         }
 
-        private void formAbrirChamado_Load(object sender, EventArgs e){}
+        private void formAbrirChamado_Load(object sender, EventArgs e)
+        {
+            this.ControlBox = false;
+            this.Dock = DockStyle.Fill;
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
