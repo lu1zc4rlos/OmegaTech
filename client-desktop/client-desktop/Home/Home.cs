@@ -4,27 +4,22 @@ using CredentialManagement;
 
 
 namespace client_desktop.Home {
-    public partial class Home : Form
-    {
+    public partial class Home : Form {
 
         private ApiClient _apiClient;
         public static string TokenGlobal { get; private set; }
 
-        public Home(string username)
-        {
         public Home() {
             InitializeComponent();
         }
-        private void Home_Load(object sender, EventArgs e)
-        {
+        private void Home_Load(object sender, EventArgs e) {
 
             string alvo = "OmegaTech-Desktop";
             string tokenSalvo = null;
             string usuarioSalvo = null;
             var credencial = new Credential { Target = alvo };
 
-            if (credencial.Load())
-            {
+            if (credencial.Load()) {
 
                 tokenSalvo = credencial.Password;
                 usuarioSalvo = credencial.Username;
@@ -34,8 +29,7 @@ namespace client_desktop.Home {
 
 
             }
-            else
-            {
+            else {
                 MessageBox.Show("Sessão expirada. Por favor, faça o login novamente.");
                 this.Hide();
                 using (Login login = new Login()) {
@@ -55,22 +49,17 @@ namespace client_desktop.Home {
 
 
         bool sidebarExpand = true;
-        private void sidebarTransition_Tick(object sender, EventArgs e)
-        {
-            if (sidebarExpand)
-            {
+        private void sidebarTransition_Tick(object sender, EventArgs e) {
+            if (sidebarExpand) {
                 sideBar.Width -= 10;
-                if (sideBar.Width <= 54)
-                {
+                if (sideBar.Width <= 54) {
                     sidebarExpand = false;
                     sidebarTransition.Stop();
                 }
             }
-            else
-            {
+            else {
                 sideBar.Width += 10;
-                if (sideBar.Width >= 215)
-                {
+                if (sideBar.Width >= 215) {
                     sidebarExpand = true;
                     sidebarTransition.Stop();
                 }
@@ -83,13 +72,11 @@ namespace client_desktop.Home {
                 formOmegaHelp.ShowDialog();
             }
             this.Show();
-            
+
         }
 
-        private void btnOmegaHelp_Click(object sender, EventArgs e)
-        {
-            foreach (Form formFilho in this.MdiChildren)
-            {
+        private void btnOmegaHelp_Click(object sender, EventArgs e) {
+            foreach (Form formFilho in this.MdiChildren) {
                 formFilho.Close();
             }
             formOmegaHelp omegahelp = new formOmegaHelp();
@@ -99,31 +86,30 @@ namespace client_desktop.Home {
 
         }
 
-        private void btnHome_Click(object sender, EventArgs e)
-        {
+        private void btnHome_Click(object sender, EventArgs e) {
 
 
         }
 
-        private void btnChamados_Click(object sender, EventArgs e)
-        {
-            foreach (Form formFilho in this.MdiChildren)
-            {
+        private void btnChamados_Click(object sender, EventArgs e) {
+            foreach (Form formFilho in this.MdiChildren) {
                 formFilho.Close();
             }
 
             formChamados chamados = new formChamados();
             chamados.MdiParent = this;
             chamados.Show();
-            
+
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
+        private void pictureBox1_Click(object sender, EventArgs e) {
             sidebarTransition.Start();
         }
         private void btn_sidebar_Click(object sender, EventArgs e) {
-            SideBarTransition.Start();
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e) {
+
         }
     }
 }
