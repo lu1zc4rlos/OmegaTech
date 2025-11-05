@@ -25,6 +25,7 @@
         private void InitializeComponent()
         {
             pn_title = new Panel();
+            nightControlBox1 = new ReaLTaiizor.Controls.NightControlBox();
             lbl_titulo = new Label();
             lbl_omega = new Label();
             tableLayoutPanel1 = new TableLayoutPanel();
@@ -45,6 +46,7 @@
             // pn_title
             // 
             pn_title.BackColor = Color.FromArgb(40, 42, 90);
+            pn_title.Controls.Add(nightControlBox1);
             pn_title.Controls.Add(lbl_titulo);
             pn_title.Controls.Add(lbl_omega);
             pn_title.Dock = DockStyle.Top;
@@ -53,6 +55,29 @@
             pn_title.Size = new Size(875, 56);
             pn_title.TabIndex = 17;
             pn_title.Paint += pn_title_Paint;
+            // 
+            // nightControlBox1
+            // 
+            nightControlBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            nightControlBox1.BackColor = Color.Transparent;
+            nightControlBox1.CloseHoverColor = Color.FromArgb(199, 80, 80);
+            nightControlBox1.CloseHoverForeColor = Color.White;
+            nightControlBox1.DefaultLocation = true;
+            nightControlBox1.DisableMaximizeColor = Color.FromArgb(105, 105, 105);
+            nightControlBox1.DisableMinimizeColor = Color.FromArgb(105, 105, 105);
+            nightControlBox1.EnableCloseColor = Color.FromArgb(160, 160, 160);
+            nightControlBox1.EnableMaximizeButton = true;
+            nightControlBox1.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
+            nightControlBox1.EnableMinimizeButton = true;
+            nightControlBox1.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
+            nightControlBox1.Location = new Point(736, 0);
+            nightControlBox1.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
+            nightControlBox1.MaximizeHoverForeColor = Color.White;
+            nightControlBox1.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
+            nightControlBox1.MinimizeHoverForeColor = Color.White;
+            nightControlBox1.Name = "nightControlBox1";
+            nightControlBox1.Size = new Size(139, 31);
+            nightControlBox1.TabIndex = 2;
             // 
             // lbl_titulo
             // 
@@ -129,7 +154,7 @@
             btnNaoCadastrado.Name = "btnNaoCadastrado";
             btnNaoCadastrado.Size = new Size(150, 32);
             btnNaoCadastrado.TabIndex = 5;
-            btnNaoCadastrado.Text = "Realizar Cadastro";
+            btnNaoCadastrado.Text = "&Realizar Cadastro";
             btnNaoCadastrado.UseVisualStyleBackColor = false;
             btnNaoCadastrado.Click += btnNaoCadastrado_Click;
             // 
@@ -143,7 +168,7 @@
             cbMostarSenha.Name = "cbMostarSenha";
             cbMostarSenha.Size = new Size(115, 21);
             cbMostarSenha.TabIndex = 2;
-            cbMostarSenha.Text = "Mostrar senha";
+            cbMostarSenha.Text = "&Mostrar senha";
             cbMostarSenha.UseVisualStyleBackColor = false;
             cbMostarSenha.CheckedChanged += cbMostarSenha_CheckedChanged;
             // 
@@ -185,7 +210,7 @@
             btnConfirmar.Name = "btnConfirmar";
             btnConfirmar.Size = new Size(85, 30);
             btnConfirmar.TabIndex = 3;
-            btnConfirmar.Text = "Confirmar";
+            btnConfirmar.Text = "&Confirmar";
             btnConfirmar.UseVisualStyleBackColor = false;
             btnConfirmar.Click += btnConfirmar_Click;
             // 
@@ -220,7 +245,7 @@
             btnRecuperrarSenha.Name = "btnRecuperrarSenha";
             btnRecuperrarSenha.Size = new Size(182, 32);
             btnRecuperrarSenha.TabIndex = 4;
-            btnRecuperrarSenha.Text = "Recuperar senha";
+            btnRecuperrarSenha.Text = "&Trocar senha";
             btnRecuperrarSenha.UseVisualStyleBackColor = false;
             btnRecuperrarSenha.Click += btnRecuperrarSenha_Click;
             // 
@@ -232,11 +257,10 @@
             ClientSize = new Size(875, 600);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(pn_title);
-            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            FormBorderStyle = FormBorderStyle.None;
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FluxoCondicional";
-            WindowState = FormWindowState.Maximized;
             Load += Login_Load;
             pn_title.ResumeLayout(false);
             pn_title.PerformLayout();
@@ -261,5 +285,6 @@
         private TextBox txtSenha;
         private TextBox txtEmail;
         private Button btnRecuperrarSenha;
+        private ReaLTaiizor.Controls.NightControlBox nightControlBox1;
     }
 }

@@ -17,7 +17,10 @@ namespace client_desktop.Home
             _usuario = usuario;
             */
         }
-        private void formChamados_Load(object sender, EventArgs e) {
+        private void formChamados_Load(object sender, EventArgs e)
+        {
+            this.ControlBox = false;
+            this.Dock = DockStyle.Fill;
             /*
             CarregarTicketsDoCliente();
             */

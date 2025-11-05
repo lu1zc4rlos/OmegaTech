@@ -37,6 +37,7 @@
             lblEamail = new Label();
             label5 = new Label();
             pn_title = new Panel();
+            nightControlBox1 = new ReaLTaiizor.Controls.NightControlBox();
             lbl_titulo = new Label();
             pictureBox2 = new PictureBox();
             lbl_omega = new Label();
@@ -129,7 +130,7 @@
             btnConfirmar.Name = "btnConfirmar";
             btnConfirmar.Size = new Size(110, 33);
             btnConfirmar.TabIndex = 5;
-            btnConfirmar.Text = "Confirmar";
+            btnConfirmar.Text = "&Confirmar";
             btnConfirmar.UseVisualStyleBackColor = false;
             btnConfirmar.Click += button1_Click;
             // 
@@ -145,7 +146,7 @@
             btnOutraForma.Name = "btnOutraForma";
             btnOutraForma.Size = new Size(196, 33);
             btnOutraForma.TabIndex = 6;
-            btnOutraForma.Text = "Tentar de outra forma";
+            btnOutraForma.Text = "&Tentar de outra forma";
             btnOutraForma.UseVisualStyleBackColor = false;
             btnOutraForma.Click += button2_Click;
             // 
@@ -159,7 +160,7 @@
             cbMostrarSenha.Name = "cbMostrarSenha";
             cbMostrarSenha.Size = new Size(121, 21);
             cbMostrarSenha.TabIndex = 4;
-            cbMostrarSenha.Text = "Mostrar senhas";
+            cbMostrarSenha.Text = "&Mostrar senhas";
             cbMostrarSenha.UseVisualStyleBackColor = true;
             cbMostrarSenha.CheckedChanged += checkBox1_CheckedChanged;
             // 
@@ -197,6 +198,7 @@
             // pn_title
             // 
             pn_title.BackColor = Color.FromArgb(40, 42, 90);
+            pn_title.Controls.Add(nightControlBox1);
             pn_title.Controls.Add(lbl_titulo);
             pn_title.Controls.Add(pictureBox2);
             pn_title.Controls.Add(lbl_omega);
@@ -205,6 +207,29 @@
             pn_title.Name = "pn_title";
             pn_title.Size = new Size(899, 84);
             pn_title.TabIndex = 18;
+            // 
+            // nightControlBox1
+            // 
+            nightControlBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            nightControlBox1.BackColor = Color.Transparent;
+            nightControlBox1.CloseHoverColor = Color.FromArgb(199, 80, 80);
+            nightControlBox1.CloseHoverForeColor = Color.White;
+            nightControlBox1.DefaultLocation = true;
+            nightControlBox1.DisableMaximizeColor = Color.FromArgb(105, 105, 105);
+            nightControlBox1.DisableMinimizeColor = Color.FromArgb(105, 105, 105);
+            nightControlBox1.EnableCloseColor = Color.FromArgb(160, 160, 160);
+            nightControlBox1.EnableMaximizeButton = true;
+            nightControlBox1.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
+            nightControlBox1.EnableMinimizeButton = true;
+            nightControlBox1.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
+            nightControlBox1.Location = new Point(760, 0);
+            nightControlBox1.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
+            nightControlBox1.MaximizeHoverForeColor = Color.White;
+            nightControlBox1.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
+            nightControlBox1.MinimizeHoverForeColor = Color.White;
+            nightControlBox1.Name = "nightControlBox1";
+            nightControlBox1.Size = new Size(139, 31);
+            nightControlBox1.TabIndex = 4;
             // 
             // lbl_titulo
             // 
@@ -282,11 +307,10 @@
             Controls.Add(panel1);
             Controls.Add(panel2);
             Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            FormBorderStyle = FormBorderStyle.None;
             Name = "RecuperarSenha";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "RecuperarSenha";
-            WindowState = FormWindowState.Maximized;
             Load += RecuperarSenha_Load;
             pn_title.ResumeLayout(false);
             pn_title.PerformLayout();
@@ -318,5 +342,6 @@
         private System.Windows.Forms.Label lbl_omega;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private ReaLTaiizor.Controls.NightControlBox nightControlBox1;
     }
 }

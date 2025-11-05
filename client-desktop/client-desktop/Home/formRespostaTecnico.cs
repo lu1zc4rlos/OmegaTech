@@ -22,6 +22,8 @@ namespace client_desktop.Home
         private void formRespostaTecnico_Load(object sender, EventArgs e)
         {
             CarregarDetalhesTicket();
+            this.ControlBox = false;
+            this.Dock = DockStyle.Fill;
         }
         private void CarregarDetalhesTicket()
         {

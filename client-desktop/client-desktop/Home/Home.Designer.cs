@@ -22,206 +22,177 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
-            sideBar = new FlowLayoutPanel();
-            btn_chamados = new Button();
-            btn_chatbot = new Button();
-            pn_title = new Panel();
+            sidebarTransition = new System.Windows.Forms.Timer(components);
+            panel4 = new Panel();
             pictureBox1 = new PictureBox();
-            lbl_titulo = new Label();
-            nightControlBox1 = new ReaLTaiizor.Controls.NightControlBox();
-            lbl_omega = new Label();
-            btn_sidebar = new PictureBox();
-            SideBarTransition = new System.Windows.Forms.Timer(components);
-            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            sideBar.SuspendLayout();
-            pn_title.SuspendLayout();
+            lblTitulo = new Label();
+            sideBar = new FlowLayoutPanel();
+            panel1 = new Panel();
+            btnHome = new Button();
+            panel2 = new Panel();
+            btnOmegaHelp = new Button();
+            panel3 = new Panel();
+            btnChamados = new Button();
+            panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)btn_sidebar).BeginInit();
+            sideBar.SuspendLayout();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
-            // sideBar
+            // sidebarTransition
             // 
-            sideBar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            sideBar.BackColor = Color.FromArgb(60, 62, 110);
-            sideBar.Controls.Add(btn_chamados);
-            sideBar.Controls.Add(btn_chatbot);
-            sideBar.FlowDirection = FlowDirection.TopDown;
-            sideBar.Location = new Point(1, 102);
-            sideBar.Margin = new Padding(3, 4, 3, 4);
-            sideBar.Name = "sideBar";
-            sideBar.Size = new Size(263, 695);
-            sideBar.TabIndex = 2;
+            sidebarTransition.Interval = 10;
+            sidebarTransition.Tick += sidebarTransition_Tick;
             // 
-            // btn_chamados
+            // panel4
             // 
-            btn_chamados.BackColor = Color.FromArgb(60, 62, 110);
-            btn_chamados.FlatAppearance.BorderSize = 0;
-            btn_chamados.FlatStyle = FlatStyle.Flat;
-            btn_chamados.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            btn_chamados.ForeColor = Color.White;
-            btn_chamados.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_chamados.ImeMode = ImeMode.NoControl;
-            btn_chamados.Location = new Point(3, 4);
-            btn_chamados.Margin = new Padding(3, 4, 3, 4);
-            btn_chamados.Name = "btn_chamados";
-            btn_chamados.Padding = new Padding(25, 0, 0, 0);
-            btn_chamados.Size = new Size(274, 95);
-            btn_chamados.TabIndex = 1;
-            btn_chamados.Text = "             Chamados";
-            btn_chamados.TextAlign = ContentAlignment.MiddleLeft;
-            btn_chamados.UseVisualStyleBackColor = false;
-            btn_chamados.Click += btn_chamados_Click;
-            // 
-            // btn_chatbot
-            // 
-            btn_chatbot.Anchor = AnchorStyles.Top;
-            btn_chatbot.BackColor = Color.FromArgb(60, 62, 110);
-            btn_chatbot.FlatAppearance.BorderSize = 0;
-            btn_chatbot.FlatStyle = FlatStyle.Flat;
-            btn_chatbot.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            btn_chatbot.ForeColor = Color.White;
-            btn_chatbot.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_chatbot.ImeMode = ImeMode.NoControl;
-            btn_chatbot.Location = new Point(3, 107);
-            btn_chatbot.Margin = new Padding(3, 4, 3, 4);
-            btn_chatbot.Name = "btn_chatbot";
-            btn_chatbot.Padding = new Padding(25, 0, 0, 0);
-            btn_chatbot.Size = new Size(274, 95);
-            btn_chatbot.TabIndex = 2;
-            btn_chatbot.Text = "             OmegaHelp";
-            btn_chatbot.TextAlign = ContentAlignment.MiddleLeft;
-            btn_chatbot.UseVisualStyleBackColor = false;
-            btn_chatbot.Click += btn_chatbot_Click;
-            // 
-            // pn_title
-            // 
-            pn_title.Anchor = AnchorStyles.Top;
-            pn_title.BackColor = Color.FromArgb(40, 42, 90);
-            pn_title.Controls.Add(pictureBox1);
-            pn_title.Controls.Add(lbl_titulo);
-            pn_title.Controls.Add(nightControlBox1);
-            pn_title.Controls.Add(lbl_omega);
-            pn_title.Controls.Add(btn_sidebar);
-            pn_title.Location = new Point(1, 1);
-            pn_title.Margin = new Padding(3, 4, 3, 4);
-            pn_title.Name = "pn_title";
-            pn_title.Size = new Size(1000, 99);
-            pn_title.TabIndex = 3;
+            panel4.BackColor = Color.FromArgb(40, 42, 90);
+            panel4.Controls.Add(pictureBox1);
+            panel4.Controls.Add(lblTitulo);
+            panel4.Dock = DockStyle.Top;
+            panel4.Location = new Point(0, 0);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(700, 67);
+            panel4.TabIndex = 1;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.ImeMode = ImeMode.NoControl;
-            pictureBox1.Location = new Point(70, 15);
-            pictureBox1.Margin = new Padding(3, 4, 3, 4);
+            pictureBox1.Location = new Point(12, 16);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(50, 50);
+            pictureBox1.Size = new Size(35, 35);
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox1.TabIndex = 2;
+            pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
-            // lbl_titulo
+            // lblTitulo
             // 
-            lbl_titulo.Anchor = AnchorStyles.None;
-            lbl_titulo.AutoSize = true;
-            lbl_titulo.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold);
-            lbl_titulo.ForeColor = Color.White;
-            lbl_titulo.ImeMode = ImeMode.NoControl;
-            lbl_titulo.Location = new Point(542, 28);
-            lbl_titulo.Name = "lbl_titulo";
-            lbl_titulo.Size = new Size(96, 37);
-            lbl_titulo.TabIndex = 0;
-            lbl_titulo.Text = "HOME";
-            lbl_titulo.TextAlign = ContentAlignment.TopCenter;
+            lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblTitulo.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitulo.ForeColor = Color.Snow;
+            lblTitulo.Location = new Point(310, 9);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(150, 42);
+            lblTitulo.TabIndex = 0;
+            lblTitulo.Text = "OmegaTech";
             // 
-            // nightControlBox1
+            // sideBar
             // 
-            nightControlBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            nightControlBox1.BackColor = Color.Transparent;
-            nightControlBox1.CloseHoverColor = Color.FromArgb(199, 80, 80);
-            nightControlBox1.CloseHoverForeColor = Color.White;
-            nightControlBox1.Cursor = Cursors.Hand;
-            nightControlBox1.DefaultLocation = true;
-            nightControlBox1.DisableMaximizeColor = Color.FromArgb(105, 105, 105);
-            nightControlBox1.DisableMinimizeColor = Color.FromArgb(105, 105, 105);
-            nightControlBox1.EnableCloseColor = Color.FromArgb(160, 160, 160);
-            nightControlBox1.EnableMaximizeButton = true;
-            nightControlBox1.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
-            nightControlBox1.EnableMinimizeButton = true;
-            nightControlBox1.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
-            nightControlBox1.Location = new Point(861, 0);
-            nightControlBox1.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
-            nightControlBox1.MaximizeHoverForeColor = Color.White;
-            nightControlBox1.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
-            nightControlBox1.MinimizeHoverForeColor = Color.White;
-            nightControlBox1.Name = "nightControlBox1";
-            nightControlBox1.Size = new Size(139, 31);
-            nightControlBox1.TabIndex = 1;
+            sideBar.BackColor = Color.FromArgb(40, 42, 90);
+            sideBar.Controls.Add(panel1);
+            sideBar.Controls.Add(panel2);
+            sideBar.Controls.Add(panel3);
+            sideBar.Dock = DockStyle.Left;
+            sideBar.Location = new Point(0, 67);
+            sideBar.Name = "sideBar";
+            sideBar.Size = new Size(215, 302);
+            sideBar.TabIndex = 3;
             // 
-            // lbl_omega
+            // panel1
             // 
-            lbl_omega.AutoSize = true;
-            lbl_omega.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            lbl_omega.ForeColor = Color.White;
-            lbl_omega.ImeMode = ImeMode.NoControl;
-            lbl_omega.Location = new Point(144, 28);
-            lbl_omega.Name = "lbl_omega";
-            lbl_omega.Size = new Size(119, 28);
-            lbl_omega.TabIndex = 1;
-            lbl_omega.Text = "OmegaTech\r\n";
+            panel1.Controls.Add(btnHome);
+            panel1.Location = new Point(3, 3);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(224, 35);
+            panel1.TabIndex = 1;
             // 
-            // btn_sidebar
+            // btnHome
             // 
-            btn_sidebar.Image = (Image)resources.GetObject("btn_sidebar.Image");
-            btn_sidebar.ImeMode = ImeMode.NoControl;
-            btn_sidebar.Location = new Point(10, 20);
-            btn_sidebar.Margin = new Padding(3, 4, 3, 4);
-            btn_sidebar.Name = "btn_sidebar";
-            btn_sidebar.Size = new Size(38, 36);
-            btn_sidebar.SizeMode = PictureBoxSizeMode.StretchImage;
-            btn_sidebar.TabIndex = 0;
-            btn_sidebar.TabStop = false;
-            btn_sidebar.Click += btn_sidebar_Click;
+            btnHome.BackColor = Color.FromArgb(60, 62, 110);
+            btnHome.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnHome.ForeColor = SystemColors.Control;
+            btnHome.Location = new Point(-11, -13);
+            btnHome.Name = "btnHome";
+            btnHome.Size = new Size(232, 59);
+            btnHome.TabIndex = 2;
+            btnHome.Text = "&Home";
+            btnHome.UseVisualStyleBackColor = false;
+            btnHome.Click += btnHome_Click;
             // 
-            // SideBarTransition
+            // panel2
             // 
-            SideBarTransition.Interval = 20;
+            panel2.Controls.Add(btnOmegaHelp);
+            panel2.Location = new Point(3, 44);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(224, 35);
+            panel2.TabIndex = 3;
+            // 
+            // btnOmegaHelp
+            // 
+            btnOmegaHelp.BackColor = Color.FromArgb(60, 62, 110);
+            btnOmegaHelp.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnOmegaHelp.ForeColor = SystemColors.Control;
+            btnOmegaHelp.Location = new Point(-11, -13);
+            btnOmegaHelp.Name = "btnOmegaHelp";
+            btnOmegaHelp.Size = new Size(232, 59);
+            btnOmegaHelp.TabIndex = 2;
+            btnOmegaHelp.Text = "&OmegaHelp";
+            btnOmegaHelp.UseVisualStyleBackColor = false;
+            btnOmegaHelp.Click += btnOmegaHelp_Click;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(btnChamados);
+            panel3.Location = new Point(3, 85);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(224, 35);
+            panel3.TabIndex = 3;
+            // 
+            // btnChamados
+            // 
+            btnChamados.BackColor = Color.FromArgb(60, 62, 110);
+            btnChamados.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnChamados.ForeColor = SystemColors.Control;
+            btnChamados.Location = new Point(-11, -13);
+            btnChamados.Name = "btnChamados";
+            btnChamados.Size = new Size(232, 59);
+            btnChamados.TabIndex = 2;
+            btnChamados.Text = "&Chamados";
+            btnChamados.UseVisualStyleBackColor = false;
+            btnChamados.Click += btnChamados_Click;
             // 
             // Home
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(100, 102, 140);
-            ClientSize = new Size(1000, 800);
-            Controls.Add(pn_title);
+            ClientSize = new Size(700, 369);
             Controls.Add(sideBar);
-            FormBorderStyle = FormBorderStyle.None;
+            Controls.Add(panel4);
+            IsMdiContainer = true;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Home";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Home";
+            WindowState = FormWindowState.Maximized;
             Load += Home_Load;
-            sideBar.ResumeLayout(false);
-            pn_title.ResumeLayout(false);
-            pn_title.PerformLayout();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)btn_sidebar).EndInit();
+            sideBar.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            panel3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
+        private System.Windows.Forms.Timer sidebarTransition;
+        private Panel panel4;
+        private Label lblTitulo;
         private FlowLayoutPanel sideBar;
-        private Button btn_chamados;
-        private Button btn_chatbot;
-        private Panel pn_title;
+        private Panel panel1;
+        private Button btnHome;
+        private Panel panel2;
+        private Button btnOmegaHelp;
+        private Panel panel3;
+        private Button btnChamados;
         private PictureBox pictureBox1;
-        private Label lbl_titulo;
-        private ReaLTaiizor.Controls.NightControlBox nightControlBox1;
-        private Label lbl_omega;
-        private PictureBox btn_sidebar;
-        private System.Windows.Forms.Timer SideBarTransition;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

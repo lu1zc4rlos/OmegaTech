@@ -77,7 +77,11 @@ namespace client_desktop {
             
         }
         private void txtSenhaNova_TextChanged(object sender, EventArgs e) {}
-        private void RecuperarSenha_Load(object sender, EventArgs e) {}
+        private void RecuperarSenha_Load(object sender, EventArgs e) 
+        {
+            this.ControlBox = false;
+            this.Dock = DockStyle.Fill;
+        }
         private void textBox3_TextChanged(object sender, EventArgs e) {}
         private void textBox1_TextChanged(object sender, EventArgs e) {}
         private void label1_Click(object sender, EventArgs e) {}

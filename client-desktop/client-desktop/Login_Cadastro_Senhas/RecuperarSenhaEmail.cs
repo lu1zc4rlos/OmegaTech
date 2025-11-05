@@ -9,6 +9,8 @@ namespace client_desktop.Login_Cadastro_Senhas {
 
         private void Form1_Load(object sender, EventArgs e) {
             btnTrocarSenha.Visible = false;
+            this.ControlBox = false;
+            this.Dock = DockStyle.Fill;
         }
         private async void btnEnviarCodigo_ClickAsync(object sender, EventArgs e) {
             try {

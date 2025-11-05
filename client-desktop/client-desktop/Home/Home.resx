@@ -117,39 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="sidebarTransition.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DgAACw4BQL7hQQAAA2NJREFUaEPt2VmITnEYx3F7tmxXjD1KWVJuULii7FIiS5QsI8ml5Y4LITe2awlR
-        4mIkwpWxZIuRXCrbhWwj+/rVo+fi9Gv+Z3nP+UeaT01NM7/nec6Zed/znv//tGnT6j8FDACWAQeBS8Aj
-        4A3ww7/se/uZ/c4yS4H+2uevALoAa4GrwC+Ks5orwBrrpf2jAzoAG4GXemQlvAA2WG+dFwUwGrivR1Gh
-        e8BInVspYBHwSSdH8BFYoPMrAawGfurEiOwCsUqPoxRgvjfO8gFoAOqBicBQoCvQzb+3n60DzvhfPYvN
-        nKfHUxNghB9gmtfAJjtorQ/xk9vsl+U074HhWl8I0B64pZ3FMaCX1uYF9AaOa1NxHWintbn5+yLEPgN2
-        Am21rijr4f/RtPfgCq3LBegIPNNuCdu0pixguw5JeFzTZwywRDslXLSXndaUZS8f4JwOS1ioNZmAC9rF
-        2edIX81XBagDPutQd07zqYA+wDft4vZpvmp+U9mSr0BPzQf550ZL7Lo+UPNVAwanvPHnaj4I2K3V7oZm
-        YwFu63C3Q7NBwFmtdvmblATs0uGuQbNBwEOtdtM1GwswU4e7B5oN8luOlozRbCzAWB3uXmo2KOXyF+2y
-        q4B+Otx90mxQyp1uJ83GYrN0uPuu2SDgnVa77pqNBeihw12zZoOA51rtBmg2FmCQDndPNBuUcus+XrOx
-        ABN0uLup2SDgqFa7es3GAqzX4e6wZoOArVrtDmk2Fpulw90WzQYBk7Ta2bI0+pXL10KvdLibqPkg34AL
-        XbnmaL5qdmOoQ93bwourlPfJdc1WDbimQ90RzWYCpmiXhPy30gUBs3VYwmTN5wI0aSdna/k+mi/Ld1Se
-        6jDXpPncgBnaLeF0qS0a4ev1UzokYYbWFAKc144J+zVfK2CvNk8otlZviW8G2JZ/yJ4y/xnf0wotoozN
-        rtO6mgBTUzYjzMlaHtQAnYET2izBZk7TulJ8QyLtZGxVOU7rQoBRwF1tkmBLicVaVwlgVsams23XrNQ6
-        BSwHvmhxQnPMS/wfwBB/qhRyR2uUZbQowZ6GDdOaKDL2aO9qXmW8pLZrvmb+lLZWZU8kS6P2C9LKgmKf
-        CNovSAsLaj2RvLRfkBYW9E+dSKMW52SP4zLvv4ADWljAZe3XqlVEvwF41380cgj66gAAAABJRU5ErkJg
-        gg==
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DQAACw0B7QfALAAAAHdJREFUWEft1jEOQEAUhGG1o1BaPZdxPRzISUh+eRsKG9p9yHzJ1CaTjbyiEPk6
+        oAUGx4SzSA1s+LLvV1amekGZNZY51gk30+VMk7wcEfkRoARmYHHMZD2sTJ/+Dp105zLWLG2bM2NcRkR+
+        Swf5lQ7yp+ggl+/bARpSeGtGCeYNAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="btn_sidebar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DgAACw4BQL7hQQAAAFZJREFUaEPt1rkNwDAMA0CPns0dpJX7RGLuAA7AQs9aAHxh730l5CkSQZFuoooc
-        gzMxdYkBwD/VCzk1Ub9WBEW6yRl2AMAb348i3UQVOQZnYuoSA+AVNysxbeDYZXV2AAAAAElFTkSuQmCC
-</value>
-  </data>
-  <metadata name="SideBarTransition.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>192, 17</value>
-  </metadata>
 </root>

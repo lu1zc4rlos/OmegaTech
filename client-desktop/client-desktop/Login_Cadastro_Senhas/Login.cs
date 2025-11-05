@@ -20,7 +20,10 @@ namespace client_desktop {
             LimparCampos();
 
         }
-        private void Login_Load(object sender, EventArgs e) {
+        private void Login_Load(object sender, EventArgs e) 
+        {
+            this.ControlBox = false;
+            this.Dock = DockStyle.Fill;
 
         }
         private async void btnConfirmar_Click(object sender, EventArgs e) {

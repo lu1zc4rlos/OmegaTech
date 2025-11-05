@@ -15,6 +15,8 @@ namespace client_desktop.Login_Cadastro_Senhas {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
+            this.ControlBox = false;
+            this.Dock = DockStyle.Fill;
 
         }
         private void checkBox1_CheckedChanged(object sender, EventArgs e) {

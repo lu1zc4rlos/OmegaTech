@@ -26,8 +26,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formOmegaHelp));
+        private void InitializeComponent()
+        {
             nightControlBox1 = new ReaLTaiizor.Controls.NightControlBox();
             pn_title = new Panel();
             button4 = new Button();
@@ -57,7 +57,7 @@
             nightControlBox1.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
             nightControlBox1.EnableMinimizeButton = true;
             nightControlBox1.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
-            nightControlBox1.Location = new Point(879, 0);
+            nightControlBox1.Location = new Point(752, 0);
             nightControlBox1.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
             nightControlBox1.MaximizeHoverForeColor = Color.White;
             nightControlBox1.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
@@ -76,22 +76,20 @@
             pn_title.Controls.Add(lbl_omega);
             pn_title.Dock = DockStyle.Top;
             pn_title.Location = new Point(0, 0);
-            pn_title.Margin = new Padding(3, 4, 3, 4);
             pn_title.Name = "pn_title";
-            pn_title.Size = new Size(1000, 99);
+            pn_title.Size = new Size(875, 74);
             pn_title.TabIndex = 3;
             pn_title.Paint += pn_title_Paint;
             // 
             // button4
             // 
-            button4.BackColor = Color.FromArgb(40, 42, 90);
-            button4.Image = (Image)resources.GetObject("button4.Image");
-            button4.Location = new Point(11, 18);
-            button4.Name = "button4";
-            button4.Size = new Size(56, 49);
-            button4.TabIndex = 31;
-            button4.UseVisualStyleBackColor = false;
-            button4.Click += button4_Click;
+            pic_home.Location = new Point(10, 16);
+            pic_home.Name = "pic_home";
+            pic_home.Size = new Size(38, 37);
+            pic_home.SizeMode = PictureBoxSizeMode.StretchImage;
+            pic_home.TabIndex = 0;
+            pic_home.TabStop = false;
+            pic_home.Click += pic_home_Click;
             // 
             // lbl_titulo
             // 
@@ -100,9 +98,9 @@
             lbl_titulo.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold);
             lbl_titulo.ForeColor = Color.White;
             lbl_titulo.ImeMode = ImeMode.NoControl;
-            lbl_titulo.Location = new Point(432, 30);
+            lbl_titulo.Location = new Point(378, 22);
             lbl_titulo.Name = "lbl_titulo";
-            lbl_titulo.Size = new Size(162, 37);
+            lbl_titulo.Size = new Size(132, 30);
             lbl_titulo.TabIndex = 0;
             lbl_titulo.Text = "OmegaHelp";
             lbl_titulo.TextAlign = ContentAlignment.TopCenter;
@@ -110,8 +108,7 @@
             // pictureBox2
             // 
             pictureBox2.ImeMode = ImeMode.NoControl;
-            pictureBox2.Location = new Point(78, 20);
-            pictureBox2.Margin = new Padding(3, 4, 3, 4);
+            pictureBox2.Location = new Point(68, 15);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(50, 50);
             pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -133,7 +130,7 @@
             nightControlBox2.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
             nightControlBox2.EnableMinimizeButton = true;
             nightControlBox2.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
-            nightControlBox2.Location = new Point(861, 0);
+            nightControlBox2.Location = new Point(736, 0);
             nightControlBox2.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
             nightControlBox2.MaximizeHoverForeColor = Color.White;
             nightControlBox2.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
@@ -148,9 +145,9 @@
             lbl_omega.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             lbl_omega.ForeColor = Color.White;
             lbl_omega.ImeMode = ImeMode.NoControl;
-            lbl_omega.Location = new Point(144, 30);
+            lbl_omega.Location = new Point(126, 22);
             lbl_omega.Name = "lbl_omega";
-            lbl_omega.Size = new Size(119, 28);
+            lbl_omega.Size = new Size(96, 21);
             lbl_omega.TabIndex = 1;
             lbl_omega.Text = "OmegaTech\r\n";
             // 
@@ -160,10 +157,11 @@
             txtEnviarMensagem.BackColor = Color.FromArgb(60, 62, 110);
             txtEnviarMensagem.BorderStyle = BorderStyle.None;
             txtEnviarMensagem.ForeColor = Color.White;
-            txtEnviarMensagem.Location = new Point(11, 761);
+            txtEnviarMensagem.Location = new Point(10, 571);
+            txtEnviarMensagem.Margin = new Padding(3, 2, 3, 2);
             txtEnviarMensagem.Multiline = true;
             txtEnviarMensagem.Name = "txtEnviarMensagem";
-            txtEnviarMensagem.Size = new Size(870, 29);
+            txtEnviarMensagem.Size = new Size(761, 22);
             txtEnviarMensagem.TabIndex = 1;
             // 
             // btnEnviar
@@ -171,41 +169,42 @@
             btnEnviar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnEnviar.BackColor = Color.WhiteSmoke;
             btnEnviar.FlatStyle = FlatStyle.Flat;
-            btnEnviar.Location = new Point(887, 760);
+            btnEnviar.Location = new Point(776, 570);
+            btnEnviar.Margin = new Padding(3, 2, 3, 2);
             btnEnviar.Name = "btnEnviar";
-            btnEnviar.Size = new Size(94, 31);
+            btnEnviar.Size = new Size(82, 23);
             btnEnviar.TabIndex = 2;
             btnEnviar.Text = "Enviar";
             btnEnviar.UseVisualStyleBackColor = false;
-            btnEnviar.Click += btnEnviar_Click;
             // 
             // flowLayoutPanelChat
             // 
             flowLayoutPanelChat.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             flowLayoutPanelChat.AutoScroll = true;
             flowLayoutPanelChat.BackColor = Color.FromArgb(100, 102, 140);
-            flowLayoutPanelChat.Location = new Point(11, 107);
+            flowLayoutPanelChat.Location = new Point(10, 80);
+            flowLayoutPanelChat.Margin = new Padding(3, 2, 3, 2);
             flowLayoutPanelChat.Name = "flowLayoutPanelChat";
-            flowLayoutPanelChat.Size = new Size(969, 648);
+            flowLayoutPanelChat.Size = new Size(848, 486);
             flowLayoutPanelChat.TabIndex = 6;
             flowLayoutPanelChat.Paint += flowLayoutPanelChat_Paint;
             // 
             // formOmegaHelp
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(100, 102, 140);
-            ClientSize = new Size(1000, 800);
+            ClientSize = new Size(875, 600);
             Controls.Add(flowLayoutPanelChat);
             Controls.Add(btnEnviar);
             Controls.Add(txtEnviarMensagem);
             Controls.Add(pn_title);
             Controls.Add(nightControlBox1);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 4, 3, 4);
             Name = "formOmegaHelp";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "OmegaHelp";
+            WindowState = FormWindowState.Maximized;
             Load += formOmegaHelp_Load;
             pn_title.ResumeLayout(false);
             pn_title.PerformLayout();
