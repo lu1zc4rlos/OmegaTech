@@ -25,6 +25,7 @@
         private void InitializeComponent()
         {
             pn_title = new Panel();
+            nightControlBox1 = new ReaLTaiizor.Controls.NightControlBox();
             lbl_titulo = new Label();
             pictureBox2 = new PictureBox();
             lbl_omega = new Label();
@@ -45,6 +46,7 @@
             // pn_title
             // 
             pn_title.BackColor = Color.FromArgb(40, 42, 90);
+            pn_title.Controls.Add(nightControlBox1);
             pn_title.Controls.Add(lbl_titulo);
             pn_title.Controls.Add(pictureBox2);
             pn_title.Controls.Add(lbl_omega);
@@ -53,6 +55,29 @@
             pn_title.Name = "pn_title";
             pn_title.Size = new Size(700, 84);
             pn_title.TabIndex = 20;
+            // 
+            // nightControlBox1
+            // 
+            nightControlBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            nightControlBox1.BackColor = Color.Transparent;
+            nightControlBox1.CloseHoverColor = Color.FromArgb(199, 80, 80);
+            nightControlBox1.CloseHoverForeColor = Color.White;
+            nightControlBox1.DefaultLocation = true;
+            nightControlBox1.DisableMaximizeColor = Color.FromArgb(105, 105, 105);
+            nightControlBox1.DisableMinimizeColor = Color.FromArgb(105, 105, 105);
+            nightControlBox1.EnableCloseColor = Color.FromArgb(160, 160, 160);
+            nightControlBox1.EnableMaximizeButton = true;
+            nightControlBox1.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
+            nightControlBox1.EnableMinimizeButton = true;
+            nightControlBox1.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
+            nightControlBox1.Location = new Point(561, 0);
+            nightControlBox1.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
+            nightControlBox1.MaximizeHoverForeColor = Color.White;
+            nightControlBox1.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
+            nightControlBox1.MinimizeHoverForeColor = Color.White;
+            nightControlBox1.Name = "nightControlBox1";
+            nightControlBox1.Size = new Size(139, 31);
+            nightControlBox1.TabIndex = 4;
             // 
             // lbl_titulo
             // 
@@ -111,7 +136,7 @@
             btnConfirmar.Name = "btnConfirmar";
             btnConfirmar.Size = new Size(82, 27);
             btnConfirmar.TabIndex = 26;
-            btnConfirmar.Text = "Confirmar";
+            btnConfirmar.Text = "&Confirmar";
             btnConfirmar.UseVisualStyleBackColor = false;
             btnConfirmar.Click += btnConfirmar_Click_1Async;
             // 
@@ -161,7 +186,7 @@
             btnEnviarCodigo.Name = "btnEnviarCodigo";
             btnEnviarCodigo.Size = new Size(94, 27);
             btnEnviarCodigo.TabIndex = 24;
-            btnEnviarCodigo.Text = "Enviar código";
+            btnEnviarCodigo.Text = "&Enviar código";
             btnEnviarCodigo.UseVisualStyleBackColor = false;
             btnEnviarCodigo.Click += btnEnviarCodigo_ClickAsync;
             // 
@@ -187,7 +212,7 @@
             btnTrocarSenha.Name = "btnTrocarSenha";
             btnTrocarSenha.Size = new Size(127, 31);
             btnTrocarSenha.TabIndex = 4;
-            btnTrocarSenha.Text = "Trocar Senha";
+            btnTrocarSenha.Text = "&Trocar Senha";
             btnTrocarSenha.UseVisualStyleBackColor = false;
             btnTrocarSenha.Click += btnTrocarSenha_Click;
             // 
@@ -215,11 +240,10 @@
             Controls.Add(panel1);
             Controls.Add(panel2);
             Controls.Add(pn_title);
-            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 2, 3, 2);
             Name = "RecuperarSenhaEmail";
             Text = "Form1";
-            WindowState = FormWindowState.Maximized;
             Load += Form1_Load;
             pn_title.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
@@ -245,5 +269,6 @@
         private Panel panel2;
         private Button button1;
         private Button button2;
+        private ReaLTaiizor.Controls.NightControlBox nightControlBox1;
     }
 }

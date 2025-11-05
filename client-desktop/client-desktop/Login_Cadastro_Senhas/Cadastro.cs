@@ -19,6 +19,7 @@ namespace client_desktop {
             btnVoltarLogin = new Button();
             txtConfirmarSenha = new TextBox();
             pn_title = new Panel();
+            nightControlBox1 = new ReaLTaiizor.Controls.NightControlBox();
             lbl_titulo = new Label();
             pictureBox2 = new PictureBox();
             lbl_omega = new Label();
@@ -66,7 +67,7 @@ namespace client_desktop {
             btnConfirmar.Name = "btnConfirmar";
             btnConfirmar.Size = new Size(78, 30);
             btnConfirmar.TabIndex = 6;
-            btnConfirmar.Text = "Confirmar";
+            btnConfirmar.Text = "&Confirmar";
             btnConfirmar.TextAlign = ContentAlignment.MiddleRight;
             btnConfirmar.UseVisualStyleBackColor = false;
             btnConfirmar.Click += btnConfirmar_Click;
@@ -92,7 +93,7 @@ namespace client_desktop {
             cbMostrarSenha.Name = "cbMostrarSenha";
             cbMostrarSenha.Size = new Size(115, 59);
             cbMostrarSenha.TabIndex = 4;
-            cbMostrarSenha.Text = "Mostrar senha";
+            cbMostrarSenha.Text = "&Mostrar senha";
             cbMostrarSenha.UseVisualStyleBackColor = true;
             cbMostrarSenha.CheckedChanged += checkBox1_CheckedChanged;
             // 
@@ -127,7 +128,7 @@ namespace client_desktop {
             btnVoltarLogin.Name = "btnVoltarLogin";
             btnVoltarLogin.Size = new Size(210, 30);
             btnVoltarLogin.TabIndex = 7;
-            btnVoltarLogin.Text = "Voltar para tela de login";
+            btnVoltarLogin.Text = "&Voltar para tela de login";
             btnVoltarLogin.UseVisualStyleBackColor = false;
             btnVoltarLogin.Click += button2_Click;
             // 
@@ -145,6 +146,7 @@ namespace client_desktop {
             // pn_title
             // 
             pn_title.BackColor = Color.FromArgb(40, 42, 90);
+            pn_title.Controls.Add(nightControlBox1);
             pn_title.Controls.Add(lbl_titulo);
             pn_title.Controls.Add(pictureBox2);
             pn_title.Controls.Add(lbl_omega);
@@ -153,6 +155,29 @@ namespace client_desktop {
             pn_title.Name = "pn_title";
             pn_title.Size = new Size(875, 74);
             pn_title.TabIndex = 16;
+            // 
+            // nightControlBox1
+            // 
+            nightControlBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            nightControlBox1.BackColor = Color.Transparent;
+            nightControlBox1.CloseHoverColor = Color.FromArgb(199, 80, 80);
+            nightControlBox1.CloseHoverForeColor = Color.White;
+            nightControlBox1.DefaultLocation = true;
+            nightControlBox1.DisableMaximizeColor = Color.FromArgb(105, 105, 105);
+            nightControlBox1.DisableMinimizeColor = Color.FromArgb(105, 105, 105);
+            nightControlBox1.EnableCloseColor = Color.FromArgb(160, 160, 160);
+            nightControlBox1.EnableMaximizeButton = true;
+            nightControlBox1.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
+            nightControlBox1.EnableMinimizeButton = true;
+            nightControlBox1.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
+            nightControlBox1.Location = new Point(736, 0);
+            nightControlBox1.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
+            nightControlBox1.MaximizeHoverForeColor = Color.White;
+            nightControlBox1.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
+            nightControlBox1.MinimizeHoverForeColor = Color.White;
+            nightControlBox1.Name = "nightControlBox1";
+            nightControlBox1.Size = new Size(139, 31);
+            nightControlBox1.TabIndex = 3;
             // 
             // lbl_titulo
             // 
@@ -371,10 +396,9 @@ namespace client_desktop {
             Controls.Add(lblSenhaDiferente);
             Controls.Add(lblEmailCadastrado);
             Controls.Add(panel2);
-            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            FormBorderStyle = FormBorderStyle.None;
             Name = "Cadastro";
             StartPosition = FormStartPosition.CenterScreen;
-            WindowState = FormWindowState.Maximized;
             Load += Cadastro_Load;
             pn_title.ResumeLayout(false);
             pn_title.PerformLayout();
@@ -459,6 +483,8 @@ namespace client_desktop {
 
             atpDataNascimento.Format = DateTimePickerFormat.Custom;
             atpDataNascimento.CustomFormat = "dd/MM/yyyy";
+            this.ControlBox = false;
+            this.Dock = DockStyle.Fill;
         }
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e) {
 

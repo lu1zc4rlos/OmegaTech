@@ -20,6 +20,8 @@ namespace client_desktop.Home
         }
         private void formChamados_Load(object sender, EventArgs e)
         {
+            this.ControlBox = false;
+            this.Dock = DockStyle.Fill;
             /*
             CarregarTicketsDoCliente();
             */
