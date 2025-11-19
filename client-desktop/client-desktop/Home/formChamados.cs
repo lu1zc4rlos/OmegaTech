@@ -190,14 +190,14 @@ namespace client_desktop.Home
             */
         }
         private void button1_Click(object sender, EventArgs e) {
-            /*
-            this.Hide();
-            using (formAbrirChamado _formAbrirChamado = new formAbrirChamado(_usuario))
-            {
-                _formAbrirChamado.ShowDialog();
+            foreach (Form formFilho in this.MdiChildren) {
+                formFilho.Close();
             }
-            this.Hide();
-            */
+            formAbrirChamado abrirChamado = new formAbrirChamado();
+
+            abrirChamado.MdiParent = this.MdiParent;
+            abrirChamado.Show();
+
         }
         private void dgv_chamados_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
         private void pic_home_Click(object sender, EventArgs e) {

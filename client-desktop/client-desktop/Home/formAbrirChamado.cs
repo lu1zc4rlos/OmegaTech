@@ -1,89 +1,80 @@
-﻿using System;
-using System.Windows.Forms;
-using client_desktop.Home;
+﻿using CredentialManagement;
+using service;
 
-namespace client_desktop.Home
-{
-    public partial class formAbrirChamado : Form
-    {
-        /*
-        private Usuario _usuario;
-        */
-        public formAbrirChamado(/*Usuario usuario*/)
-        {
-            /*
+namespace client_desktop.Home {
+    public partial class formAbrirChamado : Form {
+        public static string TokenGlobal { get; set; }
+        public formAbrirChamado() {
             InitializeComponent();
-            _usuario = usuario;
-            */
         }
-
-        private void formAbrirChamado_Load(object sender, EventArgs e)
-        {
+        private void formAbrirChamado_Load(object sender, EventArgs e) {
             this.ControlBox = false;
             this.Dock = DockStyle.Fill;
+
+            string alvo = "OmegaTech-Desktop";
+            var credencial = new Credential { Target = alvo };
+
+            if (!credencial.Load()) { 
+                MessageBox.Show("Sessão expirada. Por favor, faça o login novamente.", "Sessão", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                using (Login login = new Login()) {
+                    System.Windows.Forms.DialogResult resultado = login.ShowDialog();
+
+                    if (resultado != System.Windows.Forms.DialogResult.OK) {
+                        this.Close();
+                        return;
+                    }
+                }
+            }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            /*
-            // Validações
-            if (string.IsNullOrWhiteSpace(txtDescricao.Text))
-            {
-                MessageBox.Show("Por favor, insira uma descrição do problema.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        private async void button1_ClickAsync(object sender, EventArgs e) {
+            
+            string mensagemDoTicket = txtDescricao.Text;
+            if (string.IsNullOrWhiteSpace(mensagemDoTicket)) {
+                MessageBox.Show("Por favor, descreva seu problema.", "Campo Vazio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            string alvo = "OmegaTech-Desktop";
+            var credencial = new Credential { Target = alvo };
+
+            if (!credencial.Load()) {
+                MessageBox.Show("Sessão não encontrada. Feche a tela e tente novamente.", "Erro de Autenticação", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Coletar dados
-            string prioridade = comboBox2.SelectedItem.ToString();
-            string tipoChamado = comboBoxTipo.SelectedItem.ToString();
-            string descricao = txtDescricao.Text.Trim();
-            string status = "Aberto";
-            DateTime dataCriacao = DateTime.Now;
-            int usuarioId = _usuario.Id;
+            string tokenParaEnvio = credencial.Password;
+            try {
+                button1.Enabled = false;
+                this.Cursor = Cursors.WaitCursor;
 
-            try
-            {
-                TicketClienteDAL _ticketClienteDAL = new TicketClienteDAL();
+                var _authTicketService = new AuthTicketService();
+                await _authTicketService.CriarTicketAsync(mensagemDoTicket, tokenParaEnvio);
 
-                _ticketClienteDAL.CriarTicket(new Ticket
-                {
-                    Titulo = tipoChamado,
-                    Prioridade = prioridade,
-                    Status = status,
-                    Descricao = descricao,
-                    DataCriacao = dataCriacao,
-                    UsuarioId = usuarioId
-
-                });
+                this.Close();
 
                 MessageBox.Show("Chamado enviado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
-                using (formChamados _formChamados = new formChamados(_usuario))
-                {
+                using (formChamados _formChamados = new formChamados()) {
                     _formChamados.ShowDialog();
                 }
                 this.Close();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro ao enviar chamado: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            catch (Exception ex) {
+                MessageBox.Show($"Falha ao criar o chamado: {ex.Message}",
+                                 "Erro de API",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Error);
             }
-            */
+            finally {
+                button1.Enabled = true;
+                this.Cursor = Cursors.Default;
+            }
+
         }
 
-        private void pn_title_Paint(object sender, PaintEventArgs e){}
-
-        private void pic_home_Click(object sender, EventArgs e)
-        {
-            /*
-            this.Hide();
-            formChamados _formChamados = new formChamados(_usuario);
-            _formChamados.FormClosed += (s, args) => Application.Exit();
-            _formChamados.ShowDialog();
-            this.Close();
-            */
-        }
+        private void pn_title_Paint(object sender, PaintEventArgs e) { }
     }
 }
-    
+
 

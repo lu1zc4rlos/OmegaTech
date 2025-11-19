@@ -1,20 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace client_desktop.Login_Cadastro_Senhas
+﻿namespace client_desktop.Login_Cadastro_Senhas
 {
     public partial class TesteMestre : Form
     {
         public TesteMestre()
         {
             InitializeComponent();
+        }
+        private void Login_FormClosed(object sender, FormClosedEventArgs e) {
+            Login loginForm = sender as Login;
+
+            if (loginForm != null && loginForm.DialogResult == System.Windows.Forms.DialogResult.OK) {
+
+                this.Hide(); 
+                Home.Home formHome = new Home.Home();
+                formHome.Show();
+            }
+            else {
+                MessageBox.Show("Você precisa se autenticar para usar o sistema.", "Acesso Negado");
+                this.Close(); 
+            }
         }
 
         private void novaJanelaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -54,6 +58,7 @@ namespace client_desktop.Login_Cadastro_Senhas
         {
             Login login = new Login();
             login.MdiParent = this;
+            login.FormClosed += Login_FormClosed;
             login.Show();
         }
 
@@ -68,6 +73,7 @@ namespace client_desktop.Login_Cadastro_Senhas
 
             Login login = new Login();
             login.MdiParent = this;
+            login.FormClosed += Login_FormClosed;
             login.Show();
         }
     }

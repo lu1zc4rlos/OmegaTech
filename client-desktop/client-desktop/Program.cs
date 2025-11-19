@@ -12,13 +12,16 @@ namespace client_desktop
         [STAThread]
         static void Main()
         {
+            
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             };
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new TesteMestre());
+             Application.Run(new TesteMestre());
+        
+
 
         }
     }

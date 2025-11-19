@@ -30,15 +30,15 @@
             pictureBox1 = new PictureBox();
             lblTitulo = new Label();
             sideBar = new FlowLayoutPanel();
-            panel2 = new Panel();
-            btnChamados = new Button();
             panel3 = new Panel();
             btnOmegaHelp = new Button();
+            panel2 = new Panel();
+            btnChamados = new Button();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             sideBar.SuspendLayout();
-            panel2.SuspendLayout();
             panel3.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // sidebarTransition
@@ -93,6 +93,30 @@
             sideBar.Size = new Size(246, 403);
             sideBar.TabIndex = 3;
             // 
+            // panel3
+            // 
+            panel3.Controls.Add(btnOmegaHelp);
+            panel3.Location = new Point(3, 4);
+            panel3.Margin = new Padding(3, 4, 3, 4);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(256, 47);
+            panel3.TabIndex = 3;
+            panel3.Paint += panel3_Paint;
+            // 
+            // btnOmegaHelp
+            // 
+            btnOmegaHelp.BackColor = Color.FromArgb(60, 62, 110);
+            btnOmegaHelp.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnOmegaHelp.ForeColor = SystemColors.Control;
+            btnOmegaHelp.Location = new Point(-9, -20);
+            btnOmegaHelp.Margin = new Padding(3, 4, 3, 4);
+            btnOmegaHelp.Name = "btnOmegaHelp";
+            btnOmegaHelp.Size = new Size(265, 79);
+            btnOmegaHelp.TabIndex = 2;
+            btnOmegaHelp.Text = "&OmegaHelp";
+            btnOmegaHelp.UseVisualStyleBackColor = false;
+            btnOmegaHelp.Click += btnOmegaHelp_Click;
+            // 
             // panel2
             // 
             panel2.Controls.Add(btnChamados);
@@ -116,30 +140,6 @@
             btnChamados.UseVisualStyleBackColor = false;
             btnChamados.Click += btnChamados_Click;
             // 
-            // panel3
-            // 
-            panel3.Controls.Add(btnOmegaHelp);
-            panel3.Location = new Point(3, 4);
-            panel3.Margin = new Padding(3, 4, 3, 4);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(256, 47);
-            panel3.TabIndex = 3;
-            panel3.Paint += panel3_Paint;
-            // 
-            // btnOmegaHelp
-            // 
-            btnOmegaHelp.BackColor = Color.FromArgb(60, 62, 110);
-            btnOmegaHelp.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnOmegaHelp.ForeColor = SystemColors.Control;
-            btnOmegaHelp.Location = new Point(-12, -29);
-            btnOmegaHelp.Margin = new Padding(3, 4, 3, 4);
-            btnOmegaHelp.Name = "btnOmegaHelp";
-            btnOmegaHelp.Size = new Size(265, 79);
-            btnOmegaHelp.TabIndex = 2;
-            btnOmegaHelp.Text = "&OmegaHelp";
-            btnOmegaHelp.UseVisualStyleBackColor = false;
-            btnOmegaHelp.Click += btnOmegaHelp_Click;
-            // 
             // Home
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -157,8 +157,8 @@
             panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             sideBar.ResumeLayout(false);
-            panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 

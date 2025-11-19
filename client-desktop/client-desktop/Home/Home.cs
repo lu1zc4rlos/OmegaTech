@@ -7,7 +7,7 @@ namespace client_desktop.Home {
     public partial class Home : Form {
 
         private ApiClient _apiClient;
-        public static string TokenGlobal { get; private set; }
+        public static string TokenGlobal { get; set; }
 
         public Home() {
             InitializeComponent();
@@ -15,14 +15,12 @@ namespace client_desktop.Home {
         private void Home_Load(object sender, EventArgs e) {
 
             string alvo = "OmegaTech-Desktop";
-            string tokenSalvo = null;
-            string usuarioSalvo = null;
             var credencial = new Credential { Target = alvo };
 
             if (credencial.Load()) {
 
-                tokenSalvo = credencial.Password;
-                usuarioSalvo = credencial.Username;
+                string tokenSalvo = credencial.Password;
+                string usuarioSalvo = credencial.Username;
                 TokenGlobal = tokenSalvo;
 
                 _apiClient = new ApiClient(tokenSalvo);
@@ -30,12 +28,8 @@ namespace client_desktop.Home {
 
             }
             else {
-                MessageBox.Show("Sessão expirada. Por favor, faça o login novamente.");
-                this.Hide();
-                using (Login login = new Login()) {
-                    login.ShowDialog();
-                }
-                this.Show();
+                MessageBox.Show("Sessão expirada. Redirecionando para o Login.", "Erro de Sessão");
+                this.Close();
             }
         }
 

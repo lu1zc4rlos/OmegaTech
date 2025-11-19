@@ -13,8 +13,9 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String titulo;
+    private TipoProblema titulo;
 
     @Column(nullable = false, length = 2000)
     private String descricao;

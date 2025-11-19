@@ -49,17 +49,14 @@ namespace client_desktop {
                     };
                     credencial.Save();
                 }
-                    catch (Exception ex) {
+                catch (Exception ex) {
                         MessageBox.Show("Erro ao salvar a credencial: " + ex.Message);
-                    }
-
-                this.Hide();
-                using (Home.Home homeForm = new Home.Home()) {
-                    homeForm.ShowDialog();
                 }
-                this.Show();
-                LimparCampos();
+                Home.Home.TokenGlobal = tokenRecebido;
 
+                this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                LimparCampos();
+                this.Close(); 
             }
             catch (HttpRequestException ex) {             
                 MessageBox.Show("Usuário ou senha inválidos. Tente novamente.",

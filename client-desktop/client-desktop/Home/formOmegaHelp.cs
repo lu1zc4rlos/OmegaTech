@@ -6,8 +6,6 @@ namespace client_desktop.Home
 {
     public partial class formOmegaHelp : Form {
         private ApiClient _apiClient;
-        public static string TokenGlobal { get; private set; }
-
         public formOmegaHelp() {
             InitializeComponent();
          
@@ -15,27 +13,23 @@ namespace client_desktop.Home
         private void formOmegaHelp_Load(object sender, EventArgs e) {
             this.ControlBox = false;
             this.Dock = DockStyle.Fill;
+            this.ControlBox = false;
+            this.Dock = DockStyle.Fill;
+
             string alvo = "OmegaTech-Desktop";
-            string tokenSalvo = null;
-            string usuarioSalvo = null;
             var credencial = new Credential { Target = alvo };
 
-            if (credencial.Load()) {
+            if (!credencial.Load()) { 
+                MessageBox.Show("Sessão expirada. Por favor, faça o login novamente.", "Sessão", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                tokenSalvo = credencial.Password;
-                usuarioSalvo = credencial.Username;
-                TokenGlobal = tokenSalvo;
-
-                _apiClient = new ApiClient(tokenSalvo);
-
-            }
-            else {
-                MessageBox.Show("Sessão expirada. Por favor, faça o login novamente.");
-                this.Hide();
                 using (Login login = new Login()) {
-                    login.ShowDialog();
+                    System.Windows.Forms.DialogResult resultado = login.ShowDialog();
+
+                    if (resultado != System.Windows.Forms.DialogResult.OK) {
+                        this.Close();
+                        return;
+                    }
                 }
-                this.Show();
             }
         }
 
@@ -76,13 +70,21 @@ namespace client_desktop.Home
         private async void btnEnviar_Click(object sender, EventArgs e) {
 
             string mensagemUsuario = txtEnviarMensagem.Text.Trim();
-            AdicionarMensagem(mensagemUsuario, true); 
+            AdicionarMensagem(mensagemUsuario, true);
+
+            string alvo = "OmegaTech-Desktop";
+            var credencial = new Credential { Target = alvo };
+
+            if (!credencial.Load()) {
+                MessageBox.Show("Sessão não encontrada. Feche a tela e tente novamente.", "Erro de Autenticação", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string tokenParaEnvio = credencial.Password;
 
             try {
-                var token = TokenGlobal;
-
-                var chatService = new ChatService();
-                var resposta = await chatService.EnviarMensagemAsync(mensagemUsuario, token);
+                var chatService = new AuthChatService();
+                var resposta = await chatService.EnviarMensagemAsync(mensagemUsuario, tokenParaEnvio);
                 
                 if (resposta.Tipo == "ERRO") {
                     AdicionarMensagem($"⚠️ Erro: {resposta.Resposta}", false);

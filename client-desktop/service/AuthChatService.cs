@@ -2,8 +2,8 @@
 using repository;
 
 namespace service {
-    public class ChatService {
-        public ChatService() { }
+    public class AuthChatService {
+        public AuthChatService() { }
 
         public async Task<ChatResponse> EnviarMensagemAsync(string mensagem, string token) {
            
