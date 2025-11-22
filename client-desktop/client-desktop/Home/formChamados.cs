@@ -1,52 +1,110 @@
-﻿using client_desktop.Home;
-using client_desktop.Home_Técnico;
-using System;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using CredentialManagement;
+using model;
+using service;
+using System.Globalization;
 
-namespace client_desktop.Home
-{
+namespace client_desktop.Home {
+
     public partial class formChamados : Form {
-        /*
-        private Usuario _usuario;
-        private TicketClienteDAL _tickeClientetDAL = new TicketClienteDAL();
-        */
-        public formChamados(/*Usuario usuario*/) {
+
+        public formChamados() {
             InitializeComponent();
-            /*
-            _usuario = usuario;
-            */
         }
-        private void formChamados_Load(object sender, EventArgs e)
-        {
+
+        private void formChamados_Load(object sender, EventArgs e) {
             this.ControlBox = false;
             this.Dock = DockStyle.Fill;
-            /*
-            CarregarTicketsDoCliente();
-            */
+
+            string alvo = "OmegaTech-Desktop";
+            var credencial = new Credential { Target = alvo };
+
+            if (!credencial.Load()) {
+                MessageBox.Show("Sessão expirada. Por favor, faça o login novamente.", "Sessão", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                using (Login login = new Login()) {
+                    System.Windows.Forms.DialogResult resultado = login.ShowDialog();
+
+                    if (resultado != System.Windows.Forms.DialogResult.OK) {
+                        this.Close();
+                        return;
+                    }
+                }
+            }
+
+            CarregarTicketsDoClienteAsync().ConfigureAwait(false);
         }
-        /*
-        int IdUsuarioLogado = Login.Sessao.UsuarioLogado.Id;
-        */
-        private void CarregarTicketsDoCliente() {
-            /*
+
+        private async Task CarregarTicketsDoClienteAsync(string statusFiltro = null) {
+
             flowLayoutPanelCards.Controls.Clear();
 
+            string alvo = "OmegaTech-Desktop";
+            var credencial = new Credential { Target = alvo };
 
-            var listaTickets = _tickeClientetDAL.ObterTicketsDoBancoPorUsuario(IdUsuarioLogado);
-
-
-            foreach (var ticket in listaTickets)
-            {
-                var card = CriarTicketCard(ticket.ID, ticket.Titulo, ticket.Cliente, ticket.Prioridade, ticket.Tempo, ticket.Status);
-                flowLayoutPanelCards.Controls.Add(card);
+            if (!credencial.Load()) {
+                MessageBox.Show("Sessão não encontrada. Feche a tela e tente novamente.", "Erro de Autenticação", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            */
+
+            string tokenParaEnvio = credencial.Password;
+            List<TicketResponseDTO> listaTickets;
+
+            try {
+                var ticketService = new AuthTicketService(tokenParaEnvio);
+
+                listaTickets = await ticketService.BuscarTicketsAsync(statusFiltro);
+
+                if (listaTickets == null || listaTickets.Count == 0) {
+                    if (!string.IsNullOrWhiteSpace(statusFiltro)) {
+                        MessageBox.Show($"Nenhum chamado encontrado com o status '{statusFiltro}'.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    return;
+                }
+
+                foreach (var ticket in listaTickets) {
+                    string dataFormatada = ticket.DataCriacao.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                    var card = CriarTicketCard(
+                        ticket.Id.ToString(),
+                        ticket.Titulo,
+                        ticket.NomeCliente,
+                        ticket.Prioridade,
+                        dataFormatada,
+                        ticket.Status
+                    );
+                    flowLayoutPanelCards.Controls.Add(card);
+                }
+
+            }
+            catch (HttpRequestException ex) {
+                MessageBox.Show($"Falha ao buscar tickets da API. Detalhe: {ex.Message}",
+                                "Erro de API",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex) {
+                MessageBox.Show($"Ocorreu um erro inesperado: {ex.Message}",
+                                "Erro",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+        private async void btnCarregar_Click(object sender, EventArgs e) {
+            await CarregarTicketsDoClienteAsync();
+        }
+        private async void button3_Click(object sender, EventArgs e) {
+            await CarregarTicketsDoClienteAsync("CONCLUIDO");
+        }
+        private async void btnChamadosEmAndamento_Click_1(object sender, EventArgs e) {
+            await CarregarTicketsDoClienteAsync("EM_ANDAMENTO");
+        }
+        private async void btnChamadosAbertos_Click(object sender, EventArgs e) {
+            await CarregarTicketsDoClienteAsync("PENDENTE");
+        }
+
         private Panel CriarTicketCard(string id, string titulo, string cliente, string prioridade, string tempo, string status) {
             Panel card = new Panel();
-            card.Width = 850;
-            card.Height = 80;
+            card.Width = 1660;
+            card.Height = 90;
             card.BackColor = Color.FromArgb(245, 245, 255);
             card.Padding = new Padding(10);
             card.Margin = new Padding(5);
@@ -71,22 +129,20 @@ namespace client_desktop.Home
             table.Controls.Add(NovaLabel("Nome chamado", true), 1, 0);
             table.Controls.Add(NovaLabel("Cliente", true), 2, 0);
             table.Controls.Add(NovaLabel("Prioridade", true), 3, 0);
-            table.Controls.Add(NovaLabel("Há", true), 4, 0);
+            table.Controls.Add(NovaLabel("Criação", true), 4, 0);
             table.Controls.Add(NovaLabel("Status", true), 5, 0);
 
-            table.Controls.Add(NovaLabel(id), 0, 1);
+            table.Controls.Add(NovaLabel("#HDN" + id), 0, 1);
             table.Controls.Add(NovaLabel(titulo, false, Color.DeepPink), 1, 1);
             table.Controls.Add(NovaLabel(cliente), 2, 1);
             table.Controls.Add(NovaLabel(prioridade), 3, 1);
             table.Controls.Add(NovaLabel(tempo), 4, 1);
             table.Controls.Add(NovaLabel(status), 5, 1);
 
-            // Adicionar botão dinâmico
             Button btnAcao = new Button();
             btnAcao.AutoSize = true;
 
-            // Verifica o status do chamado
-            if (status == "Concluído") {
+            if (status == "CONCLUIDO") {
                 btnAcao.Text = "Ver Resposta";
                 btnAcao.BackColor = Color.Green;
                 btnAcao.ForeColor = Color.White;
@@ -94,35 +150,27 @@ namespace client_desktop.Home
                     int idNumerico = int.Parse(id.Replace("#HDN", ""));
 
                     this.Hide();
-                    // Abre a tela de resposta do técnico
-                    /*
-                    using (formRespostaTecnico respostaTecnico = new formRespostaTecnico(idNumerico,_usuario))
-                    {
+
+                    using (formRespostaTecnico respostaTecnico = new formRespostaTecnico()) {
                         respostaTecnico.ShowDialog();
                         this.Close();
                     }
-                    */
+
                 };
             }
+            /*
+            // O código de exclusão (ExcluirTicket) PRECISA ser atualizado para usar await ticketService.ExcluirTicketAsync(idNumerico, tokenParaEnvio)
+            // Se você quiser que o botão Excluir funcione, precisará implementá-lo no TicketService e no ApiClientTicket
             else {
                 btnAcao.Text = "Excluir";
-                btnAcao.BackColor = Color.Red;
-                btnAcao.ForeColor = Color.White;
-                btnAcao.Click += (s, e) => {
-                    int idNumerico = int.Parse(id.Replace("#HDN", ""));
-                    DialogResult confirmacao = MessageBox.Show("Deseja realmente excluir este chamado?", "Confirmar exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                    if (confirmacao == DialogResult.Yes) {
-                        /*
-                        _tickeClientetDAL.ExcluirTicket(idNumerico);
-                        MessageBox.Show("Chamado excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        CarregarTicketsDoCliente();
-                        */
-                    }
-                };
+                // ... (restante da lógica de exclusão)
+            }
+            */
+            else {
+                btnAcao.Text = "Em Andamento";
+                btnAcao.Enabled = false;
             }
 
-            // Aqui você adiciona o botão ao seu Card ou ao Layout
             card.Controls.Add(btnAcao);
 
             card.Controls.Add(table);
@@ -140,55 +188,6 @@ namespace client_desktop.Home
             };
         }
 
-        private void btnCarregar_Click(object sender, EventArgs e) {
-            /*
-            flowLayoutPanelCards.Controls.Clear();
-
-            var listaTickets = _tickeClientetDAL.ObterTicketsDoBancoPorUsuario(_usuario.Id);
-
-            foreach (var ticket in listaTickets)
-            {
-                var card = CriarTicketCard(ticket.ID, ticket.Titulo, ticket.Cliente, ticket.Prioridade, ticket.Tempo, ticket.Status);
-                flowLayoutPanelCards.Controls.Add(card);
-            }
-            */
-        }
-        private void button2_Click(object sender, EventArgs e) {
-            /*
-            flowLayoutPanelCards.Controls.Clear();
-            var listaTickets = _tickeClientetDAL.ObterTicketsDoBancoPorUsuario(_usuario.Id, "Em andamento");
-
-            foreach (var ticket in listaTickets)
-            {
-                var card = CriarTicketCard(ticket.ID, ticket.Titulo, ticket.Cliente, ticket.Prioridade, ticket.Tempo, ticket.Status);
-                flowLayoutPanelCards.Controls.Add(card);
-            }
-            */
-        }
-        private void button3_Click(object sender, EventArgs e) {
-            /*
-            flowLayoutPanelCards.Controls.Clear();
-            var listaTickets = _tickeClientetDAL.ObterTicketsDoBancoPorUsuario(_usuario.Id, "Concluído");
-
-            foreach (var ticket in listaTickets)
-            {
-                var card = CriarTicketCard(ticket.ID, ticket.Titulo, ticket.Cliente, ticket.Prioridade, ticket.Tempo, ticket.Status);
-                flowLayoutPanelCards.Controls.Add(card);
-            }
-            */
-        }
-        private void btnChamadosAbertos_Click(object sender, EventArgs e) {
-            /*
-            flowLayoutPanelCards.Controls.Clear();
-            var listaTickets = _tickeClientetDAL.ObterTicketsDoBancoPorUsuario(_usuario.Id, "Aberto");
-
-            foreach (var ticket in listaTickets)
-            {
-                var card = CriarTicketCard(ticket.ID, ticket.Titulo, ticket.Cliente, ticket.Prioridade, ticket.Tempo, ticket.Status);
-                flowLayoutPanelCards.Controls.Add(card);
-            }
-            */
-        }
         private void button1_Click(object sender, EventArgs e) {
             foreach (Form formFilho in this.MdiChildren) {
                 formFilho.Close();
@@ -200,16 +199,7 @@ namespace client_desktop.Home
 
         }
         private void dgv_chamados_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
-        private void pic_home_Click(object sender, EventArgs e) {
-            /*
-            this.Hide();
-            home = new Home(_usuario);
-            home.FormClosed += (s, args) => Application.Exit();
-            home.ShowDialog();
-            this.Close();
-            */
-        }
-
+        private void pic_home_Click(object sender, EventArgs e) { }
         private void flowLayoutPanelCards_Paint(object sender, PaintEventArgs e) { }
         private void pn_title_Paint(object sender, PaintEventArgs e) { }
 
@@ -218,7 +208,8 @@ namespace client_desktop.Home
             Home homeForm = new Home();
             homeForm.ShowDialog();
             this.Show();
-            
+
         }
     }
+
 }

@@ -54,10 +54,6 @@ namespace client_desktop.Home {
                 this.Close();
 
                 MessageBox.Show("Chamado enviado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide();
-                using (formChamados _formChamados = new formChamados()) {
-                    _formChamados.ShowDialog();
-                }
                 this.Close();
             }
             catch (Exception ex) {

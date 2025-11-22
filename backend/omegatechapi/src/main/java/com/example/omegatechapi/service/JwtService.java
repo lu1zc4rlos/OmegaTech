@@ -1,3 +1,4 @@
+/*
 package com.example.omegatechapi.service;
 
 import io.jsonwebtoken.Claims;
@@ -43,10 +44,7 @@ public class JwtService {
                 .compact(); // Constrói o token como uma String
     }
 
-    /**
-     * Verifica se um token é válido para um determinado usuário.
-     * (Isso será usado por um Filtro de Segurança, não pelo AuthService)
-     */
+
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token); // Pega o usuário de dentro do token
         // Verifica se o usuário do token é o mesmo que está logando
@@ -54,25 +52,17 @@ public class JwtService {
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
-    /**
-     * Extrai o "Subject" (username/email) de dentro do token.
-     */
+
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-    // ----- MÉTODOS PRIVADOS AUXILIARES -----
 
-    /**
-     * Verifica se o token expirou.
-     */
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 
-    /**
-     * Extrai a data de expiração do token.
-     */
+
     private Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
@@ -82,9 +72,7 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    /**
-     * Decodifica o token e extrai todas as informações (claims) dele.
-     */
+
     private Claims extractAllClaims(String token) {
         return Jwts.parser()
         //parserBuilder
@@ -94,9 +82,100 @@ public class JwtService {
                 .getBody(); // Pega o "corpo" (os claims)
     }
 
+
+    private Key getSigningKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
+}
+*/
+package com.example.omegatechapi.service;
+
+import com.example.omegatechapi.model.Usuario;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+
+import java.security.Key;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
+@Data
+@Service
+public class JwtService {
+
+    @Value("${application.security.jwt.secret-key}")
+    private String secretKey;
+
+    @Value("${application.security.jwt.expiration-ms}")
+    private long expirationMs;
+
+
     /**
-     * Converte a chave secreta (String em Base64) em um objeto Key criptográfico.
+     * Gera o token JWT usando o ID do usuário como Subject.
      */
+    public String gerarToken(Usuario usuario) {
+        Map<String, Object> extraClaims = new HashMap<>();
+
+        // CORREÇÃO CRÍTICA: Define o Subject como o ID numérico do usuário (String)
+        String subjectId = usuario.getId().toString();
+
+        return Jwts.builder()
+                .setClaims(extraClaims)
+                .setSubject(subjectId) // O Subject agora é o ID do usuário
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + expirationMs))
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
+                .compact();
+    }
+
+    /**
+     * Extrai o Subject (ID do usuário) de dentro do token.
+     */
+    public String extractUsername(String token) {
+        return extractClaim(token, Claims::getSubject);
+    }
+
+    // Método de validação adaptado para comparar IDs (Subject com ID do UserDetails)
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        final String userIdFromToken = extractUsername(token);
+        // Assume-se que o UserDetails é a Entidade Usuario (para ter acesso ao getId())
+        final String userIdFromUserDetails = ((Usuario) userDetails).getId().toString();
+
+        return (userIdFromToken.equals(userIdFromUserDetails)) && !isTokenExpired(token);
+    }
+
+    // --- Métodos Auxiliares ---
+
+    private boolean isTokenExpired(String token) {
+        return extractExpiration(token).before(new Date());
+    }
+
+    private Date extractExpiration(String token) {
+        return extractClaim(token, Claims::getExpiration);
+    }
+
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
+    }
+
+    private Claims extractAllClaims(String token) {
+        return Jwts.parser()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
     private Key getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);

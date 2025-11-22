@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -117,4 +118,58 @@ public class TicketService {
             throw e;
         }
     }
+
+    public List<TicketResponseDTO> findTicketsByUserIdAndStatus(Long clienteId, String statusFilter) {
+
+        List<Ticket> tickets;
+
+        String cleanedStatus = (statusFilter != null) ? statusFilter.trim().toUpperCase() : null;
+
+        if (cleanedStatus == null || cleanedStatus.isEmpty() || cleanedStatus.equals("todos")) {
+            tickets = ticketRepository.findByClienteId(clienteId);
+        } else {
+            try {
+                Status statusEnum = convertToStatus(cleanedStatus);
+                tickets = ticketRepository.findByClienteIdAndStatus(clienteId, statusEnum);
+
+            } catch (IllegalArgumentException e) {
+                System.err.println("Filtro de Status inválido: " + cleanedStatus);
+                return List.of();
+            }        }
+
+        return tickets.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
+    private Status convertToStatus(String statusStr) throws IllegalArgumentException {
+        String upperCaseStatus = statusStr.toUpperCase();
+
+        return Status.valueOf(upperCaseStatus);
+    }
+
+    private TicketResponseDTO toDto(Ticket ticket) {
+        TicketResponseDTO dto = new TicketResponseDTO();
+        dto.setId(ticket.getId());
+        dto.setTitulo(ticket.getTitulo() != null ? ticket.getTitulo().toString() : null);
+        dto.setDescricao(ticket.getDescricao());
+        dto.setDataCriacao(ticket.getDataCriacao());
+        dto.setPrioridade(ticket.getPrioridade() != null ? ticket.getPrioridade().toString() : null);
+        dto.setStatus(ticket.getStatus() != null ? ticket.getStatus().toString() : null);
+        dto.setResposta(ticket.getResposta());
+
+        if (ticket.getCliente() != null) {
+            dto.setClienteId(ticket.getCliente().getId());
+            dto.setNomeCliente(ticket.getCliente().getNome());
+        }
+
+        if (ticket.getTecnicoAtribuido() != null) {
+            dto.setTecnicoId(ticket.getTecnicoAtribuido().getId());
+            dto.setNomeTecnico(ticket.getTecnicoAtribuido().getNome());
+        }
+
+        return dto;
+    }
+
 }
+

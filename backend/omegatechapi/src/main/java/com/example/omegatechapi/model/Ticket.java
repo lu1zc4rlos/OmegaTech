@@ -3,10 +3,12 @@ package com.example.omegatechapi.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Data
 @Entity
 @Table(name = "tickets")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 public class Ticket {
     @Id

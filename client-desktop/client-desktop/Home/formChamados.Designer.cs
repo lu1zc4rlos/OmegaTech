@@ -30,8 +30,8 @@
             lbl_titulo = new Label();
             panel1 = new Panel();
             btnChamadosAbertos = new Button();
-            button3 = new Button();
-            button2 = new Button();
+            btnChamadosConcluidos = new Button();
+            btnChamadosEmAndamento = new Button();
             button1 = new Button();
             btnMeusChamados = new Button();
             flowLayoutPanelCards = new FlowLayoutPanel();
@@ -69,8 +69,8 @@
             // 
             panel1.BackColor = Color.FromArgb(60, 62, 110);
             panel1.Controls.Add(btnChamadosAbertos);
-            panel1.Controls.Add(button3);
-            panel1.Controls.Add(button2);
+            panel1.Controls.Add(btnChamadosConcluidos);
+            panel1.Controls.Add(btnChamadosEmAndamento);
             panel1.Controls.Add(button1);
             panel1.Controls.Add(btnMeusChamados);
             panel1.Dock = DockStyle.Bottom;
@@ -95,46 +95,46 @@
             btnChamadosAbertos.Name = "btnChamadosAbertos";
             btnChamadosAbertos.Size = new Size(155, 40);
             btnChamadosAbertos.TabIndex = 11;
-            btnChamadosAbertos.Text = "Abertos";
+            btnChamadosAbertos.Text = "Pendentes ";
             btnChamadosAbertos.UseVisualStyleBackColor = false;
             btnChamadosAbertos.Click += btnChamadosAbertos_Click;
             // 
-            // button3
+            // btnChamadosConcluidos
             // 
-            button3.Anchor = AnchorStyles.Left;
-            button3.BackColor = Color.FromArgb(40, 42, 90);
-            button3.FlatAppearance.BorderColor = Color.White;
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatAppearance.MouseOverBackColor = Color.FromArgb(45, 47, 95);
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button3.ForeColor = Color.White;
-            button3.Location = new Point(639, 8);
-            button3.Margin = new Padding(3, 4, 3, 4);
-            button3.Name = "button3";
-            button3.Size = new Size(155, 40);
-            button3.TabIndex = 10;
-            button3.Text = "Concluidos";
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += button3_Click;
+            btnChamadosConcluidos.Anchor = AnchorStyles.Left;
+            btnChamadosConcluidos.BackColor = Color.FromArgb(40, 42, 90);
+            btnChamadosConcluidos.FlatAppearance.BorderColor = Color.White;
+            btnChamadosConcluidos.FlatAppearance.BorderSize = 0;
+            btnChamadosConcluidos.FlatAppearance.MouseOverBackColor = Color.FromArgb(45, 47, 95);
+            btnChamadosConcluidos.FlatStyle = FlatStyle.Flat;
+            btnChamadosConcluidos.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnChamadosConcluidos.ForeColor = Color.White;
+            btnChamadosConcluidos.Location = new Point(639, 8);
+            btnChamadosConcluidos.Margin = new Padding(3, 4, 3, 4);
+            btnChamadosConcluidos.Name = "btnChamadosConcluidos";
+            btnChamadosConcluidos.Size = new Size(155, 40);
+            btnChamadosConcluidos.TabIndex = 10;
+            btnChamadosConcluidos.Text = "Concluidos";
+            btnChamadosConcluidos.UseVisualStyleBackColor = false;
+            btnChamadosConcluidos.Click += button3_Click;
             // 
-            // button2
+            // btnChamadosEmAndamento
             // 
-            button2.BackColor = Color.FromArgb(40, 42, 90);
-            button2.FlatAppearance.BorderColor = Color.White;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatAppearance.MouseOverBackColor = Color.FromArgb(45, 47, 95);
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(477, 8);
-            button2.Margin = new Padding(3, 4, 3, 4);
-            button2.Name = "button2";
-            button2.Size = new Size(155, 40);
-            button2.TabIndex = 9;
-            button2.Text = "Em andamento";
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += button2_Click;
+            btnChamadosEmAndamento.BackColor = Color.FromArgb(40, 42, 90);
+            btnChamadosEmAndamento.FlatAppearance.BorderColor = Color.White;
+            btnChamadosEmAndamento.FlatAppearance.BorderSize = 0;
+            btnChamadosEmAndamento.FlatAppearance.MouseOverBackColor = Color.FromArgb(45, 47, 95);
+            btnChamadosEmAndamento.FlatStyle = FlatStyle.Flat;
+            btnChamadosEmAndamento.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnChamadosEmAndamento.ForeColor = Color.White;
+            btnChamadosEmAndamento.Location = new Point(477, 8);
+            btnChamadosEmAndamento.Margin = new Padding(3, 4, 3, 4);
+            btnChamadosEmAndamento.Name = "btnChamadosEmAndamento";
+            btnChamadosEmAndamento.Size = new Size(155, 40);
+            btnChamadosEmAndamento.TabIndex = 9;
+            btnChamadosEmAndamento.Text = "Em andamento";
+            btnChamadosEmAndamento.UseVisualStyleBackColor = false;
+            btnChamadosEmAndamento.Click += btnChamadosEmAndamento_Click_1;
             // 
             // button1
             // 
@@ -214,8 +214,8 @@
         private System.Windows.Forms.Button btnMeusChamados;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelCards;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnChamadosEmAndamento;
+        private System.Windows.Forms.Button btnChamadosConcluidos;
         private System.Windows.Forms.Button btnChamadosAbertos;
     }
 }

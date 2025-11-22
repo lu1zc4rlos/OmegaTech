@@ -23,5 +23,12 @@ namespace repository {
 
             response.EnsureSuccessStatusCode();
         }
+        public async Task<T> GetAsync<T>(string endpoint) {
+            var response = await _httpClient.GetAsync(endpoint);
+
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<T>();
+        }
     }
 }
