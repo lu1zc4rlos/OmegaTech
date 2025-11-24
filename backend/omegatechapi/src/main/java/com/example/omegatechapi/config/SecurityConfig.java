@@ -44,6 +44,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/chat/mensagem").permitAll()
                         // 🔓 Libera criar ticket
                         .requestMatchers(HttpMethod.POST, "/tickets/criar").permitAll()
+                        // 🔓 Libera buscar ticket
+                        .requestMatchers(HttpMethod.GET, "/tickets/meus").permitAll()
 
                         // 🔒 O resto precisa de token JWT
                         .anyRequest().authenticated()
