@@ -15,10 +15,10 @@
                 Home.Home formHome = new Home.Home();
                 formHome.Show();
             }
-            else {
-                MessageBox.Show("Você precisa se autenticar para usar o sistema.", "Acesso Negado");
-                this.Close(); 
-            }
+           // else {
+            //    MessageBox.Show("Você precisa se autenticar para usar o sistema.", "Acesso Negado");
+            //    this.Close(); 
+            //}
         }
 
         private void novaJanelaToolStripMenuItem_Click(object sender, EventArgs e)

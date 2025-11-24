@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -98,14 +99,30 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException("Email não encontrado"));
 
-        tokenRepository.findByUsuarioId(usuario.getId()).ifPresent(tokenRepository::delete);
-
+        // Gerar dados novos
         String codigo = String.format("%06d", new Random().nextInt(999999));
-
         LocalDateTime expiracao = LocalDateTime.now().plusMinutes(10);
 
-        TokenRecuperacao novoToken = new TokenRecuperacao(codigo, expiracao, usuario);
-        tokenRepository.save(novoToken);
+        // 1. Verifica se JÁ EXISTE um token (Upsert Strategy)
+        Optional<TokenRecuperacao> tokenExistenteOpt = tokenRepository.findByUsuarioId(usuario.getId());
+
+        TokenRecuperacao tokenParaSalvar;
+
+        if (tokenExistenteOpt.isPresent()) {
+            // CENÁRIO A: O usuário já pediu antes (como o Pedro).
+            // Nós RECICLAMOS o registro existente. O ID do banco continua o mesmo.
+            tokenParaSalvar = tokenExistenteOpt.get();
+            tokenParaSalvar.setCodigo(codigo);
+            tokenParaSalvar.setDataExpiracao(expiracao);
+            tokenParaSalvar.setValidado(false); // Importante resetar isso!
+        } else {
+            // CENÁRIO B: Primeira vez pedindo.
+            // Criamos um objeto novo.
+            tokenParaSalvar = new TokenRecuperacao(codigo, expiracao, usuario);
+        }
+
+        // O .save() é inteligente: se o objeto tem ID, ele faz UPDATE. Se não tem, faz INSERT.
+        tokenRepository.save(tokenParaSalvar);
 
         emailService.enviarEmailCodigo(email, codigo);
     }
