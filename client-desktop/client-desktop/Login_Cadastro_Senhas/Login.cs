@@ -4,6 +4,7 @@ using service;
 namespace client_desktop {
     public partial class Login : Form {
 
+        public string PerfilUsuario { get; private set; }
         public Login() {
 
             InitializeComponent();
@@ -47,16 +48,20 @@ namespace client_desktop {
                         Type = CredentialType.Generic,
                         PersistanceType = PersistanceType.LocalComputer
                     };
-                    credencial.Save();
+                    if (credencial.Save()) {
+                        PerfilUsuario = response.Perfil;
+
+                        // 3. Fecha o form de Login e sinaliza sucesso
+                        this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                        LimparCampos();
+                        this.Close();
+                    }
                 }
                 catch (Exception ex) {
                         MessageBox.Show("Erro ao salvar a credencial: " + ex.Message);
                 }
                 Home.Home.TokenGlobal = tokenRecebido;
 
-                this.DialogResult = System.Windows.Forms.DialogResult.OK;
-                LimparCampos();
-                this.Close(); 
             }
             catch (HttpRequestException ex) {             
                 MessageBox.Show("Usuário ou senha inválidos. Tente novamente.",

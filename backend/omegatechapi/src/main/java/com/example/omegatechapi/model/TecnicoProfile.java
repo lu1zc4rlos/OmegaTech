@@ -20,9 +20,6 @@ public class TecnicoProfile {
     @Column(nullable = false, unique = true)
     private String matricula;
 
-    @Column(nullable = false)
-    private String especialidade;
-
     private LocalDate dataCertificacao;
 
     @OneToOne

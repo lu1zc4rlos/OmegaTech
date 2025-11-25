@@ -1,4 +1,6 @@
-﻿namespace client_desktop.Login_Cadastro_Senhas
+﻿using client_desktop.Home_Técnico;
+
+namespace client_desktop.Login_Cadastro_Senhas
 {
     public partial class TesteMestre : Form
     {
@@ -11,9 +13,25 @@
 
             if (loginForm != null && loginForm.DialogResult == System.Windows.Forms.DialogResult.OK) {
 
-                this.Hide(); 
-                Home.Home formHome = new Home.Home();
-                formHome.Show();
+                string perfil = loginForm.PerfilUsuario;
+
+                this.Hide();
+
+                if (perfil == "ROLE_TECNICO") {
+                    HomeTecnico formTecnico = new HomeTecnico();
+                    formTecnico.Show();
+
+                }
+                else if (perfil == "ROLE_CLIENTE") {
+                    Home.Home formCliente = new Home.Home();
+                    formCliente.Show();
+
+                }
+                else {
+                    MessageBox.Show("Perfil de usuário desconhecido ou não atribuído.", "Erro de Permissão");
+                    this.Close();
+                    return;
+                }
             }
             
         }

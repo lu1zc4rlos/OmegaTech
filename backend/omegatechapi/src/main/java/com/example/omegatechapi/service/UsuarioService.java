@@ -221,10 +221,9 @@ public class UsuarioService {
             throw new RuntimeException("Senha incorreta");
         }
 
-        // 🛑 MUDANÇA: Passa o objeto Usuario completo (com o ID)
         String token = jwtService.gerarToken(usuario);
 
-        return new AuthResponse(usuario.getNome(), token);
+        return new AuthResponse(usuario.getNome(), token, usuario.getPerfil().toString());
     }
 
     // --- Fluxo de Cadastro ---
@@ -241,10 +240,8 @@ public class UsuarioService {
         novoUsuario.setSenha(passwordEncoder.encode(request.getSenha()));
         novoUsuario.setPerfil(Perfil.ROLE_CLIENTE);
 
-        // O save() faz o Hibernate preencher o ID gerado (ID da nova linha)
         Usuario usuarioSalvo = usuarioRepository.save(novoUsuario);
 
-        // 🛑 MUDANÇA: Passa o objeto Usuario salvo (que agora tem o ID)
         String token = jwtService.gerarToken(usuarioSalvo);
 
 
@@ -254,7 +251,7 @@ public class UsuarioService {
             System.err.println("Erro ao agendar envio de e-mail: " + e.getMessage());
         }
 
-        return new AuthResponse(usuarioSalvo.getNome(), token);
+        return new AuthResponse(usuarioSalvo.getNome(), token, novoUsuario.getPerfil().toString());
     }
 
     public void alterarSenha(AlterarSenhaRequest request) {

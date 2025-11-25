@@ -20,7 +20,7 @@ namespace client_desktop
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new TesteMestre());
-            //Application.Run(new Home.Home());
+            //Application.Run(new Home_Tecnico.ResponderTicket());
 
 
 
