@@ -2,6 +2,7 @@ package com.example.omegatechapi.service;
 
 import com.example.omegatechapi.model.*;
 import com.example.omegatechapi.repository.TicketRepository;
+import com.example.omegatechapi.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -10,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import jakarta.transaction.Transactional;
 
 import org.springframework.http.HttpHeaders;
 import java.time.LocalDate;
@@ -24,6 +26,7 @@ import java.util.stream.Collectors;
 public class TicketService {
 
     private final TicketRepository ticketRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Value("${openai.api.key}")
     private String openAiApiKey;
@@ -119,23 +122,39 @@ public class TicketService {
         }
     }
 
-    public List<TicketResponseDTO> findTicketsByUserIdAndStatus(Long clienteId, String statusFilter) {
+    public List<TicketResponseDTO> findTicketsByUserIdAndStatus(Long userId, String statusFilter) {
+
+        Usuario usuario = usuarioRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado na busca de tickets."));
+
+        boolean isTecnico = usuario.getPerfil().equals(Perfil.ROLE_TECNICO);
 
         List<Ticket> tickets;
-
         String cleanedStatus = (statusFilter != null) ? statusFilter.trim().toUpperCase() : null;
 
-        if (cleanedStatus == null || cleanedStatus.isEmpty() || cleanedStatus.equals("todos")) {
-            tickets = ticketRepository.findByClienteId(clienteId);
+        if (cleanedStatus == null || cleanedStatus.isEmpty() || cleanedStatus.equals("TODOS")) {
+
+            if (isTecnico) {
+                tickets = ticketRepository.findAll();
+            } else {
+                tickets = ticketRepository.findByClienteId(userId);
+            }
+
         } else {
             try {
                 Status statusEnum = convertToStatus(cleanedStatus);
-                tickets = ticketRepository.findByClienteIdAndStatus(clienteId, statusEnum);
+
+                if (isTecnico) {
+                    tickets = ticketRepository.findByStatus(statusEnum);
+                } else {
+                    tickets = ticketRepository.findByClienteIdAndStatus(userId, statusEnum);
+                }
 
             } catch (IllegalArgumentException e) {
                 System.err.println("Filtro de Status inválido: " + cleanedStatus);
                 return List.of();
-            }        }
+            }
+        }
 
         return tickets.stream()
                 .map(this::toDto)
@@ -169,6 +188,68 @@ public class TicketService {
         }
 
         return dto;
+    }
+    @Transactional
+    public void atualizarStatus(Long ticketId, String novoStatusStr, Usuario tecnico) {
+
+        Ticket ticket = ticketRepository.findById(ticketId)
+                .orElseThrow(() -> new RuntimeException("Ticket não encontrado."));
+
+        Status novoStatus = Status.valueOf(novoStatusStr.toUpperCase());
+
+        if (novoStatus == Status.EM_ANDAMENTO) {
+            if (ticket.getStatus() != Status.PENDENTE) {
+                throw new IllegalArgumentException("Não é possível iniciar um ticket que já está em " + ticket.getStatus());
+            }
+            // Atribui o ticket ao técnico que está clicando em "Iniciar"
+            ticket.setTecnicoAtribuido(tecnico);
+
+        } else if (novoStatus == Status.CONCLUIDO) {
+            if (ticket.getStatus() != Status.EM_ANDAMENTO) {
+                throw new IllegalArgumentException("Um ticket só pode ser concluído se estiver 'Em Andamento'.");
+            }
+        } else {
+            throw new IllegalArgumentException("Transição de status inválida para: " + novoStatusStr);
+        }
+
+        ticket.setStatus(novoStatus);
+
+        ticketRepository.save(ticket);
+    }
+    public TicketResponseDTO buscarTicketPorId(Long ticketId, Long userId, Perfil perfil) {
+
+        Ticket ticket = ticketRepository.findById(ticketId)
+                .orElseThrow(() -> new RuntimeException("Ticket não encontrado."));
+
+        if (perfil.equals(Perfil.ROLE_CLIENTE) && !ticket.getCliente().getId().equals(userId)) {
+            throw new SecurityException("Acesso negado. Este ticket não pertence a este cliente.");
+        }
+        return toDto(ticket);
+    }
+    @Transactional
+    public void responderTicket(Long ticketId, String resposta, Usuario tecnico) {
+
+        Ticket ticket = ticketRepository.findById(ticketId)
+                .orElseThrow(() -> new RuntimeException("Ticket não encontrado."));
+
+        if (ticket.getTecnicoAtribuido() == null) {
+            ticket.setTecnicoAtribuido(tecnico);
+
+        } else if (!ticket.getTecnicoAtribuido().getId().equals(tecnico.getId())) {
+            throw new SecurityException("Ação proibida. Este ticket está em atendimento por outro técnico.");
+        }
+
+        if (ticket.getStatus() == Status.CONCLUIDO) {
+            throw new IllegalArgumentException("Não é possível responder/concluir um ticket que já está finalizado.");
+        }
+        if (resposta == null || resposta.trim().isEmpty()) {
+            throw new IllegalArgumentException("A resposta do técnico não pode ser vazia.");
+        }
+
+        ticket.setResposta(resposta);
+        ticket.setStatus(Status.CONCLUIDO);
+
+        ticketRepository.save(ticket);
     }
 
 }

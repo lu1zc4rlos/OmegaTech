@@ -30,5 +30,9 @@ namespace repository {
 
             return await response.Content.ReadFromJsonAsync<T>();
         }
+        public async Task PutAsync(string endpoint, object body) {
+            var response = await _httpClient.PutAsJsonAsync(endpoint, body);
+            response.EnsureSuccessStatusCode();
+        }
     }
 }

@@ -1,23 +1,20 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Windows.Forms;
-using client_desktop.Home_Técnico;
+﻿using System.Drawing.Drawing2D;
+using model;
+using service;
 
-namespace client_desktop.Home_Tecnico
-{
-    public partial class ResponderTicket : Form
-    {
-        /*
-        private Ticket _ticket;
-        private Usuario _usuario;
-        */
-        public ResponderTicket()
-        {
+namespace client_desktop.Home_Tecnico {
+    public partial class ResponderTicket : Form {
+
+        private int _ticketId;
+        private string _token;
+        private TicketResponseDTO _ticketDetalhe;
+        public ResponderTicket(int ticketId, string token) {
             InitializeComponent();
+            _ticketId = ticketId;
+            _token = token;
+            ArredondarBotao(btnConfirmarChamado, 20);
         }
-        private void ArredondarBotao(Button botao, int raio)
-        {
+        private void ArredondarBotao(Button botao, int raio) {
             GraphicsPath path = new GraphicsPath();
             path.StartFigure();
             path.AddArc(0, 0, raio, raio, 180, 90);
@@ -28,25 +25,55 @@ namespace client_desktop.Home_Tecnico
 
             botao.Region = new Region(path);
         }
-        /*
-        public ResponderTicket(Ticket ticket, Usuario usuario)
-        {        
-            InitializeComponent();
-         
-            _ticket = ticket;
-            _usuario = usuario;
+
+        private async void ResponderTicket_Load(object sender, EventArgs e) {
+            this.ControlBox = false;
+
+            try {
+                var ticketService = new AuthTicketService(_token);
+                _ticketDetalhe = await ticketService.BuscarTicketPorIdAsync(_ticketId);
+
+                PreencherUIComDetalhes(_ticketDetalhe);
+            }
+            catch (HttpRequestException ex) {
+                MessageBox.Show("Falha ao carregar detalhes do ticket: " + ex.Message, "Erro de API");
+                this.Close();
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Erro inesperado: " + ex.Message, "Erro");
+                this.Close();
+            }
         }
-        */
-        private void ResponderTicket_Load(object sender, EventArgs e)
-        {
-            /*
-            CriarCard();
-            ArredondarBotao(btnConfirmarChamado, 20);
-            */
+
+        private async void btnConfirmarChamado_Click(object sender, EventArgs e) {
+            string respostaTecnico = textBox1.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(respostaTecnico)) {
+                MessageBox.Show("Por favor, preencha a resposta antes de confirmar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try {
+                var ticketService = new AuthTicketService(_token);
+
+                await ticketService.ResponderTicketAsync(_ticketId, respostaTecnico); 
+
+                MessageBox.Show("Chamado concluído e resposta registrada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+
+            }
+            catch (HttpRequestException ex) {
+                MessageBox.Show($"Erro ao concluir chamado: {ex.Message}", "Erro de API");
+            }
+            catch (Exception ex) {
+                MessageBox.Show($"Erro inesperado: {ex.Message}", "Erro");
+            }
         }
-        private void CriarCard()
-        {
-            /*
+
+        private void PreencherUIComDetalhes(TicketResponseDTO ticket) {
+
             Panel card = new Panel();
             card.Size = new Size(400, 600);
             card.BackColor = Color.FromArgb(245, 247, 250);
@@ -72,14 +99,12 @@ namespace client_desktop.Home_Tecnico
             Font normalFont = new Font("Segoe UI", 10, FontStyle.Regular);
             Color textColor = Color.FromArgb(50, 50, 50);
 
-
-            Label lblCodigo = new Label { Text = $"Código: {_ticket.ID}", Font = boldFont, ForeColor = textColor, AutoSize = true };
-            Label lblCliente = new Label { Text = $"Cliente: {_usuario.Nome}", Font = normalFont, ForeColor = textColor, AutoSize = true };
-            Label lblPrioridade = new Label { Text = $"Prioridade: {_ticket.Prioridade}", Font = normalFont, ForeColor = textColor, AutoSize = true };
-            Label lblAssunto = new Label { Text = $"Assunto: {_ticket.Titulo}", Font = normalFont, ForeColor = textColor, AutoSize = true };
-            Label lblAbertoHa = new Label { Text = $"Aberto há: {_ticket.Tempo}", Font = normalFont, ForeColor = textColor, AutoSize = true };
-            Label lblStatus = new Label { Text = $"Status: {_ticket.Status}", Font = normalFont, ForeColor = textColor, AutoSize = true };
-            Label lblEmail = new Label { Text = $"Email: {_usuario.Email}", Font = normalFont, ForeColor = textColor, AutoSize = true };
+            Label lblCodigo = new Label { Text = $"Id: {"#HDN" + ticket.Id}", Font = boldFont, ForeColor = textColor, AutoSize = true };
+            Label lblCliente = new Label { Text = $"Cliente: {ticket.NomeCliente}", Font = normalFont, ForeColor = textColor, AutoSize = true };
+            Label lblPrioridade = new Label { Text = $"Prioridade: {ticket.Prioridade}", Font = normalFont, ForeColor = textColor, AutoSize = true };
+            Label lblAssunto = new Label { Text = $"Assunto: {ticket.Titulo}", Font = normalFont, ForeColor = textColor, AutoSize = true };
+            Label lblAbertoHa = new Label { Text = $"Aberto há: {ticket.DataCriacao}", Font = normalFont, ForeColor = textColor, AutoSize = true };
+            Label lblStatus = new Label { Text = $"Status: {ticket.Status}", Font = normalFont, ForeColor = textColor, AutoSize = true };
 
             layout.Controls.Add(lblCodigo);
             layout.Controls.Add(lblCliente);
@@ -87,11 +112,10 @@ namespace client_desktop.Home_Tecnico
             layout.Controls.Add(lblAssunto);
             layout.Controls.Add(lblAbertoHa);
             layout.Controls.Add(lblStatus);
-            layout.Controls.Add(lblEmail);
 
             card.Controls.Add(layout);
 
-            flowLayoutPanelCard.Controls.Add(card);
+            flowLayoutPanel2.Controls.Add(card);
 
             Panel descricaoCard = new Panel();
             descricaoCard.Size = new Size(660, 670);
@@ -101,7 +125,7 @@ namespace client_desktop.Home_Tecnico
             descricaoCard.Padding = new Padding(10);
 
             Label lblDescricao = new Label();
-            lblDescricao.Text = _ticket.Descricao;
+            lblDescricao.Text = ticket.Descricao;
             lblDescricao.Font = new Font("Segoe UI", 10, FontStyle.Regular);
             lblDescricao.ForeColor = Color.FromArgb(70, 70, 70);
             lblDescricao.AutoSize = false;
@@ -112,47 +136,11 @@ namespace client_desktop.Home_Tecnico
 
             descricaoCard.Controls.Add(lblDescricao);
 
-            flowLayoutPanelDescricao.Controls.Add(descricaoCard);
-            */
+            flowLayoutPanel1.Controls.Add(descricaoCard);
 
         }
-        private void btnConfirmarChamado_Click(object sender, EventArgs e)
-        {
-            /*
-            if (string.IsNullOrWhiteSpace(txtResposta.Text))
-            {
-                MessageBox.Show("Por favor, preencha a resposta antes de confirmar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            try
-            {
-                TicketDAL ticketDAL = new TicketDAL();
-
-                ticketDAL.AdicionarResposta(int.Parse(_ticket.ID.Replace("#HDN", "")), txtResposta.Text.Trim());
-
-                MessageBox.Show("Resposta enviada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erro ao enviar resposta: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            */
-        }
-
-        private void flowLayoutPanelDescricao_Paint(object sender, PaintEventArgs e) { }
-        private void txtResposta_TextChanged(object sender, EventArgs e) { }
-        private void flowLayoutPanelCard_Paint(object sender, PaintEventArgs e) { }
-
-        private void pic_home_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            HomeTecnico _homeTecnico = new HomeTecnico();
-            _homeTecnico.FormClosed += (s, args) => Application.Exit();
-            _homeTecnico.ShowDialog();
-            this.Close();
-        }
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e) { }
+        private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e) { }
+        private void textBox1_TextChanged(object sender, EventArgs e) { }
     }
 }
-

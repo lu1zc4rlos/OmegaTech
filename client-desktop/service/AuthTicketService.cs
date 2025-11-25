@@ -31,6 +31,28 @@ namespace service {
 
             return await _apiClientTicket.GetAsync<List<TicketResponseDTO>>(endpoint);
         }
+        public async Task AtualizarStatusAsync(int ticketId, string novoStatus) {
+            string endpoint = $"tickets/status/{ticketId}";
+
+            var request = new StatusUpdateDTO {
+                NovoStatus = novoStatus
+            };
+
+            await _apiClientTicket.PutAsync(endpoint, request);
+        }
+        public async Task<TicketResponseDTO> BuscarTicketPorIdAsync(int ticketId) {
+            string endpoint = $"tickets/{ticketId}";
+            return await _apiClientTicket.GetAsync<TicketResponseDTO>(endpoint);
+        }
+        public async Task ResponderTicketAsync(int ticketId, string resposta) {
+            string endpoint = $"tickets/resposta/{ticketId}";
+
+            var request = new RespostaTicketDTO {
+                Resposta = resposta
+            };
+
+            await _apiClientTicket.PutAsync(endpoint, request);
+        }
 
     }
 }
