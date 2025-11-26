@@ -1,9 +1,6 @@
 package com.example.omegatechapi.controller;
 
-import com.example.omegatechapi.model.MensagemRequest;
-import com.example.omegatechapi.model.Ticket;
-import com.example.omegatechapi.model.TicketResponseDTO;
-import com.example.omegatechapi.model.Usuario;
+import com.example.omegatechapi.model.*;
 import com.example.omegatechapi.service.TicketService;
 import com.example.omegatechapi.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -38,19 +35,48 @@ public class TicketController {
     @GetMapping("/meus")
     public ResponseEntity<List<TicketResponseDTO>> getMeusTickets(
             @RequestParam(required = false) String status,
-            @AuthenticationPrincipal Usuario usuarioAutenticado) { // Usamos o objeto Usuario completo
+            @AuthenticationPrincipal Usuario usuarioAutenticado) {
 
         if (usuarioAutenticado == null || usuarioAutenticado.getId() == null) {
-            // Salvaguarda: Embora o @PreAuthorize deva evitar isso, é bom verificar.
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        // Obtemos o ID Long diretamente do objeto carregado e validado
         Long clienteId = usuarioAutenticado.getId();
 
-        // Passa o ID Long para o Service (que usa findByClienteId)
         List<TicketResponseDTO> tickets = ticketService.findTicketsByUserIdAndStatus(clienteId, status);
 
         return ResponseEntity.ok(tickets);
+    }
+    @PutMapping("/status/{id}")
+    @PreAuthorize("hasRole('ROLE_TECNICO')")
+    public ResponseEntity<Void> atualizarStatus(
+            @PathVariable Long id,
+            @RequestBody StatusUpdateDTO request,
+            @AuthenticationPrincipal Usuario tecnico) {
+
+        ticketService.atualizarStatus(id, request.getNovoStatus(), tecnico);
+
+        return ResponseEntity.ok().build();
+    }
+    @GetMapping("/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<TicketResponseDTO> getTicketById(
+            @PathVariable Long id,
+            @AuthenticationPrincipal Usuario usuarioAutenticado) {
+
+        TicketResponseDTO ticket = ticketService.buscarTicketPorId(id, usuarioAutenticado.getId(), usuarioAutenticado.getPerfil());
+
+        return ResponseEntity.ok(ticket);
+    }
+    @PutMapping("/resposta/{id}")
+    @PreAuthorize("hasRole('ROLE_TECNICO')")
+    public ResponseEntity<Void> responderTicket(
+            @PathVariable Long id,
+            @RequestBody RespostaTicketDTO request,
+            @AuthenticationPrincipal Usuario tecnico) {
+
+        ticketService.responderTicket(id, request.getResposta(), tecnico);
+
+        return ResponseEntity.ok().build();
     }
 }
