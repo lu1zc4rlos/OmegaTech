@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".OmegaHelpActivity" />
         <activity android:name=".ResetarSenhaActivity" />
         <activity android:name=".AlterarSenhaActivity" />
         <activity android:name=".CadastroActivity" />
