@@ -183,6 +183,7 @@
             flowLayoutPanelCards.Name = "flowLayoutPanelCards";
             flowLayoutPanelCards.Size = new Size(1000, 637);
             flowLayoutPanelCards.TabIndex = 26;
+            flowLayoutPanelCards.Paint += flowLayoutPanelCards_Paint_1;
             // 
             // formChamados
             // 

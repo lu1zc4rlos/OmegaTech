@@ -211,7 +211,7 @@
             Name = "formRespostaTecnico";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "formRespostaTecnico";
-            Load += formRespostaTecnico_Load;
+            Load += formRespostaTecnico_LoadAsync;
             pn_title.ResumeLayout(false);
             pn_title.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();

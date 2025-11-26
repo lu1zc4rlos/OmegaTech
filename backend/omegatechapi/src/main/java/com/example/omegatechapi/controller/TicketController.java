@@ -79,4 +79,14 @@ public class TicketController {
 
         return ResponseEntity.ok().build();
     }
+    @DeleteMapping("/deletar/{id}")
+    @PreAuthorize("hasRole('ROLE_CLIENTE')")
+    public ResponseEntity<Void> excluirTicket(
+            @PathVariable Long id,
+            @AuthenticationPrincipal Usuario cliente) {
+
+        ticketService.excluirTicket(id, cliente.getId());
+
+        return ResponseEntity.noContent().build();
+    }
 }
