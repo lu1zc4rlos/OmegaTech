@@ -251,6 +251,24 @@ public class TicketService {
 
         ticketRepository.save(ticket);
     }
+    @Transactional
+    public void excluirTicket(Long ticketId, Long clienteId) {
+
+        Ticket ticket = ticketRepository.findById(ticketId)
+                .orElseThrow(() -> new RuntimeException("Ticket não encontrado."));
+
+        if (!ticket.getCliente().getId().equals(clienteId)) {
+            throw new SecurityException("Acesso negado. Você não é o dono deste ticket.");
+        }
+
+        Status statusAtual = ticket.getStatus();
+
+        if (statusAtual != Status.PENDENTE) {
+            throw new IllegalArgumentException("O ticket só pode ser excluído se o status for PENDENTE. Status atual: " + statusAtual);
+        }
+
+        ticketRepository.delete(ticket);
+    }
 
 }
 

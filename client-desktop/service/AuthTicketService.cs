@@ -53,6 +53,12 @@ namespace service {
 
             await _apiClientTicket.PutAsync(endpoint, request);
         }
+        public async Task ExcluirTicketAsync(int ticketId) {
+            string endpoint = $"tickets/deletar/{ticketId}";
+
+            await _apiClientTicket.DeleteAsync(endpoint);
+        }
+
 
     }
 }

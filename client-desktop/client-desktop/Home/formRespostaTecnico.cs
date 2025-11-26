@@ -1,4 +1,6 @@
-﻿using System;
+﻿using model;
+using service;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,32 +8,39 @@ namespace client_desktop.Home
 {
     public partial class formRespostaTecnico : Form
     {
-        /*
-        private int _idTicket;
-        private Usuario _usuario;
-        private TicketClienteDAL _ticketClienteDAL = new TicketClienteDAL();
-        */
-        public formRespostaTecnico(/*int idTicket,Usuario usuario*/)
+        private int _ticketId;
+        private string _token;
+        private TicketResponseDTO _ticketDetalhe;
+        public formRespostaTecnico(int ticketId, string token)
         {
             InitializeComponent();
-            /*
-            _idTicket = idTicket;
-            _usuario = usuario;
-            */
+            _ticketId = ticketId;
+            _token = token;
         }
-        private void formRespostaTecnico_Load(object sender, EventArgs e)
+        private async void formRespostaTecnico_LoadAsync(object sender, EventArgs e)
         {
-            CarregarDetalhesTicket();
             this.ControlBox = false;
-            this.Dock = DockStyle.Fill;
+
+            try {
+                var ticketService = new AuthTicketService(_token);
+                _ticketDetalhe = await ticketService.BuscarTicketPorIdAsync(_ticketId);
+
+                CarregarDetalhesTicket(_ticketDetalhe);
+            }
+            catch (HttpRequestException ex) {
+                MessageBox.Show("Falha ao carregar detalhes do ticket: " + ex.Message, "Erro de API");
+                this.Close();
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Erro inesperado: " + ex.Message, "Erro");
+                this.Close();
+            }
         }
-        private void CarregarDetalhesTicket()
+        private void CarregarDetalhesTicket(TicketResponseDTO ticket)
         {
-            /*
+            
             try
             {
-                Ticket ticket = _ticketClienteDAL.ObterTicketPorId(_idTicket);
-
                 if (ticket != null)
                 {
                     Panel descricaoCard = new Panel();
@@ -82,18 +91,9 @@ namespace client_desktop.Home
             {
                 MessageBox.Show("Erro ao carregar detalhes do chamado: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            */
+            
         }
-        private void pic_home_Click(object sender, EventArgs e)
-        {
-            /*
-            this.Hide();
-            formChamados _formChamados = new formChamados(_usuario);
-            _formChamados.FormClosed += (s, args) => Application.Exit();
-            _formChamados.ShowDialog();
-            this.Close();
-            */
-        }
+        private void pic_home_Click(object sender, EventArgs e) {}
         private void flowLayoutPanelResposta_Paint(object sender, PaintEventArgs e) {}
         private void label1_Click(object sender, EventArgs e) {}
         private void panelDescricao_Paint(object sender, PaintEventArgs e) {}

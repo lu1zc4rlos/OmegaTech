@@ -34,5 +34,9 @@ namespace repository {
             var response = await _httpClient.PutAsJsonAsync(endpoint, body);
             response.EnsureSuccessStatusCode();
         }
+        public async Task DeleteAsync(string endpoint) {
+            var response = await _httpClient.DeleteAsync(endpoint);
+            response.EnsureSuccessStatusCode();
+        }
     }
 }

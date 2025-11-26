@@ -50,6 +50,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/tickets/status").permitAll()
                         // 🔓 Libera resposta do tecnico
                         .requestMatchers(HttpMethod.PUT, "/tickets/resposta").permitAll()
+                        // 🔓 Libera deletar ticket
+                        .requestMatchers(HttpMethod.DELETE, "/tickets/deletar").permitAll()
 
                         // 🔒 O resto precisa de token JWT
                         .anyRequest().authenticated()

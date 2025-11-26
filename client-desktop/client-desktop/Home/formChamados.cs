@@ -1,4 +1,5 @@
-﻿using CredentialManagement;
+﻿using client_desktop.Home_Tecnico;
+using CredentialManagement;
 using model;
 using service;
 using System.Globalization;
@@ -32,6 +33,16 @@ namespace client_desktop.Home {
             }
 
             CarregarTicketsDoClienteAsync().ConfigureAwait(false);
+        }
+        private string ObterTokenSalvo() {
+            string alvo = "OmegaTech-Desktop";
+            var credencial = new Credential { Target = alvo };
+            if (credencial.Load()) {
+                return credencial.Password;
+            }
+            MessageBox.Show("Sessão expirada. Faça login novamente.", "Erro de Token");
+            this.Close();
+            return null;
         }
 
         private async Task CarregarTicketsDoClienteAsync(string statusFiltro = null) {
@@ -142,32 +153,63 @@ namespace client_desktop.Home {
             Button btnAcao = new Button();
             btnAcao.AutoSize = true;
 
+           
             if (status == "CONCLUIDO") {
                 btnAcao.Text = "Ver Resposta";
                 btnAcao.BackColor = Color.Green;
                 btnAcao.ForeColor = Color.White;
-                btnAcao.Click += (s, e) => {
+
+                btnAcao.Click += async (s, e) => {
+                    if (!btnAcao.Enabled) return;
                     int idNumerico = int.Parse(id.Replace("#HDN", ""));
 
-                    this.Hide();
+                    string token = ObterTokenSalvo();
+                    if (string.IsNullOrWhiteSpace(token)) return;
 
-                    using (formRespostaTecnico respostaTecnico = new formRespostaTecnico()) {
-                        respostaTecnico.ShowDialog();
-                        this.Close();
-                    }
+                    await RespostaTicketAsync(idNumerico, token);
+
+                    await CarregarTicketsDoClienteAsync();
 
                 };
             }
-            /*
-            // O código de exclusão (ExcluirTicket) PRECISA ser atualizado para usar await ticketService.ExcluirTicketAsync(idNumerico, tokenParaEnvio)
-            // Se você quiser que o botão Excluir funcione, precisará implementá-lo no TicketService e no ApiClientTicket
-            else {
+            if(status == "PENDENTE") {
                 btnAcao.Text = "Excluir";
-                // ... (restante da lógica de exclusão)
+                btnAcao.BackColor = Color.Red;
+                btnAcao.ForeColor = Color.White;
+                btnAcao.Click += async (s, e) => {
+                    System.Windows.Forms.DialogResult confirmacao = MessageBox.Show("Deseja realmente excluir este chamado?",
+                                                                "Confirmar exclusão",
+                                                                MessageBoxButtons.YesNo,
+                                                                MessageBoxIcon.Question);
+
+                    if (confirmacao == System.Windows.Forms.DialogResult.Yes) {
+                        try {
+                            string token = ObterTokenSalvo();
+                            int idNumerico = int.Parse(id.Replace("#HDN", ""));
+                            if (string.IsNullOrEmpty(token)) return;
+
+                            var ticketService = new AuthTicketService(token);
+
+                            await ticketService.ExcluirTicketAsync(idNumerico);
+
+                            MessageBox.Show("Chamado excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            await CarregarTicketsDoClienteAsync();
+
+                        }
+                        catch (HttpRequestException ex) {
+                            MessageBox.Show($"Falha ao excluir. Detalhe: {ex.Message}", "Erro de API");
+                        }
+                        catch (Exception ex) {
+                            MessageBox.Show($"Erro inesperado: {ex.Message}", "Erro");
+                        }
+                    }
+                };
             }
-            */
-            else {
+            if(status == "EM_ANDAMENTO") {
                 btnAcao.Text = "Em Andamento";
+                btnAcao.BackColor = Color.Blue;
+                btnAcao.ForeColor = Color.White;
                 btnAcao.Enabled = false;
             }
 
@@ -175,6 +217,16 @@ namespace client_desktop.Home {
 
             card.Controls.Add(table);
             return card;
+        }
+        private async Task RespostaTicketAsync(int ticketId, string token) {
+
+            this.Hide();
+            using (formRespostaTecnico respostaTecnico = new formRespostaTecnico(ticketId, token)) {
+                respostaTecnico.ShowDialog();
+            }
+            this.Show();
+
+            await CarregarTicketsDoClienteAsync();
         }
 
         private Label NovaLabel(string texto, bool negrito = false, Color? cor = null) {
@@ -210,6 +262,7 @@ namespace client_desktop.Home {
             this.Show();
 
         }
+        private void flowLayoutPanelCards_Paint_1(object sender, PaintEventArgs e) { }
     }
 
 }
