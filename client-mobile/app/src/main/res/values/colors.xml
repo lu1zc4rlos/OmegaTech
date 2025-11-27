@@ -6,6 +6,24 @@
     <color name="text_white">#FFFFFF</color>
     <color name="text_gray">#A0A0B0</color>
 
+    <color name="header_start">#3E3E5E</color>
+
+
+    <!-- Status -->
+    <color name="status_pendente_bg">#4A4A26</color>
+    <color name="status_pendente_text">#FFD700</color>
+
+    <color name="status_andamento_bg">#26344A</color>
+    <color name="status_andamento_text">#54A0FF</color>
+
+    <color name="status_concluido_bg">#253529</color>
+    <color name="status_concluido_text">#2ED573</color>
+
+    <!-- Prioridade -->
+    <color name="prio_urgente_text">#FF4757</color>
+    <color name="prio_alta_text">#FF6B6B</color>
+    <color name="prio_normal_text">#A0A0B0</color>
+
     <color name="status_high_bg">#4A2626</color>
     <color name="status_high_text">#FF6B6B</color>
 
