@@ -8,13 +8,18 @@ import com.example.myapplication.data.model.LoginResponse;
 import com.example.myapplication.data.model.MensagemRequest;
 import com.example.myapplication.data.model.ResetarSenhaRequest;
 import com.example.myapplication.data.model.SolicitarCodigoRequest;
+import com.example.myapplication.data.model.TicketResponseDTO;
 import com.example.myapplication.data.model.ValidarCodigoRequest;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface ApiService {
 
@@ -46,4 +51,19 @@ public interface ApiService {
 
     @PUT("usuarios/resetar_senha")
     Call<Void> resetarSenhaComCodigo(@Body ResetarSenhaRequest request);
+
+    @GET("tickets/meus") // Rota exata do seu Controller
+    Call<List<TicketResponseDTO>> getMeusTickets(@Header("Authorization") String token);
+
+    @POST("tickets/criar")
+    Call<Void> criarTicket(
+            @Header("Authorization") String token,
+            @Body MensagemRequest request // Reutilizando o DTO do chat
+    );
+
+    @GET("tickets/{id}")
+    Call<TicketResponseDTO> getTicketDetalhe( // Vamos precisar criar esse DTO ou reutilizar Ticket se tiver todos os campos
+                                              @Header("Authorization") String token,
+                                              @Path("id") Long id
+    );
 }
