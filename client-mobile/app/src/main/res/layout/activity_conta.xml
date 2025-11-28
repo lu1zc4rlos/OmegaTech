@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/DarkPurple"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="30dp">
+
+        <ImageView
+            android:id="@+id/btnVoltarConta"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@android:drawable/ic_menu_revert"
+            app:tint="@color/text_white"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Minha Conta"
+            android:textColor="@color/text_white"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/Purple"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        android:layout_marginBottom="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="32dp"
+            android:gravity="center">
+
+            <FrameLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_avatar_circle"
+                android:backgroundTint="@color/primary_purple"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:id="@+id/tvIniciaisConta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="US"
+                    android:textColor="@color/text_white"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvNomeConta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Carregando..."
+                android:textColor="@color/text_white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:id="@+id/tvPerfilConta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cliente"
+                android:textColor="#54A0FF"
+                android:background="@drawable/bg_badge"
+                android:backgroundTint="#26344A"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/Purple"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:id="@+id/btnSairConta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_lock_power_off"
+                app:tint="@color/LightPurple"
+                android:layout_marginEnd="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sair da Conta"
+                android:textColor="@color/LightPurple"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/nav_home"
-        android:icon="@android:drawable/ic_menu_view"
-        android:title="Home" />
-    <item
-        android:id="@+id/nav_novo"
-        android:icon="@android:drawable/ic_menu_agenda"
-        android:title="Tickets" />
 
     <item
-        android:id="@+id/nav_omega_help"
+        android:id="@+id/Nav_home"
+        android:icon="@android:drawable/ic_menu_view"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/nav_novo"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="Novo" />
+    <item
+        android:id="@+id/nav_Omega_help"
         android:icon="@android:drawable/stat_notify_chat"
         android:title="OmegaHelp" />
 
-    <item
-        android:id="@+id/nav_conta"
-        android:icon="@android:drawable/ic_menu_my_calendar"
-        android:title="Conta" />
+
+
 </menu>

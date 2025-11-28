@@ -10,7 +10,7 @@
         android:id="@+id/headerHelper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/card_bg"
+        android:background="@color/DarkPurple"
         android:padding="16dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -46,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/card_bg"
+        android:background="@color/DarkPurple"
         android:padding="10dp"
         android:orientation="horizontal"
         android:gravity="center_vertical">
