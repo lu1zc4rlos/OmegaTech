@@ -51,6 +51,8 @@ public class HomeActivity extends AppCompatActivity {
         // 1. Vínculos
         vincularViews();
 
+        carregarIniciaisUsuario();
+
         // 2. Configurar RecyclerView
         recyclerTickets.setLayoutManager(new LinearLayoutManager(this));
         listaTicketsExibicao = new ArrayList<>();
@@ -71,9 +73,7 @@ public class HomeActivity extends AppCompatActivity {
         // 4. Configurar Navegação e Perfil
         configurarNavegacao();
         btnPerfilUsuario.setOnClickListener(v -> {
-            session.clearSession();
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
+            startActivity(new Intent(HomeActivity.this, ContaActivity.class));
         });
     }
 
@@ -83,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
         carregarTicketsDaApi();
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
         if (bottomNav != null) {
-            bottomNav.setSelectedItemId(R.id.nav_home);
+            bottomNav.setSelectedItemId(R.id.Nav_home);
         }
     }
 
@@ -198,13 +198,16 @@ public class HomeActivity extends AppCompatActivity {
     private void configurarNavegacao() {
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
         bottomNav.setItemIconTintList(null);
-        bottomNav.setSelectedItemId(R.id.nav_home);
+        bottomNav.setSelectedItemId(R.id.Nav_home);
 
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
 
-            if (id == R.id.nav_home) { return true; }
-            else if (id == R.id.nav_omega_help) {
+            if (id == R.id.Nav_home) {
+                return true;
+            }
+
+            else if (id == R.id.nav_Omega_help) {
                 startActivity(new Intent(this, OmegaHelpActivity.class));
                 return true;
             }
@@ -212,11 +215,40 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(this, NovoTicketActivity.class));
                 return true;
             }
-            else if (id == R.id.nav_conta) {
-                Toast.makeText(this, "Perfil em construção...", Toast.LENGTH_SHORT).show();
-                return true;
-            }
+
             return false;
         });
+    }
+
+    private void carregarIniciaisUsuario() {
+        // 1. Recupera o nome salvo no login
+        // (Certifique-se que seu SessionManager tem o método getUsername ou getNome)
+        // Se não tiver, me avise que ajustamos o SessionManager
+        String nomeCompleto = session.getUsername();
+
+        String iniciais = "US"; // Valor padrão (User) caso venha nulo
+
+        if (nomeCompleto != null && !nomeCompleto.trim().isEmpty()) {
+            // Divide o nome por espaços
+            String[] partes = nomeCompleto.trim().split("\\s+");
+
+            if (partes.length == 1) {
+                // Se só tem um nome (Ex: "Pedro") -> Pega as 2 primeiras letras ou a primeira
+                iniciais = partes[0].substring(0, Math.min(2, partes[0].length())).toUpperCase();
+            } else {
+                // Se tem nome e sobrenome (Ex: "Pedro Carvalho") -> Pega P e C
+                String primeiraLetra = partes[0].substring(0, 1);
+                String ultimaLetra = partes[partes.length - 1].substring(0, 1);
+                iniciais = (primeiraLetra + ultimaLetra).toUpperCase();
+            }
+        }
+
+        // 2. Encontra o TextView que está dentro do FrameLayout do avatar
+        TextView tvIniciais = findViewById(R.id.tvIniciaisUsuario);
+
+        // 3. Define o texto
+        if (tvIniciais != null) {
+            tvIniciais.setText(iniciais);
+        }
     }
 }

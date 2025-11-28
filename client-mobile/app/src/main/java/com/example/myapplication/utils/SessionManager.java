@@ -7,6 +7,7 @@ public class SessionManager {
     private static final String PREF_NAME = "OmegaTechSession";
     private static final String KEY_TOKEN = "auth_token";
     private static final String KEY_USERNAME = "username";
+    private static final String KEY_EMAIL = "user_email";
 
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
@@ -22,6 +23,7 @@ public class SessionManager {
     /**
      * Salva a sessão do usuário após login
      */
+
     public void saveSession(String token, String username) {
         editor.putString(KEY_TOKEN, token);
         editor.putString(KEY_USERNAME, username);

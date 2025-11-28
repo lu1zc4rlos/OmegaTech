@@ -41,21 +41,77 @@ public class CadastroActivity extends AppCompatActivity {
             String senha = edtSenha.getText().toString();
             String dataInput = edtNascimento.getText().toString();
 
+
             // Validação Simples
             if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || dataInput.isEmpty()) {
                 Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // 3. Converter Data (DD/MM/AAAA -> YYYY-MM-DD)
+            //Valida a Data (Futuro/Passado/Formato)
+            if (!isDataValida(dataInput)) {
+                edtNascimento.setError("Data inválida!");
+                edtNascimento.requestFocus();
+                return; // Para aqui
+            }
+
+            // Valida a Força da Senha
+            if (!isSenhaForte(senha)) {
+                edtSenha.setError("Senha fraca! Use:\n- Maiúscula\n- Minúscula\n- Número\n- Símbolo (@#$...)");
+                edtSenha.requestFocus();
+                return; // Para aqui
+            }
+
+            //Converter Data (DD/MM/AAAA -> YYYY-MM-DD)
             String dataFormatada = converterDataParaApi(dataInput);
             if (dataFormatada == null) {
                 Toast.makeText(this, "Data inválida. Use dia/mês/ano (Ex: 20/05/1999)", Toast.LENGTH_LONG).show();
                 return;
             }
 
+
             realizarCadastro(nome, email, senha, dataFormatada);
         });
+
+    }
+
+    private boolean isSenhaForte(String senha) {
+        if (senha.length() < 8) return false;
+
+        // Regex que exige pelo menos um de cada grupo
+        String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).{8,}$";
+
+        // Se quiser algo mais simples (sem regex complexo), podemos fazer checks manuais,
+        // mas o regex acima é o padrão de indústria.
+        return senha.matches(regex);
+    }
+
+    // Verifica se a data é válida e não é futura
+    private boolean isDataValida(String dataTexto) {
+        try {
+            // Define o formato esperado
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
+            sdf.setLenient(false); // Não aceita dia 32, mês 13, etc.
+
+            java.util.Date dataInserida = sdf.parse(dataTexto);
+            java.util.Date hoje = new java.util.Date();
+
+            // Verifica se é futuro
+            if (dataInserida.after(hoje)) {
+                return false;
+            }
+
+            // Verifica se é muito antigo (ex: ano 1930)
+            java.util.Calendar limiteAntigo = java.util.Calendar.getInstance();
+            limiteAntigo.set(1931, 0, 1);
+            if (dataInserida.before(limiteAntigo.getTime())) {
+                return false;
+            }
+
+            return true;
+        } catch (Exception e) {
+            return false; // Deu erro ao ler a data (formato errado)
+        }
     }
 
     // Função auxiliar para formatar a data

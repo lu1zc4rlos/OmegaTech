@@ -51,6 +51,7 @@
                 android:layout_height="50dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:backgroundTint="@color/primary_purple"
                 android:background="@drawable/bg_avatar_circle">
 
                 <TextView
@@ -99,11 +100,11 @@
 
                 <ImageView
                     android:src="@android:drawable/ic_menu_sort_by_size"
-                    app:tint="#448AFF"
+                    app:tint="#8692f7"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:background="@drawable/bg_avatar_circle"
-                    android:backgroundTint="#26344A"
+                    android:backgroundTint="#282A5A"
                     android:padding="6dp"
                     android:layout_marginBottom="12dp"/>
 
@@ -173,11 +174,11 @@
 
                 <ImageView
                     android:src="@android:drawable/ic_menu_edit"
-                    app:tint="#FF5722"
+                    app:tint="#54A0FF"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:background="@drawable/bg_avatar_circle"
-                    android:backgroundTint="#4A2626"
+                    android:backgroundTint="#26344A"
                     android:padding="6dp"
                     android:layout_marginBottom="12dp"/>
 
@@ -272,8 +273,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/Purple"
-        app:itemIconTint="@color/text_gray"
-        app:itemTextColor="@color/text_gray"
+        app:itemIconTint="@color/primary_purple"
+        app:itemTextColor="@color/white"
         app:menu="@menu/bottom_nav_menu"/>
 
 </RelativeLayout>
