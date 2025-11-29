@@ -8,8 +8,7 @@ namespace client_desktop {
         public Cadastro() {
             InitializeComponent();
         }
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             txtEmail = new TextBox();
             btnConfirmar = new Button();
             lblEmailCadastrado = new Label();
@@ -48,9 +47,9 @@ namespace client_desktop {
             // 
             txtEmail.Anchor = AnchorStyles.Left;
             txtEmail.BorderStyle = BorderStyle.None;
-            txtEmail.Location = new Point(143, 139);
+            txtEmail.Location = new Point(179, 137);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(320, 16);
+            txtEmail.Size = new Size(320, 20);
             txtEmail.TabIndex = 2;
             // 
             // btnConfirmar
@@ -63,9 +62,9 @@ namespace client_desktop {
             btnConfirmar.FlatStyle = FlatStyle.Flat;
             btnConfirmar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btnConfirmar.ForeColor = Color.White;
-            btnConfirmar.Location = new Point(31, 369);
+            btnConfirmar.Location = new Point(34, 369);
             btnConfirmar.Name = "btnConfirmar";
-            btnConfirmar.Size = new Size(78, 30);
+            btnConfirmar.Size = new Size(107, 30);
             btnConfirmar.TabIndex = 6;
             btnConfirmar.Text = "&Confirmar";
             btnConfirmar.TextAlign = ContentAlignment.MiddleRight;
@@ -79,7 +78,7 @@ namespace client_desktop {
             lblEmailCadastrado.ForeColor = Color.Red;
             lblEmailCadastrado.Location = new Point(427, 237);
             lblEmailCadastrado.Name = "lblEmailCadastrado";
-            lblEmailCadastrado.Size = new Size(0, 15);
+            lblEmailCadastrado.Size = new Size(0, 20);
             lblEmailCadastrado.TabIndex = 10;
             lblEmailCadastrado.Click += label6_Click;
             // 
@@ -89,9 +88,9 @@ namespace client_desktop {
             cbMostrarSenha.Dock = DockStyle.Right;
             cbMostrarSenha.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cbMostrarSenha.ForeColor = Color.White;
-            cbMostrarSenha.Location = new Point(264, 0);
+            cbMostrarSenha.Location = new Point(201, 0);
             cbMostrarSenha.Name = "cbMostrarSenha";
-            cbMostrarSenha.Size = new Size(115, 59);
+            cbMostrarSenha.Size = new Size(142, 59);
             cbMostrarSenha.TabIndex = 4;
             cbMostrarSenha.Text = "&Mostrar senha";
             cbMostrarSenha.UseVisualStyleBackColor = true;
@@ -103,7 +102,7 @@ namespace client_desktop {
             txtSenha.Location = new Point(3, 19);
             txtSenha.Name = "txtSenha";
             txtSenha.PasswordChar = '*';
-            txtSenha.Size = new Size(192, 16);
+            txtSenha.Size = new Size(192, 20);
             txtSenha.TabIndex = 3;
             txtSenha.TextChanged += textBox2_TextChanged;
             // 
@@ -112,7 +111,7 @@ namespace client_desktop {
             lblSenhaDiferente.AutoSize = true;
             lblSenhaDiferente.Location = new Point(411, 320);
             lblSenhaDiferente.Name = "lblSenhaDiferente";
-            lblSenhaDiferente.Size = new Size(0, 15);
+            lblSenhaDiferente.Size = new Size(0, 20);
             lblSenhaDiferente.TabIndex = 15;
             // 
             // btnVoltarLogin
@@ -124,7 +123,7 @@ namespace client_desktop {
             btnVoltarLogin.FlatStyle = FlatStyle.Flat;
             btnVoltarLogin.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btnVoltarLogin.ForeColor = Color.White;
-            btnVoltarLogin.Location = new Point(224, 369);
+            btnVoltarLogin.Location = new Point(242, 369);
             btnVoltarLogin.Name = "btnVoltarLogin";
             btnVoltarLogin.Size = new Size(210, 30);
             btnVoltarLogin.TabIndex = 7;
@@ -136,10 +135,10 @@ namespace client_desktop {
             // 
             txtConfirmarSenha.Anchor = AnchorStyles.Left;
             txtConfirmarSenha.BorderStyle = BorderStyle.None;
-            txtConfirmarSenha.Location = new Point(143, 257);
+            txtConfirmarSenha.Location = new Point(179, 255);
             txtConfirmarSenha.Name = "txtConfirmarSenha";
             txtConfirmarSenha.PasswordChar = '*';
-            txtConfirmarSenha.Size = new Size(192, 16);
+            txtConfirmarSenha.Size = new Size(192, 20);
             txtConfirmarSenha.TabIndex = 5;
             txtConfirmarSenha.TextChanged += txtConfirmarSenha_TextChanged;
             // 
@@ -187,7 +186,7 @@ namespace client_desktop {
             lbl_titulo.ImeMode = ImeMode.NoControl;
             lbl_titulo.Location = new Point(366, 14);
             lbl_titulo.Name = "lbl_titulo";
-            lbl_titulo.Size = new Size(128, 30);
+            lbl_titulo.Size = new Size(183, 30);
             lbl_titulo.TabIndex = 0;
             lbl_titulo.Text = "CADASTRO";
             lbl_titulo.TextAlign = ContentAlignment.TopCenter;
@@ -210,7 +209,7 @@ namespace client_desktop {
             lbl_omega.ImeMode = ImeMode.NoControl;
             lbl_omega.Location = new Point(87, 23);
             lbl_omega.Name = "lbl_omega";
-            lbl_omega.Size = new Size(96, 21);
+            lbl_omega.Size = new Size(119, 28);
             lbl_omega.TabIndex = 1;
             lbl_omega.Text = "OmegaTech\r\n";
             lbl_omega.Click += lbl_omega_Click;
@@ -263,10 +262,10 @@ namespace client_desktop {
             panel3.Controls.Add(txtSenha);
             panel3.Controls.Add(cbMostrarSenha);
             panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(140, 177);
+            panel3.Location = new Point(176, 177);
             panel3.Margin = new Padding(0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(379, 59);
+            panel3.Size = new Size(343, 59);
             panel3.TabIndex = 4;
             // 
             // lblNome
@@ -276,9 +275,9 @@ namespace client_desktop {
             lblNome.BackColor = Color.FromArgb(40, 42, 90);
             lblNome.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblNome.ForeColor = Color.White;
-            lblNome.Location = new Point(89, 21);
+            lblNome.Location = new Point(112, 18);
             lblNome.Name = "lblNome";
-            lblNome.Size = new Size(48, 17);
+            lblNome.Size = new Size(61, 23);
             lblNome.TabIndex = 19;
             lblNome.Text = "Nome:";
             lblNome.TextAlign = ContentAlignment.MiddleRight;
@@ -290,9 +289,9 @@ namespace client_desktop {
             lblConfirmarSenha.BackColor = Color.FromArgb(40, 42, 90);
             lblConfirmarSenha.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblConfirmarSenha.ForeColor = Color.White;
-            lblConfirmarSenha.Location = new Point(22, 257);
+            lblConfirmarSenha.Location = new Point(27, 254);
             lblConfirmarSenha.Name = "lblConfirmarSenha";
-            lblConfirmarSenha.Size = new Size(115, 17);
+            lblConfirmarSenha.Size = new Size(146, 23);
             lblConfirmarSenha.TabIndex = 19;
             lblConfirmarSenha.Text = "Confirmar senha: ";
             lblConfirmarSenha.TextAlign = ContentAlignment.MiddleRight;
@@ -304,9 +303,9 @@ namespace client_desktop {
             lblSenha.Dock = DockStyle.Right;
             lblSenha.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblSenha.ForeColor = Color.White;
-            lblSenha.Location = new Point(89, 177);
+            lblSenha.Location = new Point(112, 177);
             lblSenha.Name = "lblSenha";
-            lblSenha.Size = new Size(48, 59);
+            lblSenha.Size = new Size(61, 59);
             lblSenha.TabIndex = 19;
             lblSenha.Text = "Senha:";
             lblSenha.TextAlign = ContentAlignment.MiddleRight;
@@ -318,9 +317,9 @@ namespace client_desktop {
             lblEmail.BackColor = Color.FromArgb(40, 42, 90);
             lblEmail.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblEmail.ForeColor = Color.White;
-            lblEmail.Location = new Point(94, 139);
+            lblEmail.Location = new Point(118, 136);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(43, 17);
+            lblEmail.Size = new Size(55, 23);
             lblEmail.TabIndex = 19;
             lblEmail.Text = "Email:";
             lblEmail.TextAlign = ContentAlignment.MiddleRight;
@@ -330,9 +329,9 @@ namespace client_desktop {
             txtNome.Anchor = AnchorStyles.Left;
             txtNome.BackColor = SystemColors.Window;
             txtNome.BorderStyle = BorderStyle.None;
-            txtNome.Location = new Point(143, 21);
+            txtNome.Location = new Point(179, 19);
             txtNome.Name = "txtNome";
-            txtNome.Size = new Size(320, 16);
+            txtNome.Size = new Size(320, 20);
             txtNome.TabIndex = 19;
             // 
             // lblDataNascimento
@@ -342,9 +341,9 @@ namespace client_desktop {
             lblDataNascimento.BackColor = Color.FromArgb(40, 42, 90);
             lblDataNascimento.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblDataNascimento.ForeColor = Color.White;
-            lblDataNascimento.Location = new Point(3, 80);
+            lblDataNascimento.Location = new Point(3, 77);
             lblDataNascimento.Name = "lblDataNascimento";
-            lblDataNascimento.Size = new Size(134, 17);
+            lblDataNascimento.Size = new Size(170, 23);
             lblDataNascimento.TabIndex = 19;
             lblDataNascimento.Text = "Data de Nascimento:";
             lblDataNascimento.TextAlign = ContentAlignment.MiddleRight;
@@ -353,10 +352,10 @@ namespace client_desktop {
             // 
             atpDataNascimento.Anchor = AnchorStyles.Left;
             atpDataNascimento.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            atpDataNascimento.Location = new Point(143, 76);
+            atpDataNascimento.Location = new Point(179, 74);
             atpDataNascimento.Name = "atpDataNascimento";
             atpDataNascimento.RightToLeft = RightToLeft.No;
-            atpDataNascimento.Size = new Size(132, 25);
+            atpDataNascimento.Size = new Size(132, 29);
             atpDataNascimento.TabIndex = 19;
             atpDataNascimento.ValueChanged += atpDataNascimento_ValueChanged;
             // 
@@ -482,14 +481,10 @@ namespace client_desktop {
             Thread.CurrentThread.CurrentUICulture = culture;
 
             atpDataNascimento.Format = DateTimePickerFormat.Custom;
+            atpDataNascimento.MaxDate = DateTime.Today;
             atpDataNascimento.CustomFormat = "dd/MM/yyyy";
             this.ControlBox = false;
             this.Dock = DockStyle.Fill;
-        }
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e) {
-
-            atpDataNascimento.MaxDate = DateTime.Today;
-
         }
         private void checkBox1_CheckedChanged(object sender, EventArgs e) {
 
@@ -512,7 +507,6 @@ namespace client_desktop {
         private void panel1_Paint(object sender, PaintEventArgs e) { }
         private void atpDataNascimento_ValueChanged(object sender, EventArgs e) { }
         private void lbl_omega_Click(object sender, EventArgs e) { }
-
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e) { }
     }
 

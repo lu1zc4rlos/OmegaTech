@@ -58,7 +58,24 @@ namespace service {
 
             await _apiClientTicket.DeleteAsync(endpoint);
         }
+        public async Task<List<TicketResponseDTO>> BuscarTicketsRespondidosPorTecnicoAsync(int tecnicoId) {
+            try {
+                
+                string statusFiltro = "CONCLUIDO";
+                string endpoint = $"admin/respondidos/{tecnicoId}?status={statusFiltro}";
 
+                List<TicketResponseDTO> listaTickets =
+                    await _apiClientTicket.GetAsync<List<TicketResponseDTO>>(endpoint);
+
+                return listaTickets;
+            }
+            catch (HttpRequestException ex) {
+                throw new HttpRequestException($"Erro ao buscar tickets respondidos pelo técnico {tecnicoId}. Detalhe: {ex.Message}", ex);
+            }
+            catch (Exception ex) {
+                throw new Exception($"Erro inesperado no serviço de tickets: {ex.Message}", ex);
+            }
+        }
 
     }
 }
