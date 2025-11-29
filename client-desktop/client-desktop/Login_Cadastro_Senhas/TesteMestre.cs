@@ -27,6 +27,11 @@ namespace client_desktop.Login_Cadastro_Senhas
                     formCliente.Show();
 
                 }
+                else if (perfil == "ROLE_ADMIN") {
+                    Home_Admin.HomeAdmin formAdmin = new Home_Admin.HomeAdmin();
+                    formAdmin.Show();
+
+                }
                 else {
                     MessageBox.Show("Perfil de usuário desconhecido ou não atribuído.", "Erro de Permissão");
                     this.Close();

@@ -3,6 +3,8 @@ package com.example.omegatechapi.repository;
 import com.example.omegatechapi.model.Status;
 import com.example.omegatechapi.model.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,4 +16,8 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     List<Ticket> findByClienteId(Long clienteId);
     List<Ticket> findByClienteIdAndStatus(Long clienteId, Status status);
     List<Ticket> findByStatus(Status status);
+    @Query("SELECT t FROM Ticket t WHERE t.status = :status AND t.tecnicoAtribuido.id = :tecnicoId")
+    List<Ticket> findByStatusAndTecnicoResponsavel(
+            @Param("status") Status status,
+            @Param("tecnicoId") Long tecnicoId);
 }

@@ -269,6 +269,36 @@ public class TicketService {
 
         ticketRepository.delete(ticket);
     }
+    public List<TicketResponseDTO> buscarTicketsRespondidos(Long tecnicoId) {
+
+        List<Ticket> tickets = ticketRepository.findByStatusAndTecnicoResponsavel(Status.CONCLUIDO, tecnicoId);
+
+        return tickets.stream()
+                .map(ticket -> {
+                    TicketResponseDTO dto = new TicketResponseDTO();
+                    dto.setId(ticket.getId());
+                    dto.setTitulo(ticket.getTitulo() != null ? ticket.getTitulo().name() : null);
+                    dto.setDescricao(ticket.getDescricao());
+                    dto.setDataCriacao(ticket.getDataCriacao());
+                    dto.setStatus(ticket.getStatus() != null ? ticket.getStatus().name() : null);
+                    dto.setPrioridade(ticket.getPrioridade() != null ? ticket.getPrioridade().name() : null);
+
+                    if (ticket.getCliente() != null) {
+                        dto.setClienteId(ticket.getCliente().getId());
+                        dto.setNomeCliente(ticket.getCliente().getNome());
+                    }
+
+                    if (ticket.getTecnicoAtribuido() != null) {
+                        dto.setTecnicoId(ticket.getTecnicoAtribuido().getId());
+                        dto.setNomeTecnico(ticket.getTecnicoAtribuido().getNome());
+                    }
+
+                    dto.setResposta(ticket.getResposta());
+
+                    return dto;
+                })
+                .collect(Collectors.toList());
+    }
 
 }
 

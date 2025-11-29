@@ -7,5 +7,4 @@ public class CriarTecnicoRequest {
     private String nome;
     private String email;
     private String senhaInicial;
-    private String especialidade;
 }
