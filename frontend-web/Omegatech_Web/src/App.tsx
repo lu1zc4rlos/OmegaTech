@@ -7,6 +7,7 @@ import NovoTicket from "@/pages/NovoTicket";
 import AdminDashboard from "@/pages/AdminDashboard";
 import AdminListaTecnicos from "@/pages/AdminListaTecnicos";
 import AdminDetalhesTecnico from "@/pages/AdminDetalhesTecnico";
+import ResetarSenha from "@/pages/ResetarSenha";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/lista" element={<AdminListaTecnicos />} />
         <Route path="/admin/tecnicos/:id" element={<AdminDetalhesTecnico />} />
+        <Route path="/esqueci-senha" element={<ResetarSenha />} />
       </Routes>
     </BrowserRouter>
   )

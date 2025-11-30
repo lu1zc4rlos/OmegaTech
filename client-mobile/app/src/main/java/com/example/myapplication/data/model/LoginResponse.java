@@ -3,26 +3,17 @@ package com.example.myapplication.data.model;
 import com.google.gson.annotations.SerializedName;
 
 public class LoginResponse {
-    @SerializedName("username")
-    private String Username;
+
     @SerializedName("token")
-    private String Token;
+    private String token;
 
-    public LoginResponse() {}
+    @SerializedName("username")
+    private String username;
 
-    public String getUsername() {
-        return Username;
-    }
+    @SerializedName("perfil") // <--- NOVO: Tem que bater com o backend
+    private String perfil;
 
-    public void setUsername(String username) {
-        Username = username;
-    }
-
-    public String getToken() {
-        return Token;
-    }
-
-    public void setToken(String token) {
-        Token = token;
-    }
+    public String getToken() { return token; }
+    public String getUsername() { return username; }
+    public String getPerfil() { return perfil; } // <--- Getter
 }

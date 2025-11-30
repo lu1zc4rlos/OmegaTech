@@ -2,7 +2,7 @@ import { useState } from "react";
 // ADICIONEI O ÍCONE 'Check' AQUI
 import { Omega, Loader2, Lock, Mail, Check } from "lucide-react";
 import { loginUser } from "@/services/authService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link} from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -96,9 +96,11 @@ try {
                   <label htmlFor="password" className="text-sm font-medium text-slate-300">
                     Senha
                   </label>
-                  <a href="#" className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors">
+                  <Link 
+                    to="/esqueci-senha" 
+                    className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors">
                     Esqueceu a senha?
-                  </a>
+                  </Link>
                 </div>
                 <div className="relative">
                   <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">

@@ -34,6 +34,8 @@ public class CadastroActivity extends AppCompatActivity {
         edtNascimento = findViewById(R.id.edtNascimentoCadastro);
         btnFinalizar = findViewById(R.id.btnFinalizarCadastro);
 
+        edtNascimento.addTextChangedListener(criarMascaraData(edtNascimento));
+
         // 2. Configurar o Botão
         btnFinalizar.setOnClickListener(v -> {
             String nome = edtNome.getText().toString();
@@ -84,6 +86,46 @@ public class CadastroActivity extends AppCompatActivity {
         // Se quiser algo mais simples (sem regex complexo), podemos fazer checks manuais,
         // mas o regex acima é o padrão de indústria.
         return senha.matches(regex);
+    }
+
+    // Método auxiliar para criar a máscara de data (DD/MM/AAAA)
+    private android.text.TextWatcher criarMascaraData(final EditText editText) {
+        return new android.text.TextWatcher() {
+            boolean isUpdating;
+            String old = "";
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String str = s.toString().replaceAll("[^\\d]", ""); // Remove tudo que não é número
+                String mascara = "";
+
+                if (isUpdating) {
+                    old = str;
+                    isUpdating = false;
+                    return;
+                }
+
+                int i = 0;
+                // Formato: ##/##/####
+                // O Java vai inserindo as barras automaticamente enquanto o usuário digita
+                if (str.length() > 2 && str.length() <= 4) {
+                    mascara = str.substring(0, 2) + "/" + str.substring(2);
+                } else if (str.length() > 4) {
+                    mascara = str.substring(0, 2) + "/" + str.substring(2, 4) + "/" + str.substring(4);
+                } else {
+                    mascara = str;
+                }
+
+                isUpdating = true;
+                editText.setText(mascara);
+                editText.setSelection(mascara.length()); // Mantém o cursor no final
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        };
     }
 
     // Verifica se a data é válida e não é futura
@@ -144,10 +186,11 @@ public class CadastroActivity extends AppCompatActivity {
                     // SUCESSO!
                     String token = response.body().getToken();
                     String usuario = response.body().getUsername();
+                    String perfil = response.body().getPerfil();
 
                     // Salva sessão e vai pra Home
                     SessionManager session = new SessionManager(CadastroActivity.this);
-                    session.saveSession(token, usuario);
+                    session.saveSession(token, usuario, email, perfil);
 
                     Toast.makeText(CadastroActivity.this, "Bem-vindo, " + usuario, Toast.LENGTH_LONG).show();
 
