@@ -51,7 +51,7 @@
             nightControlBox1.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
             nightControlBox1.EnableMinimizeButton = true;
             nightControlBox1.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
-            nightControlBox1.Location = new Point(862, 0);
+            nightControlBox1.Location = new Point(879, 0);
             nightControlBox1.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
             nightControlBox1.MaximizeHoverForeColor = Color.White;
             nightControlBox1.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
@@ -136,7 +136,6 @@
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "formOmegaHelp";
-            StartPosition = FormStartPosition.CenterScreen;
             Text = "OmegaHelp";
             WindowState = FormWindowState.Maximized;
             Load += formOmegaHelp_Load;

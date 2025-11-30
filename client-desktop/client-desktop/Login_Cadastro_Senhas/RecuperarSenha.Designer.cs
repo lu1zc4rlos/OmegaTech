@@ -22,8 +22,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             lblSenhaAtual = new Label();
             txtSenhaAtual = new TextBox();
             txtSenhaNova = new TextBox();
@@ -37,14 +36,11 @@
             lblEamail = new Label();
             label5 = new Label();
             pn_title = new Panel();
-            nightControlBox1 = new ReaLTaiizor.Controls.NightControlBox();
             lbl_titulo = new Label();
-            pictureBox2 = new PictureBox();
             lbl_omega = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
             pn_title.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -56,7 +52,7 @@
             lblSenhaAtual.ForeColor = Color.White;
             lblSenhaAtual.Location = new Point(237, 239);
             lblSenhaAtual.Name = "lblSenhaAtual";
-            lblSenhaAtual.Size = new Size(131, 17);
+            lblSenhaAtual.Size = new Size(166, 23);
             lblSenhaAtual.TabIndex = 0;
             lblSenhaAtual.Text = "Digite a senha atual:";
             lblSenhaAtual.Click += label1_Click;
@@ -68,7 +64,7 @@
             txtSenhaAtual.Location = new Point(205, 106);
             txtSenhaAtual.Name = "txtSenhaAtual";
             txtSenhaAtual.PasswordChar = '*';
-            txtSenhaAtual.Size = new Size(272, 18);
+            txtSenhaAtual.Size = new Size(272, 22);
             txtSenhaAtual.TabIndex = 1;
             txtSenhaAtual.TextChanged += textBox1_TextChanged;
             // 
@@ -79,7 +75,7 @@
             txtSenhaNova.Location = new Point(205, 142);
             txtSenhaNova.Name = "txtSenhaNova";
             txtSenhaNova.PasswordChar = '*';
-            txtSenhaNova.Size = new Size(272, 18);
+            txtSenhaNova.Size = new Size(272, 22);
             txtSenhaNova.TabIndex = 2;
             txtSenhaNova.TextChanged += txtSenhaNova_TextChanged;
             // 
@@ -91,7 +87,7 @@
             lblSenhaNova.ForeColor = Color.White;
             lblSenhaNova.Location = new Point(237, 276);
             lblSenhaNova.Name = "lblSenhaNova";
-            lblSenhaNova.Size = new Size(131, 17);
+            lblSenhaNova.Size = new Size(166, 23);
             lblSenhaNova.TabIndex = 2;
             lblSenhaNova.Text = "Digite a senha nova:";
             // 
@@ -102,7 +98,7 @@
             txtSenhaNovamente.Location = new Point(244, 185);
             txtSenhaNovamente.Name = "txtSenhaNovamente";
             txtSenhaNovamente.PasswordChar = '*';
-            txtSenhaNovamente.Size = new Size(233, 18);
+            txtSenhaNovamente.Size = new Size(233, 22);
             txtSenhaNovamente.TabIndex = 3;
             txtSenhaNovamente.TextChanged += textBox3_TextChanged;
             // 
@@ -114,7 +110,7 @@
             lblSenhaNovamente.ForeColor = Color.White;
             lblSenhaNovamente.Location = new Point(237, 314);
             lblSenhaNovamente.Name = "lblSenhaNovamente";
-            lblSenhaNovamente.Size = new Size(170, 17);
+            lblSenhaNovamente.Size = new Size(215, 23);
             lblSenhaNovamente.TabIndex = 4;
             lblSenhaNovamente.Text = "Digite novamente a senha:";
             // 
@@ -158,7 +154,7 @@
             cbMostrarSenha.ForeColor = Color.White;
             cbMostrarSenha.Location = new Point(317, 233);
             cbMostrarSenha.Name = "cbMostrarSenha";
-            cbMostrarSenha.Size = new Size(121, 21);
+            cbMostrarSenha.Size = new Size(149, 27);
             cbMostrarSenha.TabIndex = 4;
             cbMostrarSenha.Text = "&Mostrar senhas";
             cbMostrarSenha.UseVisualStyleBackColor = true;
@@ -170,7 +166,7 @@
             txtEmail.BorderStyle = BorderStyle.None;
             txtEmail.Location = new Point(218, 62);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(259, 18);
+            txtEmail.Size = new Size(259, 22);
             txtEmail.TabIndex = 0;
             txtEmail.TextChanged += textBox4_TextChanged;
             // 
@@ -182,7 +178,7 @@
             lblEamail.ForeColor = Color.White;
             lblEamail.Location = new Point(237, 196);
             lblEamail.Name = "lblEamail";
-            lblEamail.Size = new Size(156, 17);
+            lblEamail.Size = new Size(198, 23);
             lblEamail.TabIndex = 9;
             lblEamail.Text = "Digite e-mail do usuário:";
             lblEamail.Click += label4_Click;
@@ -192,44 +188,19 @@
             label5.AutoSize = true;
             label5.Location = new Point(647, 318);
             label5.Name = "label5";
-            label5.Size = new Size(0, 17);
+            label5.Size = new Size(0, 23);
             label5.TabIndex = 11;
             // 
             // pn_title
             // 
             pn_title.BackColor = Color.FromArgb(40, 42, 90);
-            pn_title.Controls.Add(nightControlBox1);
             pn_title.Controls.Add(lbl_titulo);
-            pn_title.Controls.Add(pictureBox2);
             pn_title.Controls.Add(lbl_omega);
             pn_title.Dock = DockStyle.Top;
             pn_title.Location = new Point(0, 0);
             pn_title.Name = "pn_title";
             pn_title.Size = new Size(899, 84);
             pn_title.TabIndex = 18;
-            // 
-            // nightControlBox1
-            // 
-            nightControlBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            nightControlBox1.BackColor = Color.Transparent;
-            nightControlBox1.CloseHoverColor = Color.FromArgb(199, 80, 80);
-            nightControlBox1.CloseHoverForeColor = Color.White;
-            nightControlBox1.DefaultLocation = true;
-            nightControlBox1.DisableMaximizeColor = Color.FromArgb(105, 105, 105);
-            nightControlBox1.DisableMinimizeColor = Color.FromArgb(105, 105, 105);
-            nightControlBox1.EnableCloseColor = Color.FromArgb(160, 160, 160);
-            nightControlBox1.EnableMaximizeButton = true;
-            nightControlBox1.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
-            nightControlBox1.EnableMinimizeButton = true;
-            nightControlBox1.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
-            nightControlBox1.Location = new Point(760, 0);
-            nightControlBox1.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
-            nightControlBox1.MaximizeHoverForeColor = Color.White;
-            nightControlBox1.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
-            nightControlBox1.MinimizeHoverForeColor = Color.White;
-            nightControlBox1.Name = "nightControlBox1";
-            nightControlBox1.Size = new Size(139, 31);
-            nightControlBox1.TabIndex = 4;
             // 
             // lbl_titulo
             // 
@@ -244,25 +215,15 @@
             lbl_titulo.Text = "TROCAR SENHA";
             lbl_titulo.TextAlign = ContentAlignment.TopCenter;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.ImeMode = ImeMode.NoControl;
-            pictureBox2.Location = new Point(35, 14);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(50, 50);
-            pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox2.TabIndex = 2;
-            pictureBox2.TabStop = false;
-            // 
             // lbl_omega
             // 
             lbl_omega.AutoSize = true;
             lbl_omega.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             lbl_omega.ForeColor = Color.White;
             lbl_omega.ImeMode = ImeMode.NoControl;
-            lbl_omega.Location = new Point(114, 27);
+            lbl_omega.Location = new Point(12, 27);
             lbl_omega.Name = "lbl_omega";
-            lbl_omega.Size = new Size(96, 21);
+            lbl_omega.Size = new Size(119, 28);
             lbl_omega.TabIndex = 1;
             lbl_omega.Text = "OmegaTech\r\n";
             // 
@@ -293,7 +254,7 @@
             // 
             // RecuperarSenha
             // 
-            AutoScaleDimensions = new SizeF(8F, 17F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(60, 62, 110);
             ClientSize = new Size(899, 600);
@@ -314,7 +275,6 @@
             Load += RecuperarSenha_Load;
             pn_title.ResumeLayout(false);
             pn_title.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
@@ -338,10 +298,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel pn_title;
         private System.Windows.Forms.Label lbl_titulo;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label lbl_omega;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private ReaLTaiizor.Controls.NightControlBox nightControlBox1;
     }
 }

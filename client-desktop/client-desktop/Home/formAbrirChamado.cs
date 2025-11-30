@@ -3,9 +3,13 @@ using service;
 
 namespace client_desktop.Home {
     public partial class formAbrirChamado : Form {
+
+        private readonly Panel _painelPrincipal;
+
         public static string TokenGlobal { get; set; }
-        public formAbrirChamado() {
+        public formAbrirChamado(Panel painelPrincipal) {
             InitializeComponent();
+            _painelPrincipal = painelPrincipal;
         }
         private void formAbrirChamado_Load(object sender, EventArgs e) {
             this.ControlBox = false;
