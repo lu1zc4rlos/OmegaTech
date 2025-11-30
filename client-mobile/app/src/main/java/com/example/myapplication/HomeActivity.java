@@ -201,7 +201,12 @@ public class HomeActivity extends AppCompatActivity {
         bottomNav.setSelectedItemId(R.id.Nav_home);
 
         bottomNav.setOnItemSelectedListener(item -> {
+            String perfil = session.getPerfil();
             int id = item.getItemId();
+            if ("ROLE_TECNICO".equals(perfil)) {
+                // Se for técnico, esconde o botão de criar ticket (nav_novo)
+                bottomNav.getMenu().findItem(R.id.nav_novo).setVisible(false);
+            }
 
             if (id == R.id.Nav_home) {
                 return true;
@@ -211,6 +216,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(this, OmegaHelpActivity.class));
                 return true;
             }
+
             else if (id == R.id.nav_novo) {
                 startActivity(new Intent(this, NovoTicketActivity.class));
                 return true;

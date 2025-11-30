@@ -7,9 +7,11 @@ import com.example.myapplication.data.model.LoginRequest;
 import com.example.myapplication.data.model.LoginResponse;
 import com.example.myapplication.data.model.MensagemRequest;
 import com.example.myapplication.data.model.ResetarSenhaRequest;
+import com.example.myapplication.data.model.RespostaTicketDTO;
 import com.example.myapplication.data.model.SolicitarCodigoRequest;
 import com.example.myapplication.data.model.TicketResponseDTO;
 import com.example.myapplication.data.model.ValidarCodigoRequest;
+import com.example.myapplication.data.model.StatusUpdateDTO;
 
 import java.util.List;
 
@@ -64,8 +66,8 @@ public interface ApiService {
 
     @GET("tickets/{id}")
     Call<TicketResponseDTO> getTicketDetalhe( // Vamos precisar criar esse DTO ou reutilizar Ticket se tiver todos os campos
-                                              @Header("Authorization") String token,
-                                              @Path("id") Long id
+       @Header("Authorization") String token,
+       @Path("id") Long id
     );
 
     @DELETE("tickets/deletar/{id}")
@@ -74,5 +76,18 @@ public interface ApiService {
             @Path("id") Long id
     );
 
+    @PUT("tickets/status/{id}")
+    Call<Void> atualizarStatus(
+            @Header("Authorization") String token,
+            @Path("id") Long id,
+            @Body StatusUpdateDTO body
+    );
+
+    @PUT("tickets/resposta/{id}")
+    Call<Void> responderTicket(
+            @Header("Authorization") String token,
+            @Path("id") Long id,
+            @Body RespostaTicketDTO body
+    );
 
 }

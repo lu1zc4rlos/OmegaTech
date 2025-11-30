@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        String emailDigitado = edtEmail.getText().toString();
 
         TextView tvTrocarSenha = findViewById(R.id.tvTrocarSenha);
 
@@ -106,11 +107,12 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     String token = response.body().getToken();
                     String usuario = response.body().getUsername();
+                    String emailDigitado = edtEmail.getText().toString();
+                    String perfil = response.body().getPerfil();
 
                     // 1. Instancia o Gerenciador e salva os dados
                     SessionManager session = new SessionManager(MainActivity.this);
-                    session.saveSession(token, usuario);
-
+                    session.saveSession(token, usuario, emailDigitado, perfil);
                     // 2. Feedback visual rápido
                     Toast.makeText(MainActivity.this, "Bem-vindo, " + usuario, Toast.LENGTH_SHORT).show();
 

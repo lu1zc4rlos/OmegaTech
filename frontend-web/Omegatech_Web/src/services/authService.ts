@@ -28,3 +28,37 @@ export const loginUser = async (email: string, senha: string) => {
     throw error;
   }
 };
+
+// Adicione ao src/services/authService.ts
+
+// src/services/authService.ts
+
+export const solicitarCodigo = async (email: string) => {
+  // ADICIONE /usuarios AQUI 👇
+  const response = await fetch(`${API_URL}/usuarios/solicitar_codigo`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email })
+  });
+  // ...
+};
+
+export const validarCodigo = async (email: string, codigo: string) => {
+  // ADICIONE /usuarios AQUI 👇
+  const response = await fetch(`${API_URL}/usuarios/validar_codigo`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, codigo })
+  });
+  // ...
+};
+
+export const resetarSenha = async (email: string, codigo: string, novaSenha: string) => {
+  // ADICIONE /usuarios AQUI 👇
+  const response = await fetch(`${API_URL}/usuarios/resetar_senha`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, codigo, novaSenha })
+  });
+  // ...
+};
