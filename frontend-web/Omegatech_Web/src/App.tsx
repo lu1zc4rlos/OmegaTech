@@ -4,6 +4,9 @@ import Dashboard from "@/pages/Dashboard";
 import TicketDetalhes from "@/pages/TicketDetalhes";
 import Chat from "@/pages/Chat";
 import NovoTicket from "@/pages/NovoTicket";
+import AdminDashboard from "@/pages/AdminDashboard";
+import AdminListaTecnicos from "@/pages/AdminListaTecnicos";
+import AdminDetalhesTecnico from "@/pages/AdminDetalhesTecnico";
 
 function App() {
   return (
@@ -14,6 +17,9 @@ function App() {
         <Route path="/tickets/:id" element={<TicketDetalhes />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/novo-chamado" element={<NovoTicket />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/lista" element={<AdminListaTecnicos />} />
+        <Route path="/admin/tecnicos/:id" element={<AdminDetalhesTecnico />} />
       </Routes>
     </BrowserRouter>
   )

@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { 
   LayoutDashboard, 
-  Omega, 
+  MessageSquare, Omega,
   Ticket as TicketIcon, 
   LogOut, 
   X 
@@ -16,9 +16,12 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const navigate = useNavigate();
   const location = useLocation(); 
 
+  // 1. RECUPERAR O USUÁRIO PARA SABER O PERFIL
+  const userString = localStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : { perfil: "" };
+
   const isActive = (path: string) => location.pathname === path;
 
-  // Estilos Base
   const baseButtonStyle = "flex items-center gap-3 w-full px-4 py-3 rounded-xl font-medium transition-colors group";
   const activeStyle = "bg-indigo-600 text-white shadow-lg shadow-indigo-900/20";
   const inactiveStyle = "text-slate-400 hover:text-slate-200 hover:bg-slate-800";
@@ -51,19 +54,18 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         md:translate-x-0 md:static md:h-screen
       `}>
         
-        {/* HEADER DA SIDEBAR */}
-        <div className="p-6 flex items-center justify-between shrink-0"> {/* shrink-0 impede que o header amasse */}
+        {/* HEADER */}
+        <div className="p-6 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3 min-w-0 overflow-hidden">
             <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/20 shrink-0">
               <Omega className="w-5 h-5 text-white" />
             </div>
-            <div className="min-w-0 flex-1"> {/* min-w-0 é CRUCIAL para o truncate funcionar no flex */}
+            <div className="min-w-0 flex-1">
               <h1 className="font-bold text-lg text-slate-100 tracking-tight truncate">OmegaTech</h1>
               <p className="text-xs text-slate-400 font-medium truncate">Sistema de Suporte</p>
             </div>
           </div>
           
-          {/* Botão Fechar Mobile */}
           <button onClick={onClose} className="md:hidden text-slate-400 hover:text-white shrink-0 ml-2">
             <X className="w-6 h-6" />
           </button>
@@ -75,25 +77,28 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             onClick={() => handleNavigation("/dashboard")}
             className={`${baseButtonStyle} ${isActive("/dashboard") ? activeStyle : inactiveStyle}`}
           >
-            <LayoutDashboard className="w-5 h-5 shrink-0" /> {/* shrink-0 protege o ícone */}
-            <span className="truncate text-left flex-1">Home</span> {/* truncate corta o texto longo */}
+            <LayoutDashboard className="w-5 h-5 shrink-0" />
+            <span className="truncate text-left flex-1">Início</span>
           </button>
           
           <button 
             onClick={() => handleNavigation("/chat")}
             className={`${baseButtonStyle} ${isActive("/chat") ? activeStyle : inactiveStyle}`}
           >
-            <Omega className="w-5 h-5 shrink-0" />
-            <span className="truncate text-left flex-1">OmegaHelp</span>
+            <MessageSquare className="w-5 h-5 shrink-0" />
+            <span className="truncate text-left flex-1">Bater Papo</span>
           </button>
 
-          <button 
-            onClick={() => handleNavigation("/novo-chamado")}
-            className={`${baseButtonStyle} ${isActive("/novo-chamado") ? activeStyle : inactiveStyle}`}
-          >
-            <TicketIcon className="w-5 h-5 shrink-0" />
-            <span className="truncate text-left flex-1">Novo Chamado</span>
-          </button>
+          {/* 2. TRAVA VISUAL: SÓ MOSTRA SE NÃO FOR TÉCNICO */}
+          {user.perfil !== 'ROLE_TECNICO' && (
+            <button 
+              onClick={() => handleNavigation("/novo-chamado")}
+              className={`${baseButtonStyle} ${isActive("/novo-chamado") ? activeStyle : inactiveStyle}`}
+            >
+              <TicketIcon className="w-5 h-5 shrink-0" />
+              <span className="truncate text-left flex-1">Novo Chamado</span>
+            </button>
+          )}
         </nav>
 
         {/* FOOTER */}

@@ -69,3 +69,41 @@ export const criarTicket = async (mensagem: string): Promise<void> => {
     throw new Error("Erro ao criar ticket");
   }
 };
+
+//Função para o Técnico assumir o ticket (Mudar status para EM_ANDAMENTO)
+export const assumirTicket = async (id: number): Promise<void> => {
+  const token = localStorage.getItem("token");
+  
+  // O Backend espera um StatusUpdateDTO com o campo "novoStatus"
+  const response = await fetch(`${API_URL}/status/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify({ novoStatus: "EM_ANDAMENTO" })
+  });
+
+  if (!response.ok) {
+    throw new Error("Erro ao assumir o ticket.");
+  }
+};
+
+// 2. Função para Responder e Concluir
+export const responderTicket = async (id: number, resposta: string): Promise<void> => {
+  const token = localStorage.getItem("token");
+
+  // O Backend espera o campo "resposta"
+  const response = await fetch(`${API_URL}/resposta/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify({ resposta: resposta })
+  });
+
+  if (!response.ok) {
+    throw new Error("Erro ao enviar resposta.");
+  }
+};

@@ -7,11 +7,11 @@ import {
   CheckCircle2,
   ChevronRight,
   Search,
-  Menu // Ícone do Menu
+  Menu
 } from "lucide-react";
-import { getMeusTickets } from "@/services/ticketService";
+import { getMeusTickets, assumirTicket } from "@/services/ticketService"; // Importei assumirTicket
 import { Ticket, TicketStats } from "@/types";
-import Sidebar from "@/components/Sidebar"; // IMPORTAR A SIDEBAR NOVA
+import Sidebar from "@/components/Sidebar";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -19,7 +19,6 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [filterStatus, setFilterStatus] = useState<"TODOS" | "PENDENTE" | "EM_ANDAMENTO" | "CONCLUIDO">("TODOS");
   
-  // Estado para controlar menu mobile
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const [stats, setStats] = useState<TicketStats>({
@@ -27,7 +26,7 @@ export default function Dashboard() {
   });
 
   const userString = localStorage.getItem("user");
-  const user = userString ? JSON.parse(userString) : { username: "Usuário" };
+  const user = userString ? JSON.parse(userString) : { username: "Usuário", perfil: "" };
 
   useEffect(() => {
     carregarDados();
@@ -42,6 +41,19 @@ export default function Dashboard() {
     } catch (error) {
       console.error(error);
       navigate("/"); 
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Função para o Técnico atender o chamado
+  const handleAtender = async (id: number) => {
+    try {
+      setLoading(true);
+      await assumirTicket(id);
+      await carregarDados(); // Recarrega para atualizar o status
+    } catch (error) {
+      alert("Erro ao atender chamado.");
     } finally {
       setLoading(false);
     }
@@ -88,13 +100,10 @@ export default function Dashboard() {
   return (
     <div className="flex min-h-screen bg-[#0f172a] text-slate-100 font-sans">
       
-      {/* Componente Sidebar Injetado */}
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
-      {/* CONTEÚDO */}
       <main className="flex-1 flex flex-col h-screen overflow-hidden">
         
-        {/* Header Mobile com Botão Menu */}
         <div className="md:hidden p-4 bg-[#1e293b] border-b border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-2">
              <h1 className="font-bold text-lg text-white">OmegaTech</h1>
@@ -104,18 +113,15 @@ export default function Dashboard() {
           </button>
         </div>
 
-        {/* Área de Scroll do Conteúdo */}
         <div className="flex-1 overflow-y-auto p-4 md:p-8">
           <header className="mb-8 flex flex-col md:flex-row md:justify-between md:items-end gap-4">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">Home</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">Dashboard</h2>
               <p className="text-slate-400 mt-1 text-sm md:text-base">Bem-vindo, <span className="text-indigo-400">{user.username}</span></p>
             </div>
           </header>
 
-          {/* CARDS DE ESTATÍSTICAS (Grid Responsivo) */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 mb-8">
-            {/* Copie a lógica dos cards aqui, mas note que grid-cols-2 no mobile fica melhor */}
             <div onClick={() => setFilterStatus("TODOS")} className={`cursor-pointer p-4 md:p-5 rounded-2xl border transition-all duration-200 relative overflow-hidden group ${isFilterActive("TODOS")}`}>
               <div className="relative z-10 flex flex-col md:flex-row justify-between items-start gap-2">
                 <div>
@@ -128,7 +134,6 @@ export default function Dashboard() {
               </div>
             </div>
             
-            {/* Repita para os outros cards (Abertos, Em Andamento, Resolvidos) mudando ícone e cor */}
              <div onClick={() => setFilterStatus("PENDENTE")} className={`cursor-pointer p-4 md:p-5 rounded-2xl border transition-all duration-200 relative overflow-hidden group ${isFilterActive("PENDENTE")}`}>
               <div className="relative z-10 flex flex-col md:flex-row justify-between items-start gap-2">
                 <div>
@@ -166,14 +171,13 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* LISTA DE CHAMADOS */}
           <div className="bg-[#1e293b] rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
             <div className="p-4 md:p-6 border-b border-slate-800 flex justify-between items-center bg-[#1e293b]">
               <h3 className="text-base md:text-lg font-bold text-white">
                 {filterStatus === "TODOS" ? "Chamados Recentes" : getStatusLabel(filterStatus)}
               </h3>
               {filterStatus !== "TODOS" && (
-                <button onClick={() => setFilterStatus("TODOS")} className="text-xs font-medium text-indigo-400 hover:underline">Limpar Filtros</button>
+                <button onClick={() => setFilterStatus("TODOS")} className="text-xs font-medium text-indigo-400 hover:underline">Limpar</button>
               )}
             </div>
             
@@ -202,24 +206,41 @@ export default function Dashboard() {
                     <p className="text-slate-400 text-xs truncate mt-1">{ticket.descricao}</p>
 
                     <div className="mt-3 pt-3 border-t border-slate-700/50 flex justify-between items-center">
-                       
-                       {/* Bloco de Prioridade Estilizado */}
-                       <div className="flex items-center gap-2">
-                         <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-                           Prioridade
-                         </span>
-                         
-                         <span className={`
-                           text-[10px] font-bold px-2 py-0.5 rounded border
-                           ${ticket.prioridade === 'ALTA' ? 'bg-red-500/10 text-red-400 border-red-500/20' : 
-                             ticket.prioridade === 'MEDIA' ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20' : 
-                             'bg-blue-500/10 text-blue-400 border-blue-500/20'}
-                         `}>
-                           {ticket.prioridade}
-                         </span>
-                       </div>
+                        
+                        {/* Bloco de Prioridade (Mantido para todos) */}
+                        <div className="flex items-center gap-2">
+                          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                            Prioridade
+                          </span>
+                          
+                          <span className={`
+                            text-[10px] font-bold px-2 py-0.5 rounded border
+                            ${ticket.prioridade === 'ALTA' ? 'bg-red-500/10 text-red-400 border-red-500/20' : 
+                              ticket.prioridade === 'MEDIA' ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20' : 
+                              'bg-blue-500/10 text-blue-400 border-blue-500/20'}
+                          `}>
+                            {ticket.prioridade}
+                          </span>
+                        </div>
 
-                       <ChevronRight className="w-4 h-4 text-slate-600" />
+                        {/* AQUI: Lógica dos Botões do Técnico */}
+                        <div onClick={(e) => e.stopPropagation()}> 
+                          {user.perfil === 'ROLE_TECNICO' && ticket.status === 'PENDENTE' ? (
+                            <button
+                              onClick={() => handleAtender(ticket.id)}
+                              className="px-3 py-1 bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-bold uppercase rounded shadow-lg shadow-indigo-900/30 transition-all hover:scale-105"
+                            >
+                              ATENDER
+                            </button>
+                          ) : user.perfil === 'ROLE_TECNICO' && ticket.status === 'EM_ANDAMENTO' ? (
+                            <span className="flex items-center gap-1 text-[10px] font-bold text-emerald-400 border border-emerald-500/30 px-2 py-1 rounded bg-emerald-500/10">
+                              RESPONDER <ChevronRight className="w-3 h-3" />
+                            </span>
+                          ) : (
+                            <ChevronRight className="w-4 h-4 text-slate-600 group-hover:text-indigo-400 transition-colors" />
+                          )}
+                        </div>
+
                     </div>
                   </div>
                 ))

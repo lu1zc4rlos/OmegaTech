@@ -1,4 +1,4 @@
-/*
+
 package com.example.omegatechapi.service;
 
 import com.example.omegatechapi.model.*;
@@ -46,7 +46,7 @@ public class UsuarioService {
 
         String token = jwtService.gerarToken(usuario);
 
-        return new AuthResponse(usuario.getNome(), token);
+        return new AuthResponse(usuario.getNome(), token, usuario.getPerfil().toString());
     }
     public AuthResponse cadastrarNovoUsuario(Usuario request) {
 
@@ -72,7 +72,7 @@ public class UsuarioService {
             System.err.println("Erro ao agendar envio de e-mail: " + e.getMessage());
         }
 
-        return new AuthResponse(usuarioSalvo.getNome(), token);
+        return new AuthResponse(usuarioSalvo.getNome(), token, novoUsuario.getPerfil().toString());
     }
     public void alterarSenha(AlterarSenhaRequest request) {
 
@@ -191,7 +191,7 @@ public class UsuarioService {
 
 
 }
-*/
+/*
 package com.example.omegatechapi.service;
 
 import com.example.omegatechapi.model.*;
@@ -370,4 +370,4 @@ public class UsuarioService {
     }
 }
 
-
+*/

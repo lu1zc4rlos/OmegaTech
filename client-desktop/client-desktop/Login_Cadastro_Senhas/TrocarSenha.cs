@@ -30,6 +30,7 @@ namespace client_desktop.Login_Cadastro_Senhas {
 
         private async void btnConfirmar_ClickAsync(object sender, EventArgs e) {
 
+
             try {
                 ValidacaoService.validacaoService(
                         txtSenhaNova.Text,
@@ -47,11 +48,11 @@ namespace client_desktop.Login_Cadastro_Senhas {
 
                 MessageBox.Show("Senha alterada com sucesso!", "Você já pode fazer login.", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                this.Hide();
-                using (Login login = new Login()) {
-                    login.ShowDialog();
-                }
-                this.Show();
+
+                Login login = new Login();
+                login.MdiParent = this.MdiParent;
+                login.Show();
+                this.Close();
                 LimparCampos();
 
             }

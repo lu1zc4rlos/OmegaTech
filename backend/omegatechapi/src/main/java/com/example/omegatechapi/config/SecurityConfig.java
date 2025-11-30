@@ -107,7 +107,7 @@ public class SecurityConfig {
     private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     //@Value("${api.security.cors.origins}")
-    private String allowedOrigins="http://localhost:5173";
+    private String allowedOrigins="http://localhost:5173,";
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -118,6 +118,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // 2. Libera o Preflight (OPTIONS) para qualquer rota
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
 
                         // Rotas Públicas
                         .requestMatchers("/usuarios/login", "/auth/login").permitAll()
@@ -133,6 +134,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/tickets/status").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/tickets/resposta").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/tickets/deletar").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/cadastro").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/tecnicos").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/respondidos").permitAll()
 
                         // O resto precisa de token
                         .anyRequest().authenticated()
@@ -150,8 +154,8 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // 3. Permite qualquer origem (Apenas para dev, facilita muito)
-        // Se der erro, troque "*" por "http://localhost:5173"
+
+        // Se der erro, troque "," por "http://localhost:5173"
         configuration.setAllowedOrigins(Arrays.asList(allowedOrigins.split(",")));
 
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"));

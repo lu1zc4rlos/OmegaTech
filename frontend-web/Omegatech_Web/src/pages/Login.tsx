@@ -18,17 +18,25 @@ const Login = () => {
     setError(null);
     setIsLoading(true);
 
-    try {
+try {
       const data = await loginUser(email, password);
+      
+      // 1. Salva os dados no navegador
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data));
-      navigate("/dashboard");
+      
+      // Verifica o perfil que veio do Java e decide o destino
+      if (data.perfil === 'ROLE_ADMIN') {
+        navigate("/admin"); // Manda pro Dashboard novo
+      } else {
+        navigate("/dashboard"); // Manda pro Dashboard padrão (Cliente/Técnico)
+      }
+      
     } catch (err: any) {
       console.error(err);
       setError(err.message || "Credenciais inválidas.");
-    } finally {
-      setIsLoading(false);
     }
+
   };
 
   return (
