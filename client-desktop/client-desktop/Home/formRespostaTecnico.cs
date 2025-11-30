@@ -1,8 +1,5 @@
 ﻿using model;
 using service;
-using System;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace client_desktop.Home
 {
@@ -11,11 +8,14 @@ namespace client_desktop.Home
         private int _ticketId;
         private string _token;
         private TicketResponseDTO _ticketDetalhe;
-        public formRespostaTecnico(int ticketId, string token)
+        private readonly Panel _painelPrincipal;
+        public formRespostaTecnico(int ticketId, string token, Panel painelPrincipal)
         {
             InitializeComponent();
             _ticketId = ticketId;
             _token = token;
+            _painelPrincipal = painelPrincipal;
+
         }
         private async void formRespostaTecnico_LoadAsync(object sender, EventArgs e)
         {

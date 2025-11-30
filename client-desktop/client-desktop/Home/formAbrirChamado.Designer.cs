@@ -25,7 +25,6 @@
         private void InitializeComponent() {
             pn_title = new Panel();
             lbl_titulo = new Label();
-            nightControlBox2 = new ReaLTaiizor.Controls.NightControlBox();
             button1 = new Button();
             lblMensagem = new Label();
             txtDescricao = new TextBox();
@@ -36,7 +35,6 @@
             // 
             pn_title.BackColor = Color.FromArgb(40, 42, 90);
             pn_title.Controls.Add(lbl_titulo);
-            pn_title.Controls.Add(nightControlBox2);
             pn_title.Dock = DockStyle.Top;
             pn_title.Location = new Point(0, 0);
             pn_title.Margin = new Padding(3, 4, 3, 4);
@@ -57,30 +55,6 @@
             lbl_titulo.TabIndex = 22;
             lbl_titulo.Text = "ABRIR TICKET";
             lbl_titulo.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // nightControlBox2
-            // 
-            nightControlBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            nightControlBox2.BackColor = Color.Transparent;
-            nightControlBox2.CloseHoverColor = Color.FromArgb(199, 80, 80);
-            nightControlBox2.CloseHoverForeColor = Color.White;
-            nightControlBox2.Cursor = Cursors.Hand;
-            nightControlBox2.DefaultLocation = true;
-            nightControlBox2.DisableMaximizeColor = Color.FromArgb(105, 105, 105);
-            nightControlBox2.DisableMinimizeColor = Color.FromArgb(105, 105, 105);
-            nightControlBox2.EnableCloseColor = Color.FromArgb(160, 160, 160);
-            nightControlBox2.EnableMaximizeButton = true;
-            nightControlBox2.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
-            nightControlBox2.EnableMinimizeButton = true;
-            nightControlBox2.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
-            nightControlBox2.Location = new Point(800, 0);
-            nightControlBox2.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
-            nightControlBox2.MaximizeHoverForeColor = Color.White;
-            nightControlBox2.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
-            nightControlBox2.MinimizeHoverForeColor = Color.White;
-            nightControlBox2.Name = "nightControlBox2";
-            nightControlBox2.Size = new Size(139, 31);
-            nightControlBox2.TabIndex = 24;
             // 
             // button1
             // 
@@ -142,7 +116,6 @@
 
         private Panel pn_title;
         private Label lbl_titulo;
-        private ReaLTaiizor.Controls.NightControlBox nightControlBox2;
         private Button button1;
         private Label lblMensagem;
         private TextBox txtDescricao;

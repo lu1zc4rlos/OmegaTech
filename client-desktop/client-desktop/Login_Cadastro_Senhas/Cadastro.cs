@@ -18,9 +18,7 @@ namespace client_desktop {
             btnVoltarLogin = new Button();
             txtConfirmarSenha = new TextBox();
             pn_title = new Panel();
-            nightControlBox1 = new ReaLTaiizor.Controls.NightControlBox();
             lbl_titulo = new Label();
-            pictureBox2 = new PictureBox();
             lbl_omega = new Label();
             panel1 = new Panel();
             tableLayoutPanel2 = new TableLayoutPanel();
@@ -35,7 +33,6 @@ namespace client_desktop {
             panel2 = new Panel();
             tableLayoutPanel1 = new TableLayoutPanel();
             pn_title.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -145,38 +142,13 @@ namespace client_desktop {
             // pn_title
             // 
             pn_title.BackColor = Color.FromArgb(40, 42, 90);
-            pn_title.Controls.Add(nightControlBox1);
             pn_title.Controls.Add(lbl_titulo);
-            pn_title.Controls.Add(pictureBox2);
             pn_title.Controls.Add(lbl_omega);
             pn_title.Dock = DockStyle.Top;
             pn_title.Location = new Point(0, 0);
             pn_title.Name = "pn_title";
             pn_title.Size = new Size(875, 74);
             pn_title.TabIndex = 16;
-            // 
-            // nightControlBox1
-            // 
-            nightControlBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            nightControlBox1.BackColor = Color.Transparent;
-            nightControlBox1.CloseHoverColor = Color.FromArgb(199, 80, 80);
-            nightControlBox1.CloseHoverForeColor = Color.White;
-            nightControlBox1.DefaultLocation = true;
-            nightControlBox1.DisableMaximizeColor = Color.FromArgb(105, 105, 105);
-            nightControlBox1.DisableMinimizeColor = Color.FromArgb(105, 105, 105);
-            nightControlBox1.EnableCloseColor = Color.FromArgb(160, 160, 160);
-            nightControlBox1.EnableMaximizeButton = true;
-            nightControlBox1.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
-            nightControlBox1.EnableMinimizeButton = true;
-            nightControlBox1.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
-            nightControlBox1.Location = new Point(736, 0);
-            nightControlBox1.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
-            nightControlBox1.MaximizeHoverForeColor = Color.White;
-            nightControlBox1.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
-            nightControlBox1.MinimizeHoverForeColor = Color.White;
-            nightControlBox1.Name = "nightControlBox1";
-            nightControlBox1.Size = new Size(139, 31);
-            nightControlBox1.TabIndex = 3;
             // 
             // lbl_titulo
             // 
@@ -191,23 +163,13 @@ namespace client_desktop {
             lbl_titulo.Text = "CADASTRO";
             lbl_titulo.TextAlign = ContentAlignment.TopCenter;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.ImeMode = ImeMode.NoControl;
-            pictureBox2.Location = new Point(31, 12);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(50, 50);
-            pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox2.TabIndex = 2;
-            pictureBox2.TabStop = false;
-            // 
             // lbl_omega
             // 
             lbl_omega.AutoSize = true;
             lbl_omega.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             lbl_omega.ForeColor = Color.White;
             lbl_omega.ImeMode = ImeMode.NoControl;
-            lbl_omega.Location = new Point(87, 23);
+            lbl_omega.Location = new Point(12, 21);
             lbl_omega.Name = "lbl_omega";
             lbl_omega.Size = new Size(119, 28);
             lbl_omega.TabIndex = 1;
@@ -401,7 +363,6 @@ namespace client_desktop {
             Load += Cadastro_Load;
             pn_title.ResumeLayout(false);
             pn_title.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();

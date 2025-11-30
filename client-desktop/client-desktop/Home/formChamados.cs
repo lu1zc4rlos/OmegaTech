@@ -1,4 +1,4 @@
-﻿using client_desktop.Home_Tecnico;
+﻿using client_desktop.Home_Admin;
 using CredentialManagement;
 using model;
 using service;
@@ -8,8 +8,11 @@ namespace client_desktop.Home {
 
     public partial class formChamados : Form {
 
-        public formChamados() {
+        private readonly Panel _painelPrincipal;
+
+        public formChamados(Panel painelPrincipal) {
             InitializeComponent();
+            _painelPrincipal = painelPrincipal;
         }
 
         private void formChamados_Load(object sender, EventArgs e) {
@@ -221,10 +224,15 @@ namespace client_desktop.Home {
         private async Task RespostaTicketAsync(int ticketId, string token) {
 
             this.Hide();
-            using (formRespostaTecnico respostaTecnico = new formRespostaTecnico(ticketId, token)) {
-                respostaTecnico.ShowDialog();
-            }
-            this.Show();
+            formRespostaTecnico respostaTecnico = new formRespostaTecnico(ticketId, token, _painelPrincipal);
+
+            respostaTecnico.FormBorderStyle = FormBorderStyle.None;
+            respostaTecnico.TopLevel = false;
+            respostaTecnico.Dock = DockStyle.Fill;
+
+            _painelPrincipal.Controls.Clear();
+            _painelPrincipal.Controls.Add(respostaTecnico);
+            respostaTecnico.Show();
 
             await CarregarTicketsDoClienteAsync();
         }
@@ -241,12 +249,16 @@ namespace client_desktop.Home {
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            foreach (Form formFilho in this.MdiChildren) {
-                formFilho.Close();
-            }
-            formAbrirChamado abrirChamado = new formAbrirChamado();
 
-            abrirChamado.MdiParent = this.MdiParent;
+            this.Hide();
+            formAbrirChamado abrirChamado = new formAbrirChamado(_painelPrincipal);
+
+            abrirChamado.FormBorderStyle = FormBorderStyle.None;
+            abrirChamado.TopLevel = false;
+            abrirChamado.Dock = DockStyle.Fill;
+
+            _painelPrincipal.Controls.Clear();
+            _painelPrincipal.Controls.Add(abrirChamado);
             abrirChamado.Show();
 
         }
@@ -254,14 +266,6 @@ namespace client_desktop.Home {
         private void pic_home_Click(object sender, EventArgs e) { }
         private void flowLayoutPanelCards_Paint(object sender, PaintEventArgs e) { }
         private void pn_title_Paint(object sender, PaintEventArgs e) { }
-
-        private void button4_Click(object sender, EventArgs e) {
-            this.Hide();
-            Home homeForm = new Home();
-            homeForm.ShowDialog();
-            this.Show();
-
-        }
         private void flowLayoutPanelCards_Paint_1(object sender, PaintEventArgs e) { }
     }
 

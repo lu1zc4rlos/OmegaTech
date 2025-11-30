@@ -27,13 +27,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             sidebarTransition = new System.Windows.Forms.Timer(components);
             panel4 = new Panel();
-            pictureBox1 = new PictureBox();
             lblTitulo = new Label();
+            pictureBox1 = new PictureBox();
             sideBar = new FlowLayoutPanel();
             panel3 = new Panel();
             btnOmegaHelp = new Button();
             panel2 = new Panel();
             btnChamados = new Button();
+            pnlConteudo = new Panel();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             sideBar.SuspendLayout();
@@ -49,14 +50,25 @@
             // panel4
             // 
             panel4.BackColor = Color.FromArgb(40, 42, 90);
-            panel4.Controls.Add(pictureBox1);
             panel4.Controls.Add(lblTitulo);
+            panel4.Controls.Add(pictureBox1);
             panel4.Dock = DockStyle.Top;
             panel4.Location = new Point(0, 0);
             panel4.Margin = new Padding(3, 4, 3, 4);
             panel4.Name = "panel4";
             panel4.Size = new Size(800, 89);
             panel4.TabIndex = 1;
+            // 
+            // lblTitulo
+            // 
+            lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblTitulo.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitulo.ForeColor = Color.Snow;
+            lblTitulo.Location = new Point(315, 16);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(171, 56);
+            lblTitulo.TabIndex = 2;
+            lblTitulo.Text = "OmegaTech";
             // 
             // pictureBox1
             // 
@@ -69,17 +81,6 @@
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
-            // 
-            // lblTitulo
-            // 
-            lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            lblTitulo.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.ForeColor = Color.Snow;
-            lblTitulo.Location = new Point(354, 12);
-            lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(171, 56);
-            lblTitulo.TabIndex = 0;
-            lblTitulo.Text = "OmegaTech";
             // 
             // sideBar
             // 
@@ -140,11 +141,20 @@
             btnChamados.UseVisualStyleBackColor = false;
             btnChamados.Click += btnChamados_Click;
             // 
+            // pnlConteudo
+            // 
+            pnlConteudo.Dock = DockStyle.Fill;
+            pnlConteudo.Location = new Point(246, 89);
+            pnlConteudo.Name = "pnlConteudo";
+            pnlConteudo.Size = new Size(554, 403);
+            pnlConteudo.TabIndex = 7;
+            // 
             // Home
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 492);
+            Controls.Add(pnlConteudo);
             Controls.Add(sideBar);
             Controls.Add(panel4);
             IsMdiContainer = true;
@@ -165,12 +175,13 @@
         #endregion
         private System.Windows.Forms.Timer sidebarTransition;
         private Panel panel4;
-        private Label lblTitulo;
         private FlowLayoutPanel sideBar;
         private Panel panel2;
         private Button btnOmegaHelp;
         private Panel panel3;
         private Button btnChamados;
         private PictureBox pictureBox1;
+        private Label lblTitulo;
+        private Panel pnlConteudo;
     }
 }

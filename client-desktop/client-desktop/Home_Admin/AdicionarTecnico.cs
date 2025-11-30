@@ -1,4 +1,5 @@
-﻿using model;
+﻿using CredentialManagement;
+using model;
 using service;
 using System.Globalization;
 
@@ -19,6 +20,32 @@ namespace client_desktop.Home_Admin {
             atpDataNascimento.MaxDate = DateTime.Today;
             this.ControlBox = false;
             this.Dock = DockStyle.Fill;
+
+            string alvo = "OmegaTech-Desktop";
+            var credencial = new Credential { Target = alvo };
+
+            if (!credencial.Load()) {
+                MessageBox.Show("Sessão expirada. Por favor, faça o login novamente.", "Sessão", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                using (Login login = new Login()) {
+                    System.Windows.Forms.DialogResult resultado = login.ShowDialog();
+
+                    if (resultado != System.Windows.Forms.DialogResult.OK) {
+                        this.Close();
+                        return;
+                    }
+                }
+            }
+        }
+        private string ObterTokenSalvo() {
+            string alvo = "OmegaTech-Desktop";
+            var credencial = new Credential { Target = alvo };
+            if (credencial.Load()) {
+                return credencial.Password;
+            }
+            MessageBox.Show("Sessão expirada. Faça login novamente.", "Erro de Token");
+            this.Close();
+            return null;
         }
         private void checkBox1_CheckedChanged(object sender, EventArgs e) {
 
@@ -55,9 +82,9 @@ namespace client_desktop.Home_Admin {
                  Senha = txtSenha.Text.Trim(),
                  DataNascimento = atpDataNascimento.Value,
                  Perfil = Perfil.ROLE_TECNICO,
-                 TecnicoProfile = null
                 };
-                var authService = new AuthUsuarioService();
+                string token = ObterTokenSalvo();
+                var authService = new AuthUsuarioService(token);
                 await authService.CadastroTecnicoAsync(novoTecnico);
 
                 LimparCampos();

@@ -1,6 +1,7 @@
-﻿using model;
-using repository;
+﻿using client_desktop.Home_Admin;
 using CredentialManagement;
+using model;
+using repository;
 
 
 namespace client_desktop.Home {
@@ -32,21 +33,11 @@ namespace client_desktop.Home {
                 this.Close();
             }
         }
-
-        private void btn_chamados_Click(object sender, EventArgs e) {
-            this.Hide();
-            using (formChamados formChamados = new formChamados()) {
-                formChamados.ShowDialog();
-            }
-            this.Show();
-        }
-
-
         bool sidebarExpand = true;
         private void sidebarTransition_Tick(object sender, EventArgs e) {
             if (sidebarExpand) {
                 sideBar.Width -= 10;
-                if (sideBar.Width <= 54) {
+                if (sideBar.Width <= 0) {
                     sidebarExpand = false;
                     sidebarTransition.Stop();
                 }
@@ -59,39 +50,30 @@ namespace client_desktop.Home {
                 }
             }
         }
-        private void btn_chatbot_Click(object sender, EventArgs e) {
-
-            this.Hide();
-            using (formOmegaHelp formOmegaHelp = new formOmegaHelp()) {
-                formOmegaHelp.ShowDialog();
-            }
-            this.Show();
-
-        }
-
         private void btnOmegaHelp_Click(object sender, EventArgs e) {
             foreach (Form formFilho in this.MdiChildren) {
                 formFilho.Close();
             }
             formOmegaHelp omegahelp = new formOmegaHelp();
-
-            omegahelp.MdiParent = this;
+            omegahelp.FormBorderStyle = FormBorderStyle.None;
+            omegahelp.TopLevel = false;
+            omegahelp.Dock = DockStyle.Fill;
+            pnlConteudo.Controls.Clear();
+            pnlConteudo.Controls.Add(omegahelp);
             omegahelp.Show();
 
         }
-
-        private void btnHome_Click(object sender, EventArgs e) {
-
-
-        }
-
         private void btnChamados_Click(object sender, EventArgs e) {
             foreach (Form formFilho in this.MdiChildren) {
                 formFilho.Close();
             }
 
-            formChamados chamados = new formChamados();
-            chamados.MdiParent = this;
+            formChamados chamados = new formChamados(pnlConteudo);
+            chamados.FormBorderStyle = FormBorderStyle.None;
+            chamados.TopLevel = false;
+            chamados.Dock = DockStyle.Fill;
+            pnlConteudo.Controls.Clear();
+            pnlConteudo.Controls.Add(chamados);
             chamados.Show();
 
         }
@@ -99,9 +81,6 @@ namespace client_desktop.Home {
         private void pictureBox1_Click(object sender, EventArgs e) {
             sidebarTransition.Start();
         }
-        private void btn_sidebar_Click(object sender, EventArgs e) {
-        }
-
         private void panel3_Paint(object sender, PaintEventArgs e) {
 
         }
