@@ -164,9 +164,9 @@
             // 
             txtEmail.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             txtEmail.BorderStyle = BorderStyle.None;
-            txtEmail.Location = new Point(218, 62);
+            txtEmail.Location = new Point(229, 62);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(259, 22);
+            txtEmail.Size = new Size(248, 22);
             txtEmail.TabIndex = 0;
             txtEmail.TextChanged += textBox4_TextChanged;
             // 

@@ -1,6 +1,5 @@
 ﻿using model;
 using service;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace client_desktop.Login_Cadastro_Senhas {
     public partial class TrocarSenha : Form {

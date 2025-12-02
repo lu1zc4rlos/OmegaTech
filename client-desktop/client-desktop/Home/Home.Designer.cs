@@ -143,6 +143,7 @@
             // 
             // pnlConteudo
             // 
+            pnlConteudo.BackColor = Color.FromArgb(100, 102, 140);
             pnlConteudo.Dock = DockStyle.Fill;
             pnlConteudo.Location = new Point(246, 89);
             pnlConteudo.Name = "pnlConteudo";
