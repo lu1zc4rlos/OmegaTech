@@ -79,7 +79,7 @@
             lbl_titulo.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold);
             lbl_titulo.ForeColor = Color.White;
             lbl_titulo.ImeMode = ImeMode.NoControl;
-            lbl_titulo.Location = new Point(432, 29);
+            lbl_titulo.Location = new Point(406, 27);
             lbl_titulo.Name = "lbl_titulo";
             lbl_titulo.Size = new Size(162, 37);
             lbl_titulo.TabIndex = 0;

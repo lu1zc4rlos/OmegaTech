@@ -206,6 +206,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -297,14 +298,23 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException("Email não encontrado"));
 
-        tokenRepository.findByUsuarioId(usuario.getId()).ifPresent(tokenRepository::delete);
-
         String codigo = String.format("%06d", new Random().nextInt(999999));
-
         LocalDateTime expiracao = LocalDateTime.now().plusMinutes(10);
 
-        TokenRecuperacao novoToken = new TokenRecuperacao(codigo, expiracao, usuario);
-        tokenRepository.save(novoToken);
+        Optional<TokenRecuperacao> tokenExistenteOpt = tokenRepository.findByUsuarioId(usuario.getId());
+
+        TokenRecuperacao tokenParaSalvar;
+
+        if (tokenExistenteOpt.isPresent()) {
+            tokenParaSalvar = tokenExistenteOpt.get();
+            tokenParaSalvar.setCodigo(codigo);
+            tokenParaSalvar.setDataExpiracao(expiracao);
+            tokenParaSalvar.setValidado(false);
+        } else {
+
+            tokenParaSalvar = new TokenRecuperacao(codigo, expiracao, usuario);
+        }
+        tokenRepository.save(tokenParaSalvar);
 
         emailService.enviarEmailCodigo(email, codigo);
     }
@@ -339,15 +349,15 @@ public class UsuarioService {
         System.out.println("Email recebido: " + dto.getEmail());
         System.out.println("Código recebido: " + dto.getCodigo());
 
+        if (dto.getNovaSenha() == null || dto.getNovaSenha().trim().length() < 6) {
+            throw new IllegalArgumentException("A nova senha deve ter no mínimo 6 caracteres.");
+        }
+
         TokenRecuperacao token = tokenRepository.findByCodigo(dto.getCodigo())
                 .orElseThrow(() -> new BadCredentialsException("Código inválido ou não encontrado."));
 
         if (!token.getUsuario().getEmail().equalsIgnoreCase(dto.getEmail().trim())) {
             throw new BadCredentialsException("Código ou Email inválidos.");
-        }
-
-        if (!token.isValidado()) {
-            throw new BadCredentialsException("Código não foi validado previamente.");
         }
 
         if (token.getDataExpiracao().isBefore(LocalDateTime.now())) {
@@ -356,7 +366,6 @@ public class UsuarioService {
         }
 
         Usuario usuario = token.getUsuario();
-
         usuario.setSenha(passwordEncoder.encode(dto.getNovaSenha()));
         usuarioRepository.save(usuario);
 
@@ -365,8 +374,9 @@ public class UsuarioService {
         try {
             emailService.enviarEmailTrocaDeSenha(usuario.getEmail());
         } catch (Exception e) {
-            System.err.println("Erro ao agendar envio de e-mail: " + e.getMessage());
+            System.err.println("Erro ao agendar envio de e-mail de confirmação: " + e.getMessage());
         }
+
     }
 }
 

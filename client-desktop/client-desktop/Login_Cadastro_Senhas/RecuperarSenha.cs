@@ -64,11 +64,6 @@ namespace client_desktop {
 
                 MessageBox.Show("Senha alterada com sucesso!", "Você já pode fazer login.", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                this.Hide();
-                using (Login login = new Login()) {
-                    login.ShowDialog();
-                }
-                this.Show();
                 LimparCampos();             
             }
             catch (Exception ex) {
