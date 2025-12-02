@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getTicketById, responderTicket } from "@/services/ticketService";
+import { getTicketById, responderTicket, excluirTicket } from "@/services/ticketService"; // Importei excluirTicket
 import { Ticket } from "@/types";
-import { ArrowLeft, Calendar, User, MessageCircle, AlertCircle, Send, Menu } from "lucide-react";
+import { ArrowLeft, Calendar, User, MessageCircle, AlertCircle, Send, Menu, Trash2 } from "lucide-react"; // Importei Trash2
 import Sidebar from "@/components/Sidebar";
 
 export default function TicketDetails() {
@@ -16,10 +16,11 @@ export default function TicketDetails() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [respostaTexto, setRespostaTexto] = useState("");
   const [enviando, setEnviando] = useState(false);
+  
+  // Estado para loading de exclusão
+  const [excluindo, setExcluindo] = useState(false);
 
-  // 1. RECUPERAÇÃO DO USUÁRIO CORRIGIDA
   const userString = localStorage.getItem("user");
-  // Agora focamos no 'username' que vimos no seu print
   const user = userString ? JSON.parse(userString) : { username: "", perfil: "" };
 
   useEffect(() => {
@@ -49,6 +50,27 @@ export default function TicketDetails() {
       alert("Erro ao enviar resposta");
     } finally {
       setEnviando(false);
+    }
+  };
+
+  // --- NOVA FUNÇÃO DE EXCLUSÃO ---
+  const handleExcluir = async () => {
+    if (!ticket) return;
+    
+    // Confirmação nativa do navegador
+    const confirmacao = window.confirm("Tem certeza que deseja excluir este chamado? Essa ação não pode ser desfeita.");
+    
+    if (confirmacao) {
+      setExcluindo(true);
+      try {
+        await excluirTicket(ticket.id);
+        alert("Chamado excluído com sucesso.");
+        navigate("/dashboard"); // Volta para o início
+      } catch (err: any) {
+        alert("Erro: " + err.message);
+      } finally {
+        setExcluindo(false);
+      }
     }
   };
 
@@ -90,14 +112,29 @@ export default function TicketDetails() {
         <div className="flex-1 overflow-y-auto p-4 md:p-8 flex justify-center">
           <div className="w-full max-w-2xl space-y-6 mt-2 md:mt-0">
             
-            <div className="flex items-center gap-4 mb-8">
-              <button 
-                onClick={() => navigate(-1)} 
-                className="p-2 hover:bg-slate-800 rounded-lg transition-colors text-slate-400 hover:text-white"
-              >
-                <ArrowLeft className="w-6 h-6" />
-              </button>
-              <h1 className="text-2xl font-bold">Ticket #{ticket.id}</h1>
+            {/* HEADER COM BOTÕES */}
+            <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center gap-4">
+                <button 
+                  onClick={() => navigate(-1)} 
+                  className="p-2 hover:bg-slate-800 rounded-lg transition-colors text-slate-400 hover:text-white"
+                >
+                  <ArrowLeft className="w-6 h-6" />
+                </button>
+                <h1 className="text-2xl font-bold">Ticket #{ticket.id}</h1>
+              </div>
+
+              {/* BOTÃO DE EXCLUIR (Só aparece se for CLIENTE e PENDENTE) */}
+              {user.perfil === 'ROLE_CLIENTE' && ticket.status === 'PENDENTE' && (
+                <button 
+                  onClick={handleExcluir}
+                  disabled={excluindo}
+                  className="flex items-center gap-2 px-3 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 rounded-lg text-sm font-medium transition-all disabled:opacity-50"
+                >
+                  <Trash2 className="w-4 h-4" />
+                  {excluindo ? "Excluindo..." : "Excluir"}
+                </button>
+              )}
             </div>
 
             <div className="flex gap-3">
@@ -138,8 +175,7 @@ export default function TicketDetails() {
               </div>
             </div>
 
-            {/* --- ÁREA DE RESPOSTA DO TÉCNICO --- */}
-            {/* 2. CORREÇÃO: Comparando USERNAME com NOMETECNICO */}
+            {/* ÁREA DE RESPOSTA DO TÉCNICO */}
             {user.perfil === 'ROLE_TECNICO' && ticket.status === 'EM_ANDAMENTO' && user.username === ticket.nomeTecnico && (
               <div className="bg-[#1e293b] rounded-xl p-6 shadow-lg border border-indigo-500/30 mt-6 animate-in fade-in slide-in-from-bottom-4">
                 <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
@@ -174,8 +210,7 @@ export default function TicketDetails() {
               </div>
             )}
 
-            {/* --- AVISO PARA OUTROS TÉCNICOS --- */}
-            {/* 2. CORREÇÃO: Comparando USERNAME com NOMETECNICO aqui também */}
+            {/* AVISO PARA OUTROS TÉCNICOS */}
             {user.perfil === 'ROLE_TECNICO' && ticket.status === 'EM_ANDAMENTO' && user.username !== ticket.nomeTecnico && (
                <div className="mt-6 flex items-center gap-3 p-4 rounded-xl bg-slate-800/50 border border-slate-700">
                  <div className="bg-indigo-500/10 p-2 rounded-lg text-indigo-400">
@@ -190,7 +225,7 @@ export default function TicketDetails() {
                </div>
             )}
 
-            {/* CARD RESPOSTA TÉCNICA (Visualização) */}
+            {/* CARD RESPOSTA VISUALIZAÇÃO */}
             {ticket.resposta && (
               <div className="bg-[#1e2433] rounded-xl p-6 shadow-lg border border-indigo-500/20">
                 <div className="flex items-center gap-2 mb-3">
