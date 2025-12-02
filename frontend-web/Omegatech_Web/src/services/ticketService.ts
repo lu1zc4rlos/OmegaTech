@@ -107,3 +107,21 @@ export const responderTicket = async (id: number, resposta: string): Promise<voi
     throw new Error("Erro ao enviar resposta.");
   }
 };
+
+// Adicione ao final do arquivo ticketService.ts
+
+export const excluirTicket = async (id: number): Promise<void> => {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${API_URL}/deletar/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  });
+
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(text || "Erro ao excluir ticket.");
+  }
+};
