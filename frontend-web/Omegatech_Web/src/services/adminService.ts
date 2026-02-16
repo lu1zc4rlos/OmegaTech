@@ -1,7 +1,7 @@
 // src/services/adminService.ts
 
-//const API_URL = "http://localhost:8080/admin"; 
-const API_URL = "http://192.168.x.xxx:8080/admin"
+const API_URL = "http://localhost:8080/admin"; 
+//const API_URL = "http://192.168.x.xxx:8080/admin"
 
 export interface TecnicoPayload {
   nome: string;

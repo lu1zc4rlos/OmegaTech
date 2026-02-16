@@ -2,8 +2,8 @@
 
 import { Ticket } from "@/types";
 
-//const API_URL = "http://localhost:8080/tickets";
-const API_URL = "http://192.168.x.xxx:8080/tickets";
+const API_URL = "http://localhost:8080/tickets";
+//const API_URL = "http://192.168.x.xxx:8080/tickets";
 
 export const getMeusTickets = async (): Promise<any[]> => {
   const token = localStorage.getItem("token");

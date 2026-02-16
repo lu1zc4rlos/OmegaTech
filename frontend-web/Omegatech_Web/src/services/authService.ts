@@ -1,8 +1,8 @@
 // src/services/authService.ts
 
 // Se estiver rodando o backend localmente na porta 8080:
-//const API_URL = "http://localhost:8080"; 
-const API_URL = "http://192.168.x.xxx:8080";
+const API_URL = "http://localhost:8080"; 
+//const API_URL = "http://192.168.x.xxx:8080";
 export const loginUser = async (email: string, senha: string) => {
   try {
     // CORREÇÃO: Mudamos de /auth/login para /usuarios/login para igualar ao seu Java
